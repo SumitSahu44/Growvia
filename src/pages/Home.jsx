@@ -43,9 +43,9 @@ const Home = () => {
         <Process />
       </div>
       
-       <div className="home-section">
+       {/* <div className="home-section">
         <Showcase />
-      </div>
+      </div> */}
 
        <div className="home-section">
         <HorizontalScroll />

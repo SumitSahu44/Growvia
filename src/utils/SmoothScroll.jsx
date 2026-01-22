@@ -28,8 +28,9 @@ const SmoothScroll = ({ children }) => {
     };
   }, []);
 
-  // Tailwind class for wrapper
-  return <div className="w-full min-h-screen overflow-hidden">{children}</div>;
+  // CHANGE: Yahan se 'overflow: hidden' hata diya hai.
+  // Agar 'overflow: hidden' lagana hi hai to 'main' tag pe lagana, wrapper pe nahi.
+  return <div className="w-full min-h-screen">{children}</div>;
 };
 
 export default SmoothScroll;
