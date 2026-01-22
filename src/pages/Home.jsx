@@ -7,6 +7,7 @@ import Process from '../components/home/Process';
 import Testimonials from '../components/home/Testimonials';
 import { gsap } from 'gsap';
 import Showcase from '../components/home/Showcase';
+import HorizontalScroll from '../components/home/HorizontalScroll';
 
 const Home = () => {
   
@@ -44,6 +45,10 @@ const Home = () => {
       
        <div className="home-section">
         <Showcase />
+      </div>
+
+       <div className="home-section">
+        <HorizontalScroll />
       </div>
 
 
