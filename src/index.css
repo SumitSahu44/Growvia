@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* Add this to hide default cursor */
+body {
+  cursor: none; 
+}
+
+/* Lekin mobile pe cursor nahi hota, wahan system default rehne do */
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+  /* Mobile pe custom cursor hide kar sakte ho agar chaho */
+}
+
+a, button, input {
+  cursor: none; /* Make sure links don't show the hand icon */
+}
