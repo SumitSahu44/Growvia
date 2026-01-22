@@ -8,6 +8,7 @@ import Testimonials from '../components/home/Testimonials';
 import { gsap } from 'gsap';
 import Showcase from '../components/home/Showcase';
 import HorizontalScroll from '../components/home/HorizontalScroll';
+import Capabilities from '../components/home/Capabilities';
 
 const Home = () => {
   
@@ -51,6 +52,10 @@ const Home = () => {
         <HorizontalScroll />
       </div>
 
+
+        <div className="home-section">
+        <Capabilities />
+      </div>
 
       <div className="home-section">
         <Testimonials />
