@@ -5,60 +5,54 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
-  // --- ITEM 1: TOP LEFT IMAGE ---
   {
     id: 1,
     type: "image",
     src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop",
     speed: 0.05,
     scrollSpeed: 100,
-    className: "w-[60vw] md:w-[30vw] top-[5%] left-[5%] z-20 rotate-[-2deg]"
+    className: "w-[50vw] md:w-[25vw] aspect-[3/4] top-[8%] left-[8%] z-10" 
   },
-  // --- ITEM 2: BIG TEXT (VISION) ---
   {
     id: 2,
     type: "text",
     content: "VISION",
     speed: 0.02,
-    scrollSpeed: -80, // Text thoda slow reverse jayega
-    // Outline Text Style added via CSS below
-    className: "text-[7rem] md:text-[14rem] font-black top-[15%] right-[0%] z-0 select-none leading-none outline-text"
+    scrollSpeed: -50,
+    // Added 'hover:text-white' transition via CSS/GSAP later
+    className: "text-[8rem] md:text-[16rem] font-black top-[15%] right-[5%] z-0 leading-none opacity-20 text-white select-none transition-colors duration-500"
   },
-  // --- ITEM 3: MIDDLE RIGHT IMAGE ---
   {
     id: 3,
     type: "image",
     src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop",
     speed: 0.08,
-    scrollSpeed: 200,
-    className: "w-[55vw] md:w-[28vw] top-[35%] right-[10%] z-20 rotate-[4deg]"
+    scrollSpeed: 220,
+    className: "w-[60vw] md:w-[35vw] aspect-[16/9] top-[38%] right-[10%] z-20"
   },
-  // --- ITEM 4: BIG TEXT (FUTURE) ---
   {
     id: 4,
     type: "text",
     content: "FUTURE",
     speed: 0.04,
-    scrollSpeed: -120,
-    className: "text-[7rem] md:text-[14rem] font-black top-[55%] left-[5%] z-0 select-none leading-none outline-text"
+    scrollSpeed: -100,
+    className: "text-[8rem] md:text-[16rem] font-black top-[55%] left-[5%] z-30 leading-none mix-blend-difference text-white pointer-events-none select-none"
   },
-  // --- ITEM 5: BOTTOM CENTER IMAGE ---
   {
     id: 5,
     type: "image",
     src: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop",
     speed: 0.06,
-    scrollSpeed: 150,
-    className: "w-[65vw] md:w-[35vw] top-[75%] left-[30%] z-20 rotate-[-3deg]"
+    scrollSpeed: 160,
+    className: "w-[50vw] md:w-[30vw] aspect-square top-[75%] left-[35%] z-10"
   },
-  // --- ITEM 6: EXTRA DECORATIVE TEXT ---
   {
     id: 6,
     type: "text",
     content: "AGENCY",
     speed: 0.01,
-    scrollSpeed: -50,
-    className: "text-[5rem] md:text-[8rem] font-black top-[85%] right-[5%] z-0 select-none leading-none outline-text opacity-50"
+    scrollSpeed: -20,
+    className: "text-[6rem] md:text-[10rem] font-black top-[80%] right-[15%] z-0 leading-none opacity-10 text-white writing-vertical select-none"
   }
 ];
 
@@ -69,52 +63,46 @@ const Showcase = () => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       
-      // --- 1. BACKGROUND COLOR TRANSITION ---
-      gsap.fromTo(containerRef.current, 
-        { backgroundColor: "#f9fafb" },
-        {
-          backgroundColor: "#050505",
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 90%",
-            end: "top 20%",
-            scrub: true,      
-          }
-        }
-      );
+      // Initial Load Animation
+      gsap.from(elementsRef.current, {
+        y: 100,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.1,
+        ease: "power4.out"
+      });
 
-      // --- 2. SCROLL PARALLAX ---
+      // Scroll Parallax
       elementsRef.current.forEach((el, i) => {
         if(!el) return;
         const speed = projects[i].scrollSpeed;
         
         gsap.to(el, {
-          y: -speed * 1.5, // Speed multiply ki kyunki height badi hai
+          y: -speed * 1.2,
           ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top bottom",
             end: "bottom top",
-            scrub: 0.5, 
+            scrub: 0,
           }
         });
       });
 
-      // --- 3. MOUSE MOVEMENT ---
+      // Mouse Float
       const handleMouseMove = (e) => {
         const xPos = (e.clientX / window.innerWidth) - 0.5;
         const yPos = (e.clientY / window.innerHeight) - 0.5;
 
         elementsRef.current.forEach((el, i) => {
           if(!el) return;
-          const speed = projects[i].speed * 100;
+          const speed = projects[i].speed * 50; 
           
           gsap.to(el, {
             x: xPos * speed,
             y: yPos * speed,
-            duration: 1.5,
-            ease: "power2.out"
+            duration: 2,
+            ease: "power3.out"
           });
         });
       };
@@ -127,13 +115,59 @@ const Showcase = () => {
     return () => ctx.revert();
   }, []);
 
+  // --- GLITCH-FREE HOVER LOGIC ---
+  
   const handleMouseEnter = (index) => {
-    gsap.to(`.showcase-item`, { opacity: 0.2, filter: "grayscale(100%) blur(4px)", scale: 0.95, duration: 0.5 });
-    gsap.to(`.item-${index}`, { opacity: 1, filter: "grayscale(0%) blur(0px)", scale: 1.1, zIndex: 100, duration: 0.5, ease: "power2.out" });
+    // 1. Sabko Dim Karo (Images & Text)
+    // Lekin 'mix-blend-difference' wale text ko dim mat karo, wo kharab dikhta hai
+    elementsRef.current.forEach((el, i) => {
+        if (i !== index) {
+            gsap.to(el, { 
+                opacity: 0.1, 
+                filter: "grayscale(100%) blur(2px)", 
+                scale: 1,
+                duration: 0.4 
+            });
+        }
+    });
+
+    // 2. Target ko Highlight Karo
+    const target = elementsRef.current[index];
+    if (target) {
+        gsap.to(target, { 
+            opacity: 1, 
+            filter: "grayscale(0%) blur(0px)", 
+            scale: 1.05, 
+            zIndex: 50, 
+            color: "#ffffff", // Force Text White
+            duration: 0.4, 
+            ease: "power2.out" 
+        });
+    }
   };
 
   const handleMouseLeave = () => {
-    gsap.to(`.showcase-item`, { opacity: 1, filter: "grayscale(0%) blur(0px)", scale: 1, zIndex: 20, duration: 0.5 });
+    // Sab kuch Normal Reset karo
+    projects.forEach((item, i) => {
+        const el = elementsRef.current[i];
+        if(!el) return;
+
+        // Original Opacity wapas lao
+        const originalOpacity = item.className.includes('opacity-20') ? 0.2 : 
+                                item.className.includes('opacity-10') ? 0.1 : 1;
+        
+        // Agar mix-blend hai to uski opacity 1 hi rehti hai usually
+        const finalOpacity = item.className.includes('mix-blend-difference') ? 1 : originalOpacity;
+
+        gsap.to(el, { 
+            opacity: finalOpacity, 
+            filter: "grayscale(100%) blur(0px)", // Images back to grayscale
+            scale: 1, 
+            zIndex: item.className.includes('z-30') ? 30 : (item.className.includes('z-20') ? 20 : 10),
+            color: "", // Clear forced color
+            duration: 0.4 
+        });
+    });
   };
 
   const addToRefs = (el) => {
@@ -143,30 +177,39 @@ const Showcase = () => {
   return (
     <section 
       ref={containerRef} 
-      // HEIGHT INCREASED TO 350vh
-      className="relative w-full min-h-[350vh] overflow-hidden"
+      className="relative w-full min-h-[300vh] overflow-hidden bg-[#050505]"
     >
-      {/* Styles for Outline Text */}
+      {/* Noise Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay">
+         <svg className="w-full h-full">
+            <filter id="noise">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noise)" />
+         </svg>
+      </div>
+
       <style>{`
-        .outline-text {
-          color: transparent;
-          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); /* Visible White Outline */
-          transition: all 0.5s ease;
+        .writing-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
         }
-        .outline-text:hover {
-          color: rgba(255, 255, 255, 0.1); /* Hover pe thoda fill */
-          -webkit-text-stroke: 1px rgba(255, 255, 255, 1);
+        .showcase-image {
+            filter: grayscale(100%);
+            transition: filter 0.7s ease;
+        }
+        .showcase-image:hover {
+            filter: grayscale(0%);
         }
       `}</style>
 
-      {/* Decorative Header */}
-      <div className="absolute top-24 left-0 w-full text-center z-20 pointer-events-none">
-        <span className="text-sm font-bold tracking-[0.6em] uppercase text-gray-400 opacity-60 bg-black/20 px-4 py-2 rounded-full backdrop-blur-sm">
-          Selected Works
-        </span>
+      {/* Header */}
+      <div className="absolute top-20 w-full flex justify-between px-10 md:px-20 z-40 text-white/40 uppercase text-xs tracking-[0.2em] font-mono">
+        <span>Portfolio 2026</span>
+        <span>Scroll to Explore</span>
       </div>
 
-      {/* --- ITEMS --- */}
+      {/* Items */}
       {projects.map((item, index) => {
         const isImage = item.type === 'image';
 
@@ -174,29 +217,33 @@ const Showcase = () => {
           <div 
             key={item.id}
             ref={addToRefs}
-            className={`showcase-item item-${index} absolute transition-all duration-700 ${item.className}`}
-            onMouseEnter={isImage ? () => handleMouseEnter(index) : null}
-            onMouseLeave={isImage ? handleMouseLeave : null}
+            className={`showcase-item absolute will-change-transform ${item.className}`}
+            // Ab Mouse Events Parent Div pe hain, taaki area bada mile
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={handleMouseLeave}
           >
             {isImage ? (
               // IMAGE
-              <div className="relative group cursor-pointer">
-                <div className="overflow-hidden rounded-lg shadow-2xl">
+              <div className="relative group cursor-none">
+                <div className="overflow-hidden shadow-2xl transition-all duration-700 ease-out border border-white/5">
                     <img 
                       src={item.src} 
-                      alt="Portfolio" 
-                      className="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-110"
+                      alt="Work" 
+                      className="showcase-image w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-1000"
                     />
                 </div>
-                {/* Floating Label */}
-                <div className="absolute -bottom-10 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-white text-xl font-bold">Project 0{item.id}</p>
+                <div className="absolute -right-4 top-1/2 -translate-y-1/2 translate-x-full opacity-0 group-hover:opacity-100 transition-all duration-500 pl-4">
+                    <div className="flex items-center gap-3">
+                        <span className="h-[1px] w-8 bg-white"></span>
+                        <span className="text-white font-mono text-sm tracking-widest uppercase whitespace-nowrap">
+                            Case Study 0{item.id}
+                        </span>
+                    </div>
                 </div>
               </div>
             ) : (
-              // TEXT (Now Visible Outline)
-              // Added hover effect class defined in <style>
-              <h2 className="leading-none tracking-tighter cursor-default">
+              // TEXT (Now Interactive)
+              <h2 className="cursor-default">
                 {item.content}
               </h2>
             )}
@@ -204,10 +251,9 @@ const Showcase = () => {
         );
       })}
 
-      {/* Bottom Hint */}
-      <div className="absolute bottom-20 w-full text-center opacity-40 text-white text-xs tracking-[0.5em] uppercase pointer-events-none">
-        Scroll for more
-      </div>
+      {/* Decorative Grid Lines */}
+      <div className="absolute left-10 md:left-20 top-0 h-full w-[1px] bg-white/5 z-0"></div>
+      <div className="absolute right-10 md:right-20 top-0 h-full w-[1px] bg-white/5 z-0"></div>
 
     </section>
   );

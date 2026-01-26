@@ -9,6 +9,7 @@ import { gsap } from 'gsap';
 import Showcase from '../components/home/Showcase';
 import HorizontalScroll from '../components/home/HorizontalScroll';
 import Capabilities from '../components/home/Capabilities';
+import MagicSection from '../components/home/MagicSection';
 
 const Home = () => {
   
@@ -24,6 +25,7 @@ const Home = () => {
   return (
     <div className="w-full">
       {/* Har section ek alag component hai */}
+
       <div className="home-section">
         <Hero />
       </div>
@@ -40,10 +42,17 @@ const Home = () => {
         <Services />
       </div>
 
+
+        {/* <div className="home-section">
+        <MagicSection />
+      </div> */}
+      
+
        <div className="home-section">
         <Process />
       </div>
       
+
        <div className="home-section">
         <Showcase />
       </div>

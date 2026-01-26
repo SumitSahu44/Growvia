@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
+import Blog from './pages/Blog';
 // import About from './pages/About';
 // import WhyUs from './pages/WhyUs';
 import MainLayout from './layout/MainLayout';
@@ -46,8 +47,8 @@ function App() {
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/about" element={<About />} />
-          <Route path="/why-us" element={<WhyUs />} /> */}
+          <Route path="/Blogs" element={<Blog />} />
+          {/* <Route path="/why-us" element={<WhyUs />} /> */}
         </Routes>
       </MainLayout>
       
