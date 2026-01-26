@@ -9,6 +9,7 @@ import Preloader from './components/common/Preloader';
 import Cursor from './components/common/Cursor';
 import About from './pages/About';
 import Services from './pages/Services';
+import Contact from './pages/Contact';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -52,6 +53,7 @@ function App() {
           <Route path="/Blogs" element={<Blog />} />
           <Route path="/About" element={<About />} />
            <Route path="/Services" element={<Services />} />
+              <Route path="/Contact" element={<Contact />} />
         </Routes>
       </MainLayout>
       

@@ -136,7 +136,7 @@ const Footer = () => {
           {/* Col 1: Navigation */}
           <div ref={addToLinksRef} className="flex flex-col gap-4">
               <h4 className="text-gray-500 font-mono text-xs uppercase tracking-widest mb-2">Explore</h4>
-              {['Home', 'Work', 'Services', 'Agency', 'Contact'].map((item) => (
+              {['Home', 'About', 'Services', 'Blogs', 'Contact'].map((item) => (
                   <a key={item} href="#" className="text-lg hover:text-gray-400 transition-colors w-fit group">
                       {item}
                       <span className="block h-[1px] w-0 bg-white group-hover:w-full transition-all duration-300"></span>

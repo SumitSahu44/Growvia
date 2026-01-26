@@ -1,68 +1,70 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiArrowUpRight, FiCheckCircle } from 'react-icons/fi';
+import { FiArrowUpRight, FiGlobe, FiUsers } from 'react-icons/fi';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
   const sectionRef = useRef(null);
-  const imageContainerRef = useRef(null);
   const imageRef = useRef(null);
-  const textRef = useRef(null);
+  const textContainerRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       
-      // --- 1. THE IMAGE REVEAL (Neeche se Upar) ---
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 60%", // Jab section screen ke 60% par aaye tab chalu ho
-          end: "bottom bottom",
-          toggleActions: "play none none reverse",
-        }
-      });
-
-      // Step A: Container grows from height 0 to Full
-      tl.fromTo(imageContainerRef.current, 
+      // --- 1. CREATIVE IMAGE REVEAL (Clip Path) ---
+      // Image starts as a thin line in center, then expands full width & height
+      gsap.fromTo(imageRef.current, 
         { 
-          scaleY: 0, // Height 0
-          transformOrigin: "bottom center" // Grow from Bottom
+          clipPath: "inset(40% 45% 40% 45% round 20px)", // Chota sa rounded box beech me
+          scale: 1.1,
+          filter: "grayscale(100%)"
         },
         { 
-          scaleY: 1, // Full Height
+          clipPath: "inset(0% 0% 0% 0% round 0px)", // Full visible rectangle
+          scale: 1,
+          filter: "grayscale(0%)",
           duration: 1.5,
-          ease: "power4.inOut" // Slow start, fast middle, slow end (Premium feel)
-        }
-      )
-      // Step B: Image scales down inside (Zoom Out effect)
-      .fromTo(imageRef.current,
-        { scale: 1.3 },
-        { scale: 1, duration: 1.5, ease: "power4.out" },
-        "<" // Starts at same time as Step A
-      );
-
-
-      // --- 2. TEXT CONTENT REVEAL ---
-      // Hum text elements ko tab reveal karenge jab image aadha grow ho jaye
-      gsap.fromTo(".about-text-item", 
-        { 
-          y: 50, 
-          opacity: 0 
-        },
-        { 
-          y: 0, 
-          opacity: 1, 
-          stagger: 0.1, // Ek ke baad ek
-          duration: 1, 
-          ease: "power3.out",
+          ease: "power4.inOut",
           scrollTrigger: {
-            trigger: textRef.current,
-            start: "top 75%",
+            trigger: sectionRef.current,
+            start: "top 70%", 
+            end: "bottom bottom",
+            toggleActions: "play none none reverse",
           }
         }
       );
+
+      // --- 2. TEXT STAGGER REVEAL ---
+      const textItems = textContainerRef.current.querySelectorAll('.reveal-text');
+      gsap.fromTo(textItems,
+        { y: 50, opacity: 0, rotate: 2 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          rotate: 0,
+          stagger: 0.1, 
+          duration: 1, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: textContainerRef.current,
+            start: "top 80%",
+          }
+        }
+      );
+
+      // --- 3. FLOATING BADGE PARALLAX ---
+      gsap.to(".floating-badge", {
+        y: -30,
+        ease: "none",
+        scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+        }
+      });
 
     }, sectionRef);
 
@@ -70,87 +72,93 @@ const About = () => {
   }, []);
 
   return (
+    // WHITE BG, BLACK TEXT
     <section 
       ref={sectionRef} 
-      className="w-full py-24 md:py-32 px-6 md:px-12 bg-black text-white relative overflow-hidden"
+      className="w-full py-24 md:py-32 px-6 md:px-20 bg-white text-black relative overflow-hidden"
     >
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      
+      {/* Decorative Background Text (Subtle) */}
+      <div className="absolute top-10 right-0 text-[15vw] font-black text-gray-100 leading-none pointer-events-none select-none z-0">
+         AGENCY
+      </div>
+
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
         
         {/* --- LEFT: TEXT CONTENT --- */}
-        <div ref={textRef} className="order-2 lg:order-1 flex flex-col justify-center">
+        <div ref={textContainerRef} className="order-2 lg:order-1 flex flex-col justify-center">
           
-          <div className="about-text-item flex items-center gap-2 mb-6">
-            <span className="w-12 h-[1px] bg-blue-500"></span>
-            <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">
-              Who We Are
+          <div className="reveal-text flex items-center gap-3 mb-8">
+            <span className="w-3 h-3 bg-black rounded-full"></span>
+            <span className="text-sm font-bold uppercase tracking-[0.3em] text-gray-500">
+               Our Philosophy
             </span>
           </div>
 
-          <h2 className="about-text-item text-4xl md:text-6xl font-black leading-tight mb-8">
-            NOT JUST AN AGENCY. <br />
-            <span className="text-gray-500">WE ARE YOUR GROWTH ENGINE.</span>
+          <h2 className="reveal-text text-5xl md:text-7xl font-black leading-[0.9] mb-8 tracking-tight">
+             WE DON'T JUST<br/> 
+             DESIGN. WE <span className="text-blue-600">DEFINE.</span>
           </h2>
 
-          <p className="about-text-item text-gray-400 text-lg leading-relaxed mb-8 max-w-lg">
-            At Growvia, we don't believe in "trying". We believe in data-driven dominance. 
-            We blend creative storytelling with aggressive performance marketing to turn clicks into customers.
+          <p className="reveal-text text-lg md:text-xl text-gray-500 leading-relaxed mb-10 max-w-lg">
+             In a digital world full of noise, we craft clarity. Growvia is a new-age creative powerhouse helping brands find their voice, scale their reach, and dominate their niche.
           </p>
 
-          {/* Stats / Checkpoints */}
-          <div className="about-text-item grid grid-cols-2 gap-6 mb-10 border-t border-gray-800 pt-8">
-            <div>
-              <h3 className="text-4xl font-bold text-white mb-1">150+</h3>
-              <p className="text-xs text-gray-500 uppercase tracking-wider">Brands Scaled</p>
-            </div>
-            <div>
-              <h3 className="text-4xl font-bold text-white mb-1">10X</h3>
-              <p className="text-xs text-gray-500 uppercase tracking-wider">Average ROI</p>
-            </div>
+          {/* Minimalist Stats Row */}
+          <div className="reveal-text flex gap-12 border-t border-gray-200 pt-8 mb-10">
+             <div>
+                <span className="block text-4xl font-black">4+</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Years Exp</span>
+             </div>
+             <div>
+                <span className="block text-4xl font-black">85+</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Projects</span>
+             </div>
           </div>
 
-          <div className="about-text-item">
-             <button className="flex items-center gap-3 text-white border-b border-white pb-1 hover:text-blue-400 hover:border-blue-400 transition-all duration-300 group">
-                <span className="text-sm font-bold uppercase tracking-widest">Read Our Story</span>
-                <FiArrowUpRight className="text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"/>
+          <div className="reveal-text">
+             <button className="bg-black text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-blue-600 hover:scale-105 transition-all duration-300 shadow-xl flex items-center gap-2">
+                Discover More <FiArrowUpRight className="text-lg"/>
              </button>
           </div>
 
         </div>
 
 
-        {/* --- RIGHT: ANIMATED IMAGE (Niche se Upar Effect) --- */}
-        <div className="order-1 lg:order-2 h-[500px] md:h-[700px] w-full relative flex items-end justify-center">
-            {/* Wrapper Logic: 
-               Is div ki height hum GSAP se control kar rahe hain (scaleY).
-               Overflow hidden hai taaki image reveal effect bane.
-            */}
-            <div 
-              ref={imageContainerRef}
-              className="w-full h-full overflow-hidden relative rounded-lg"
-            >
-              <img 
-                ref={imageRef}
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" 
-                alt="Growvia Team" 
-                className="absolute top-0 left-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              />
-              
-              {/* Optional Creative Overlay Badge */}
-              <div className="absolute top-6 right-6 bg-white text-black p-4 rounded-full z-10 animate-spin-slow hidden md:block">
-                 <svg viewBox="0 0 100 100" width="80" height="80">
-                    <path id="curve" d="M 50 50 m -37 0 a 37 37 0 1 1 74 0 a 37 37 0 1 1 -74 0" fill="transparent"/>
-                    <text>
-                      <textPath xlinkHref="#curve" className="text-[11px] font-bold uppercase tracking-widest">
-                        • Est. 2024 • Growvia Agency •
-                      </textPath>
-                    </text>
-                 </svg>
-              </div>
-
-            </div>
+        {/* --- RIGHT: CREATIVE IMAGE COMPONENT --- */}
+        <div className="order-1 lg:order-2 relative h-[500px] md:h-[700px] w-full flex items-center justify-center">
             
-            {/* Background Decorative Element (Behind image) */}
-            <div className="absolute -z-10 bottom-[-20px] right-[-20px] w-full h-full border-2 border-gray-800 rounded-lg hidden md:block"></div>
+            {/* The Main Image (Animated via GSAP ClipPath) */}
+            <div className="w-full h-full relative z-10">
+                <img 
+                  ref={imageRef}
+                  src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2000&auto=format&fit=crop" 
+                  alt="Creative Team" 
+                  className="w-full h-full object-cover shadow-2xl"
+                />
+            </div>
+
+            {/* Floating Badge 1 (Top Right) */}
+            <div className="floating-badge absolute -top-10 -right-10 md:right-[-40px] z-20 bg-white p-6 shadow-2xl rounded-2xl border border-gray-100 hidden md:block rotate-6">
+                <div className="flex items-center gap-3 mb-2">
+                    <div className="bg-green-100 p-2 rounded-full text-green-600"><FiGlobe/></div>
+                    <span className="font-bold text-sm">Global Reach</span>
+                </div>
+                <p className="text-xs text-gray-400">Working with clients<br/>worldwide.</p>
+            </div>
+
+            {/* Floating Badge 2 (Bottom Left) */}
+            <div className="floating-badge absolute -bottom-10 -left-10 md:left-[-40px] z-20 bg-black text-white p-6 shadow-2xl rounded-2xl rotate-[-6deg] hidden md:block">
+                <div className="flex items-center gap-3 mb-2">
+                    <div className="bg-white/20 p-2 rounded-full text-white"><FiUsers/></div>
+                    <span className="font-bold text-sm">Creative Team</span>
+                </div>
+                <p className="text-xs text-white/60">Designers, Devs &<br/>Strategists.</p>
+            </div>
+
+            {/* Abstract Shape (Behind) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[80%] bg-gray-100 -rotate-3 rounded-[3rem] -z-10"></div>
+
         </div>
 
       </div>
