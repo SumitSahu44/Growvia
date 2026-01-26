@@ -56,7 +56,7 @@ const Manifesto = ({
   return (
     <section 
         ref={containerRef} 
-        className="relative w-full py-32 md:py-48 px-6 md:px-20 bg-white text-black overflow-hidden flex flex-col justify-center items-center"
+        className="relative w-full py-32 md:py-48 px-3 md:px-20 bg-white text-black overflow-hidden flex flex-col justify-center items-center"
     >
         <div className="max-w-6xl mx-auto text-center md:text-left w-full">
             
@@ -71,7 +71,7 @@ const Manifesto = ({
             {/* Main Manifesto Text */}
             <p 
                 ref={textRef} 
-                className="text-4xl md:text-7xl lg:text-[5.5rem] font-black leading-[1.1] tracking-tight text-black"
+                className="text-4xl md:text-5xl lg:text-[4rem] font-black leading-[1.1] tracking-tight text-black"
             >
                 {splitText(text)}
             </p>
