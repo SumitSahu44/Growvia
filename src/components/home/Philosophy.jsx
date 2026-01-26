@@ -4,51 +4,50 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const phrase = "In a digital world full of noise, we don't just shout louder. We speak clearer. We believe that true growth comes from the perfect balance of data-driven strategy and human-centric design. We don't chase trends; we set the standards that others follow.";
-
-const Philosophy = () => {
+const Manifesto = ({ 
+    title = "Our Philosophy", 
+    text = "We believe that digital products should be more than just functional. They should be intuitive, beautiful, and deeply human. In a world of noise, we bring clarity. We don't just build websites; we build the future." 
+}) => {
   const containerRef = useRef(null);
   const textRef = useRef(null);
-  const bodyRef = useRef(null);
 
-useLayoutEffect(() => {
-  const ctx = gsap.context(() => {
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      
+      const words = textRef.current.querySelectorAll('.word');
 
-    const words = gsap.utils.toArray(
-      textRef.current.querySelectorAll('.word')
-    );
-
-    gsap.fromTo(
-      words,
-      {
-        opacity: 0.15,
-      },
-      {
-        opacity: 1,
-        ease: "none",
-        stagger: 1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top center", // 👈 40–50px niche se start
-          end: `+=${words.length * 120}`, // 👈 natural scroll length
-          scrub: true,
-          pin: true,
-          pinSpacing: false, // 👈 GLITCH FIX
-          anticipatePin: 1,
+      // --- TEXT REVEAL ANIMATION ---
+      gsap.fromTo(words, 
+        { 
+          opacity: 0.1, 
+          filter: "blur(8px)", 
+          y: 10 // Thoda neeche se aayega
         },
-      }
-    );
+        {
+          opacity: 1,
+          filter: "blur(0px)",
+          y: 0,
+          stagger: 0.05, // Ek-ek karke word reveal hoga
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%", // Jab section screen ke 70% height pe aayega tab start hoga
+            end: "bottom 60%", // End point
+            scrub: 1, // Smooth scrolling control (Mouse ke sath chalega)
+          }
+        }
+      );
 
-  }, containerRef);
+    }, containerRef);
 
-  return () => ctx.revert();
-}, []);
+    return () => ctx.revert();
+  }, []);
 
-
-  // Helper function to split text into words
-  const splitWords = (phrase) => {
-    return phrase.split(" ").map((word, i) => (
-      <span key={i} className="word inline-block mr-[1.5vw] opacity-10">
+  // Text Splitter Helper
+  const splitText = (content) => {
+    return content.split(" ").map((word, i) => (
+      <span key={i} className="word inline-block mr-3 md:mr-4 leading-tight will-change-[opacity,filter,transform]">
         {word}
       </span>
     ));
@@ -56,36 +55,30 @@ useLayoutEffect(() => {
 
   return (
     <section 
-      ref={containerRef} 
-      className="relative w-full h-[200vh] bg-gray-50 flex items-center justify-center text-black"
+        ref={containerRef} 
+        className="relative w-full py-32 md:py-48 px-6 md:px-20 bg-white text-black overflow-hidden flex flex-col justify-center items-center"
     >
-      <div className="w-full max-w-[90%] md:max-w-[80%] lg:max-w-[70%] h-screen flex flex-col justify-center">
-        
-        {/* Small Label */}
-        <div className="mb-8 flex items-center gap-3">
-            <span className="w-2 h-2 bg-black rounded-full"></span>
-            <span className="text-sm font-bold uppercase tracking-[0.3em] text-gray-400">
-                Our Philosophy
-            </span>
+        <div className="max-w-6xl mx-auto text-center md:text-left w-full">
+            
+            {/* Small Label */}
+            <div className="mb-8 md:mb-12 flex items-center justify-center md:justify-start gap-4">
+                <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
+                <span className="text-sm font-bold font-mono uppercase tracking-[0.3em] text-gray-400">
+                    {title}
+                </span>
+            </div>
+
+            {/* Main Manifesto Text */}
+            <p 
+                ref={textRef} 
+                className="text-4xl md:text-7xl lg:text-[5.5rem] font-black leading-[1.1] tracking-tight text-black"
+            >
+                {splitText(text)}
+            </p>
+
         </div>
-
-        {/* The Giant Text Reveal */}
-        <p 
-          ref={textRef} 
-          className="text-4xl md:text-6xl lg:text-[5.5rem] font-black leading-[1.1] tracking-tight text-black flex flex-wrap"
-        >
-          {splitWords(phrase)}
-        </p>
-
-        {/* Bottom Signature / CTA */}
-        <div className="mt-12 flex items-center justify-between border-t border-gray-300 pt-6">
-            <p className="text-sm text-gray-500 font-mono">EST. 2024</p>
-            <p className="text-sm text-gray-500 font-mono">SCROLL TO READ</p>
-        </div>
-
-      </div>
     </section>
   );
 };
 
-export default Philosophy;
+export default Manifesto;
