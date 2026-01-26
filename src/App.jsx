@@ -8,6 +8,7 @@ import MainLayout from './layout/MainLayout';
 import Preloader from './components/common/Preloader';
 import Cursor from './components/common/Cursor';
 import About from './pages/About';
+import Services from './pages/Services';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -50,6 +51,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Blogs" element={<Blog />} />
           <Route path="/About" element={<About />} />
+           <Route path="/Services" element={<Services />} />
         </Routes>
       </MainLayout>
       
