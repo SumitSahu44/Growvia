@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import SmoothScroll from '../utils/SmoothScroll'; // Wahi Lenis wala file
-
+// import ContactCTA from '../components/common/ContactCTA';
 const MainLayout = ({ children }) => {
   return (
     <SmoothScroll>
@@ -15,6 +15,8 @@ const MainLayout = ({ children }) => {
           {children}
         </main>
 
+
+        {/* <ContactCTA /> */}
         {/* Footer Fixed Bottom */}
         <Footer />
       </div>

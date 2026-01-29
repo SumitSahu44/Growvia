@@ -6,7 +6,7 @@ const ToolstationCaseStudy = () => {
       {/* Top Banner Image Section */}
       <div className="relative w-full h-64 md:h-80 bg-gray-200">
         <img
-          src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=1200" // Replace with your image
+          src="https://images.unsplash.com/photo-1603201667230-bd139210db18?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y3JlYXRpdmUlMjBhZ2VuY3l8ZW58MHx8MHx8fDA%3D" // Replace with your image
           alt="Toolstation Banner"
           className="w-full h-full object-cover"
         />
@@ -17,7 +17,7 @@ const ToolstationCaseStudy = () => {
         
         {/* Header and Button Row */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
-          <h2 className="text-xl md:text-2xl font-black tracking-tighter uppercase">
+          <h2 className="text-lg md:text-3xl font-black tracking-tighter uppercase">
             TOOLSTATION: SWIFT & IMPACTFUL ACTIONS
           </h2>
           <button className="bg-[#f3b500] hover:bg-[#d49e00] text-white px-8 py-2 rounded-full font-serif italic text-sm transition-colors">
