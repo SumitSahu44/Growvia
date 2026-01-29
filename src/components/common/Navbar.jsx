@@ -154,7 +154,7 @@ const Navbar = () => {
             to="/contact"
             onClick={closeMenu}
             ref={addToMobileLinks}
-            className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 uppercase tracking-tighter"
+            className="text-5xl font-black text-white uppercase tracking-tighter hover:text-gray-400 transition-colors"
           >
             Contact
           </Link>
