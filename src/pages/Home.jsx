@@ -10,6 +10,7 @@ import Showcase from '../components/home/Showcase';
 import HorizontalScroll from '../components/home/HorizontalScroll';
 import Capabilities from '../components/home/Capabilities';
 import MagicSection from '../components/home/MagicSection';
+import ToolstationCaseStudy from '../components/home/ToolstationCaseStudy';
 
 const Home = () => {
   
@@ -37,10 +38,17 @@ const Home = () => {
        <div className="home-section">
         <Philosophy />
       </div>
+
+      
+       <div className="home-section">
+        <ToolstationCaseStudy />
+      </div>
       
       <div className="home-section">
         <Services />
       </div>
+
+
 
 
         {/* <div className="home-section">

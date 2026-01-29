@@ -1,84 +1,88 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Preloader = () => {
   const containerRef = useRef(null);
   const textRef = useRef(null);
-  const progressRef = useRef(null);
-  const percentRef = useRef(null);
+  const [gsapLoaded, setGsapLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  // Sirf greetings ki list
+  const greetings = ["Hello", "नमस्ते", "こんにちは", "Bonjour", "Hola", "Ciao"];
 
   useEffect(() => {
-    const tl = gsap.timeline();
-
-    // 1. Loading Bar & Counter Animation
-    let progress = { value: 0 };
+    const script = document.createElement('script');
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js";
+    script.async = true;
+    script.onload = () => setGsapLoaded(true);
+    document.head.appendChild(script);
     
-    tl.to(progress, {
-      value: 100,
-      duration: 2,
-      ease: "power2.inOut",
-      onUpdate: () => {
-        // Update Text
-        if (percentRef.current) {
-          percentRef.current.textContent = Math.round(progress.value) + "%";
-        }
-        // Update Bar Width
-        if (progressRef.current) {
-          progressRef.current.style.width = Math.round(progress.value) + "%";
-        }
-      }
-    })
-    
-    // 2. Reveal Brand Name (Text moves up)
-    .to(textRef.current, {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      ease: "power4.out"
-    }, "-=0.5")
-
-    // 3. Slide Up the Whole Screen (Exit)
-    .to(containerRef.current, {
-      yPercent: -100,
-      duration: 1.2,
-      ease: "power4.inOut",
-      delay: 0.5
-    });
-
+    return () => {
+      if (document.head.contains(script)) document.head.removeChild(script);
+    };
   }, []);
 
+  useEffect(() => {
+    if (!gsapLoaded) return;
+
+    const gsap = window.gsap;
+    const tl = gsap.timeline({
+      onComplete: () => setIsVisible(false) 
+    });
+
+    // Initial state
+    gsap.set(containerRef.current, { clipPath: "inset(0% 0% 0% 0%)" });
+
+    // 1. Language Cycle Animation
+    greetings.slice(1).forEach((word) => {
+      tl.to(textRef.current, {
+        opacity: 0,
+        duration: 0.1, // Thoda sa duration badhaya taaki readable rahe
+        ease: "power1.in",
+        onComplete: () => {
+          if (textRef.current) textRef.current.innerText = word;
+        }
+      })
+      .to(textRef.current, {
+        opacity: 1,
+        duration: 0.1,
+        ease: "power1.out",
+      }, "+=0.02");
+    });
+
+    // 2. Final Exit (Growvia ke bina direct exit)
+    tl.to(textRef.current, {
+      scale: 1.1,
+      opacity: 0,
+      duration: 0.3,
+      delay: 0.2, // Aakhri word ke baad thoda wait
+      ease: "power2.inOut"
+    })
+    .to(containerRef.current, {
+      clipPath: "inset(0% 0% 100% 0%)",
+      duration: 0.7,
+      ease: "expo.inOut"
+    }, "-=0.1");
+
+    return () => tl.kill();
+  }, [gsapLoaded]);
+
+  if (!isVisible) return null;
+
   return (
-    // Main Container: Fixed, Full Screen, Black Background, High Z-Index
     <div 
       ref={containerRef} 
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white h-screen w-screen"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#050505] text-white h-screen w-screen overflow-hidden select-none"
     >
-      <div className="w-full max-w-md px-4 flex flex-col items-center">
-        
-        {/* Brand Name Wrapper with Overflow Hidden */}
-        <div className="overflow-hidden mb-8">
+      <div className="relative flex flex-col items-center justify-center w-full">
+        {/* Sirf Greetings wala text */}
+        <div className="flex items-center justify-center">
           <h1 
             ref={textRef} 
-            className="text-6xl md:text-8xl font-bold tracking-tighter translate-y-full opacity-0 uppercase"
+            className="text-5xl md:text-8xl font-bold tracking-tight"
           >
-            Growvia
+            Hello
           </h1>
         </div>
-        
-        {/* Loading Bar Container */}
-        <div className="w-full h-[2px] bg-gray-800 relative overflow-hidden rounded-full">
-          {/* Moving White Bar */}
-          <div 
-            ref={progressRef} 
-            className="absolute left-0 top-0 h-full bg-white w-0"
-          ></div>
-        </div>
-        
-        {/* Percentage Text */}
-        <div className="mt-2 w-full flex justify-end">
-           <span ref={percentRef} className="font-mono text-sm text-gray-400">0%</span>
-        </div>
-
       </div>
     </div>
   );

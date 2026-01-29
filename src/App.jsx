@@ -6,7 +6,7 @@ import Blog from './pages/Blog';
 // import WhyUs from './pages/WhyUs';
 import MainLayout from './layout/MainLayout';
 import Preloader from './components/common/Preloader';
-import Cursor from './components/common/Cursor';
+// import Cursor from './components/common/Cursor';
 import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
@@ -41,7 +41,7 @@ function App() {
          Isse content loader ke peeche load ho jayega aur reveal effect kaam karega.
       */}
     {/* Sirf Desktop pe custom cursor dikhao */}
-     <Cursor />
+     {/* <Cursor /> */}
 
      {/* 2. Preloader uske baad */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}
