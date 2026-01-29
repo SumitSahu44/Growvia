@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiArrowUpRight, FiTag, FiMaximize2 } from 'react-icons/fi';
+import { FiArrowUpRight, FiMaximize2 } from 'react-icons/fi';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,7 +10,7 @@ const projects = [
   {
     id: "01",
     client: "Nike Air",
-    category: "Social Media Campaign",
+    category: "Social Media",
     year: "2025",
     description: "Launching the new Air Max series with a high-energy AR filter campaign on Instagram.",
     img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop"
@@ -18,7 +18,7 @@ const projects = [
   {
     id: "02",
     client: "Spotify Wrapped",
-    category: "Data Visualization",
+    category: "Data Viz",
     year: "2025",
     description: "Turning user data into shareable art. A deep dive into the UX of the year's biggest viral event.",
     img: "https://images.unsplash.com/photo-1611339555312-e607c8352fd7?q=80&w=2074&auto=format&fit=crop"
@@ -26,7 +26,7 @@ const projects = [
   {
     id: "03",
     client: "Tesla Motors",
-    category: "Web Experience",
+    category: "3D Web",
     year: "2024",
     description: "Reimagining the car configurator. A WebGL-powered 3D experience for the new Model Y.",
     img: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=2071&auto=format&fit=crop"
@@ -34,7 +34,7 @@ const projects = [
   {
     id: "04",
     client: "Oura Ring",
-    category: "Brand Identity",
+    category: "Branding",
     year: "2024",
     description: "Minimalist branding for the future of health tech. Typography, color systems, and packaging.",
     img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000&auto=format&fit=crop"
@@ -44,27 +44,27 @@ const projects = [
     client: "Aesop Skin",
     category: "E-Commerce",
     year: "2023",
-    description: "A sensory digital store. merging audio-visual storytelling with seamless checkout flows.",
+    description: "A sensory digital store merging audio-visual storytelling with seamless checkout flows.",
     img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=2070&auto=format&fit=crop"
   }
 ];
 
 const WorkShowcase = () => {
   const containerRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0); // Pehla project khula rahega
+  const [activeIndex, setActiveIndex] = useState(0); 
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       
-      // 1. Header Reveal
+      // Header Reveal
       gsap.from(".work-header-item", {
-        y: 100, opacity: 0, duration: 1, stagger: 0.1, ease: "power4.out",
+        y: 80, opacity: 0, duration: 1.2, stagger: 0.1, ease: "power4.out",
         scrollTrigger: { trigger: containerRef.current, start: "top 80%" }
       });
 
-      // 2. List Entrance
+      // List Entrance
       gsap.from(".project-row", {
-        y: 50, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power2.out",
+        y: 40, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power2.out",
         scrollTrigger: { trigger: ".projects-list", start: "top 85%" }
       });
 
@@ -72,23 +72,29 @@ const WorkShowcase = () => {
     return () => ctx.revert();
   }, []);
 
+  // Mobile Click Handler
+  const handleToggle = (index) => {
+    if (activeIndex === index) return; 
+    setActiveIndex(index);
+  };
+
   return (
-    <section ref={containerRef} className="relative w-full py-32 px-6 md:px-20 bg-white text-black z-10">
+    <section ref={containerRef} className="relative w-full py-20 md:py-32 px-4 md:px-20 bg-white text-black z-10 overflow-hidden">
       
       {/* --- HEADER --- */}
-      <div className="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-gray-200 pb-10">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 border-b border-gray-200 pb-8 md:pb-10">
         <div>
             <div className="overflow-hidden mb-2">
                 <p className="work-header-item text-blue-600 font-bold uppercase tracking-[0.2em] text-xs">Selected Works</p>
             </div>
             <div className="overflow-hidden">
-                <h2 className="work-header-item text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter">
+                <h2 className="work-header-item text-4xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter">
                     Made by<br/>Growvia.
                 </h2>
             </div>
         </div>
         <div className="overflow-hidden mt-6 md:mt-0">
-            <p className="work-header-item text-gray-500 max-w-xs text-right text-sm md:text-base font-medium">
+            <p className="work-header-item text-gray-500 max-w-xs text-left md:text-right text-sm md:text-base font-medium">
                 We build digital products that define categories and drive massive growth.
             </p>
         </div>
@@ -102,46 +108,53 @@ const WorkShowcase = () => {
             return (
                 <div 
                     key={index}
-                    onMouseEnter={() => setActiveIndex(index)}
-                    className={`project-row group border-b border-gray-200 cursor-pointer transition-all duration-500 ease-in-out
-                        ${isActive ? 'pb-10 pt-10' : 'py-8 hover:bg-gray-50'}`}
+                    // Desktop: Hover triggers
+                    onMouseEnter={() => window.innerWidth > 768 && setActiveIndex(index)}
+                    // Mobile: Click triggers
+                    onClick={() => handleToggle(index)}
+                    className={`project-row group border-b border-gray-200 cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]
+                        ${isActive ? 'pb-8 pt-8 md:pb-10 md:pt-10' : 'py-6 md:py-8 hover:bg-gray-50'}`}
                 >
                     {/* TOP ROW: Title & Meta */}
                     <div className="flex items-center justify-between px-2">
-                        <div className="flex items-baseline gap-4 md:gap-10">
-                            <span className={`font-mono text-sm transition-colors duration-300 ${isActive ? 'text-blue-600' : 'text-gray-400'}`}>
+                        <div className="flex items-center gap-4 md:gap-10">
+                            <span className={`font-mono text-xs md:text-sm transition-colors duration-300 ${isActive ? 'text-blue-600' : 'text-gray-400'}`}>
                                 0{index + 1}
                             </span>
-                            <h3 className={`text-3xl md:text-6xl font-black uppercase tracking-tight transition-all duration-500
-                                ${isActive ? 'text-black translate-x-4' : 'text-gray-300 group-hover:text-gray-500'}`}>
+                            <h3 className={`text-2xl md:text-6xl font-black uppercase tracking-tight transition-all duration-500
+                                ${isActive ? 'text-black translate-x-2 md:translate-x-4' : 'text-gray-300 group-hover:text-gray-500'}`}>
                                 {project.client}
                             </h3>
                         </div>
                         
-                        <div className="flex items-center gap-4 md:gap-12">
+                        <div className="flex items-center gap-3 md:gap-12">
                             <span className="hidden md:block text-xs font-bold uppercase tracking-widest text-gray-400">
                                 {project.category}
                             </span>
-                            <div className={`w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all duration-300
+                            <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all duration-500
                                 ${isActive ? 'bg-black text-white rotate-45 border-black' : 'text-gray-400 group-hover:border-black group-hover:text-black'}`}>
-                                <FiArrowUpRight className="text-lg"/>
+                                <FiArrowUpRight className="text-sm md:text-lg"/>
                             </div>
                         </div>
                     </div>
 
-                    {/* HIDDEN CONTENT (Reveals on Hover) */}
+                    {/* HIDDEN CONTENT (Reveals on Hover/Click) */}
                     <div 
                         className={`overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]
-                        ${isActive ? 'max-h-[600px] opacity-100 mt-8' : 'max-h-0 opacity-0'}`}
+                        ${isActive ? 'max-h-[800px] opacity-100 mt-6 md:mt-8' : 'max-h-0 opacity-0'}`}
                     >
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                        {/* FIX: Changed Mobile Order. Text first (order-1), Image second (order-2) */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10">
                             
-                            {/* Left: Description & Button */}
-                            <div className="lg:col-span-4 flex flex-col justify-end p-2 lg:pl-16">
-                                <p className="text-lg text-gray-600 leading-relaxed mb-8">
+                            {/* Left: Description & Button (NOW FIRST ON MOBILE) */}
+                            <div className="order-1 lg:col-span-4 flex flex-col justify-end p-2 lg:pl-16">
+                                <span className="md:hidden text-xs font-bold uppercase tracking-widest text-blue-600 mb-2 block">
+                                    {project.category}
+                                </span>
+                                <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8">
                                     {project.description}
                                 </p>
-                                <div className="flex flex-wrap gap-2 mb-8">
+                                <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
                                     <span className="px-3 py-1 rounded-full bg-gray-100 text-[10px] font-bold uppercase tracking-wide text-gray-500">{project.year}</span>
                                     <span className="px-3 py-1 rounded-full bg-gray-100 text-[10px] font-bold uppercase tracking-wide text-gray-500">Case Study</span>
                                 </div>
@@ -150,8 +163,8 @@ const WorkShowcase = () => {
                                 </button>
                             </div>
 
-                            {/* Right: Big Image */}
-                            <div className="lg:col-span-8 h-[300px] md:h-[450px] rounded-2xl overflow-hidden relative group/image">
+                            {/* Right: Big Image (NOW SECOND ON MOBILE) */}
+                            <div className="order-2 lg:col-span-8 h-[250px] md:h-[450px] rounded-xl md:rounded-2xl overflow-hidden relative group/image">
                                 <img 
                                     src={project.img} 
                                     alt={project.client} 
@@ -168,8 +181,8 @@ const WorkShowcase = () => {
         })}
       </div>
 
-      <div className="mt-20 text-center">
-          <button className="bg-black text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 hover:scale-105 transition-all shadow-xl">
+      <div className="mt-16 md:mt-20 text-center">
+          <button className="w-full md:w-auto bg-black text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 hover:scale-105 transition-all shadow-xl">
               View All Projects
           </button>
       </div>
