@@ -151,6 +151,7 @@ const Navbar = () => {
             </Link>
           ))}
           <Link 
+          
             to="/contact"
             onClick={closeMenu}
             ref={addToMobileLinks}
