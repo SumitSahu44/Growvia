@@ -10,6 +10,7 @@ import Preloader from './components/common/Preloader';
 import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import WorkShowcase from './pages/WorkShowcase';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -52,6 +53,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Blogs" element={<Blog />} />
           <Route path="/About" element={<About />} />
+           <Route path="/works" element={<WorkShowcase />} />
            <Route path="/Services" element={<Services />} />
               <Route path="/Contact" element={<Contact />} />
         </Routes>
