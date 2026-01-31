@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
-import Blog from './pages/Blog';
+import Blogs from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
 // import About from './pages/About';
 // import WhyUs from './pages/WhyUs';
 import MainLayout from './layout/MainLayout';
@@ -51,7 +52,8 @@ function App() {
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Blogs" element={<Blog />} />
+          <Route path="/blogs" element={<Blogs />} />  {/* List Wala Page */}
+          <Route path="/blogs/:id" element={<BlogDetail />} /> {/* Single Blog Wala Page */}
           <Route path="/About" element={<About />} />
           <Route path="/works" element={<WorkShowcase />} />
           <Route path="/Services" element={<Services />} />
