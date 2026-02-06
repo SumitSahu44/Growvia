@@ -9,6 +9,8 @@ const RichAdmin = () => {
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
     const [blogs, setBlogs] = useState([]);
+    const [debugError, setDebugError] = useState(null);
+    const [isPublishing, setIsPublishing] = useState(false); // Loading state
 
     // Cover Image States
     const [coverImage, setCoverImage] = useState(null); // File Object (Upload ke liye)
@@ -20,16 +22,45 @@ const RichAdmin = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const quillRef = useRef(null);
 
-    const API_URL = "http://localhost:5000/api/blogs";
-    const UPLOAD_URL = "http://localhost:5000/api/upload";
+    const API_URL = "https://growviadigitalmarketing.com/php_backend/api";
+    const UPLOAD_URL = "https://growviadigitalmarketing.com/php_backend/api/upload.php";
+
+    // Local Development URLs - Change this if your local server path matches differently
+    // const API_URL = "http://localhost/GrowVia%20-%20Copy/php_backend/api";
+    // const UPLOAD_URL = "http://localhost/GrowVia%20-%20Copy/php_backend/api/upload.php";
 
     useEffect(() => { fetchBlogs(); }, []);
 
     const fetchBlogs = async () => {
         try {
-            const res = await axios.get(API_URL);
-            setBlogs(res.data);
-        } catch (err) { console.error(err); }
+            const res = await axios.get(`${API_URL}/read.php`);
+            let data = res.data;
+
+            // --- BUG FIX: Handle "Connected successfully" prefix from server ---
+            if (typeof data === 'string' && data.includes('Connected successfully')) {
+                const jsonPart = data.replace('Connected successfully', '').trim();
+                try {
+                    data = JSON.parse(jsonPart);
+                } catch (e) {
+                    console.error("Failed to parse fixed JSON", e);
+                }
+            }
+
+            if (Array.isArray(data)) {
+                setBlogs(data);
+                setDebugError(null);
+            } else {
+                console.warn("Expected array of blogs, got:", data);
+                setBlogs([]);
+                // Convert object/string to readable string for debugging
+                const msg = typeof data === 'object' ? JSON.stringify(data) : String(data);
+                setDebugError(`API Error: ${msg}`);
+            }
+        } catch (err) {
+            console.error(err);
+            setBlogs([]);
+            setDebugError(`Network/Server Error: ${err.message}`);
+        }
     };
 
     // --- 1. HANDLE COVER IMAGE SELECTION ---
@@ -70,45 +101,68 @@ const RichAdmin = () => {
         let finalCoverUrl = coverPreview; // Default to existing preview (for edits)
 
         try {
-            // Step A: Agar naya Cover Image select kiya hai, to pehle use Upload karo
-            if (coverImage) {
-                const formData = new FormData();
-                formData.append('image', coverImage);
+            let finalCoverUrl = coverPreview;
 
-                const uploadRes = await axios.post(UPLOAD_URL, formData, {
-                    headers: { 'Content-Type': 'multipart/form-data' }
-                });
-                finalCoverUrl = uploadRes.data.url; // Server ka naya URL mil gaya
+            // Step A: Upload Cover Image
+            if (coverImage) {
+                try {
+                    console.log("Starting Upload to:", UPLOAD_URL);
+                    const formData = new FormData();
+                    formData.append('image', coverImage);
+
+                    const uploadRes = await axios.post(UPLOAD_URL, formData, {
+                        headers: { 'Content-Type': 'multipart/form-data' }
+                    });
+
+                    let data = uploadRes.data;
+                    // Handle dirty JSON response if present
+                    if (typeof data === 'string' && data.includes('Connected successfully')) {
+                        const jsonPart = data.replace('Connected successfully', '').trim();
+                        try { data = JSON.parse(jsonPart); } catch (e) { console.error("Parse error", e); }
+                    }
+
+                    console.log("Upload Success:", data);
+                    finalCoverUrl = data.url;
+                } catch (uploadErr) {
+                    console.error("Upload Error Details:", uploadErr);
+                    throw new Error(`Cover Image Upload Failed: ${uploadErr.response?.data?.error || uploadErr.message}`);
+                }
             }
 
-            // Step B: Ab sara data DB me bhejo (Image URL ke sath)
+            // Step B: Submit Blog Data
             const blogData = {
                 title,
                 content,
-                image: finalCoverUrl, // ✅ Yahan URL jayega, file nahi
+                image: finalCoverUrl,
                 author: "Growvia Team",
                 category: "Tech"
             };
 
-            if (isEditing) {
-                await axios.put(`${API_URL}/${currentId}`, blogData);
-                alert("Story Updated Successfully!");
-            } else {
-                await axios.post(`${API_URL}/create`, blogData);
-                alert("Story Published Successfully!");
+            try {
+                console.log("Submitting Blog Data to:", `${API_URL}/create.php`);
+                if (isEditing) {
+                    await axios.put(`${API_URL}/update.php?id=${currentId}`, blogData);
+                    alert("Story Updated Successfully!");
+                } else {
+                    await axios.post(`${API_URL}/create.php`, blogData);
+                    alert("Story Published Successfully!");
+                }
+            } catch (createErr) {
+                console.error("Create Blog Error Details:", createErr);
+                throw new Error(`Saving Blog Failed: ${createErr.response?.data?.message || createErr.message}`);
             }
 
             handleNew();
             fetchBlogs();
 
         } catch (err) {
-            console.error(err);
-            alert("Something went wrong during publish.");
+            console.error("Main Publish Error:", err);
+            alert(err.message);
         }
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm("Delete?")) { await axios.delete(`${API_URL}/${id}`); fetchBlogs(); }
+        if (window.confirm("Delete?")) { await axios.delete(`${API_URL}/delete.php?id=${id}`); fetchBlogs(); }
     };
 
     const handleEdit = (blog) => {
@@ -153,6 +207,9 @@ const RichAdmin = () => {
                     </div>
                     <button onClick={handleNew} className="p-2 bg-black text-white rounded-full hover:bg-blue-600 transition shadow-lg"><FiPlus /></button>
                 </div>
+
+
+
                 <div className="p-4 overflow-y-auto flex-1 custom-scrollbar pb-20">
                     <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4 px-2">Stories ({blogs.length})</h3>
                     <div className="space-y-3">
@@ -190,7 +247,13 @@ const RichAdmin = () => {
                     </div>
                     <div className="flex gap-3 w-full md:w-auto flex-wrap sticky top-4 z-30">
                         <button onClick={() => setPreview(!preview)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-full font-bold uppercase text-xs tracking-widest hover:bg-gray-50 transition-colors shadow-sm"><FiEye /> {preview ? "Editor" : "Preview"}</button>
-                        <button onClick={handlePublish} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-3 bg-black text-white rounded-full font-bold uppercase text-xs tracking-widest hover:bg-blue-600 transition-colors shadow-xl"><FiSave /> {isEditing ? "Update" : "Publish"}</button>
+                        <button disabled={isPublishing} onClick={handlePublish} className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-3 rounded-full font-bold uppercase text-xs tracking-widest shadow-xl transition-all ${isPublishing ? 'bg-gray-400 cursor-not-allowed' : 'bg-black text-white hover:bg-blue-600'}`}>
+                            {isPublishing ? (
+                                <>Processing...</>
+                            ) : (
+                                <><FiSave /> {isEditing ? "Update" : "Publish"}</>
+                            )}
+                        </button>
                     </div>
                 </div>
 

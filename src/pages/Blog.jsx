@@ -11,11 +11,28 @@ const Blogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/blogs');
-        setBlogs(res.data);
+        const res = await axios.get('https://growviadigitalmarketing.com/php_backend/api/read.php');
+        let data = res.data;
+
+        // --- BUG FIX: Handle "Connected successfully" prefix from server ---
+        if (typeof data === 'string' && data.includes('Connected successfully')) {
+          const jsonPart = data.replace('Connected successfully', '').trim();
+          try {
+            data = JSON.parse(jsonPart);
+          } catch (e) {
+            console.error("Failed to parse fixed JSON", e);
+          }
+        }
+
+        if (Array.isArray(data)) {
+          setBlogs(data);
+        } else {
+          setBlogs([]);
+        }
         setLoading(false);
       } catch (err) {
         console.error(err);
+        setBlogs([]);
         setLoading(false);
       }
     };

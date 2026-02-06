@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiArrowRight, FiPlay } from 'react-icons/fi'; // Icons
-
+import {  Link } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
@@ -88,9 +88,11 @@ const Hero = () => {
 
         {/* 4. Action Buttons */}
         <div className="hero-anim-item flex flex-col sm:flex-row gap-4 w-full justify-center">
+         <Link to="/contact">
           <button className="px-8 py-4 bg-black text-white rounded-full font-bold text-sm tracking-wide hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2">
             Start a Project <FiArrowRight />
           </button>
+          </Link>
           <button className="px-8 py-4 bg-white text-black border border-gray-200 rounded-full font-bold text-sm tracking-wide hover:bg-gray-50 hover:border-black transition-all duration-300 flex items-center justify-center gap-2">
              View Showreel <FiPlay className="fill-current"/>
           </button>
