@@ -14,7 +14,7 @@ const ToolstationCaseStudy = () => {
 
       {/* Main Content Area */}
       <div className="px-6 py-8 md:px-12">
-        
+
         {/* Header and Button Row */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
           <h2 className="text-lg md:text-3xl font-black tracking-tighter uppercase">
@@ -27,7 +27,7 @@ const ToolstationCaseStudy = () => {
 
         {/* Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-gray-100 pt-8">
-          
+
           {/* Client Column */}
           <div>
             <p className="text-xs font-bold uppercase tracking-widest mb-4">Client</p>
@@ -49,11 +49,11 @@ const ToolstationCaseStudy = () => {
             <p className="text-xs font-bold uppercase tracking-widest mb-4">Results</p>
             <div className="flex gap-12">
               <div>
-                <p className="text-xs text-gray-500 mb-1">Uplift yoy</p>
+                <p className="text-xs text-gray-700 mb-1">Uplift yoy</p>
                 <p className="text-4xl md:text-5xl font-black">40%</p>
               </div>
               <div>
-                <p className="text-xs text-gray-500 mb-1">Stronger target roas</p>
+                <p className="text-xs text-gray-700 mb-1">Stronger target roas</p>
                 <p className="text-4xl md:text-5xl font-black">10%</p>
               </div>
             </div>

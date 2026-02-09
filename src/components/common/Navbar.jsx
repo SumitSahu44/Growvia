@@ -18,7 +18,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Agar scroll 50px se zyada hai to background solid/blur karein
       setIsScrolled(currentScrollY > 50);
 
@@ -47,7 +47,7 @@ const Navbar = () => {
         ease: 'power3.inOut'
       });
       // Links Stagger Animation
-      gsap.fromTo(mobileLinksRef.current, 
+      gsap.fromTo(mobileLinksRef.current,
         { y: 50, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, delay: 0.4 }
       );
@@ -90,7 +90,7 @@ const Navbar = () => {
         `}
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-          
+
           {/* Logo */}
           <Link to="/" className="z-50 text-2xl font-black tracking-tighter uppercase flex items-center gap-1">
             Growvia<span className="text-blue-600">.</span>
@@ -99,10 +99,10 @@ const Navbar = () => {
           {/* Desktop Links (Hidden on Mobile) */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
+              <Link
+                key={link.name}
                 to={link.path}
-                className="relative group overflow-hidden text-sm font-medium uppercase tracking-wider text-gray-800 hover:text-black transition-colors"
+                className="relative group overflow-hidden text-sm font-medium uppercase tracking-wider text-black hover:text-gray-700 transition-colors"
               >
                 {/* Text Scramble Effect or Simple Underline */}
                 <span className="block">{link.name}</span>
@@ -113,17 +113,17 @@ const Navbar = () => {
 
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-4">
-            
+
             {/* "Contact Us" Button (Different Design) */}
-            <Link 
-              to="/contact" 
+            <Link
+              to="/contact"
               className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-all rounded-full"
             >
-              Let's Talk <FiArrowUpRight className="text-lg"/>
+              Let's Talk <FiArrowUpRight className="text-lg" />
             </Link>
 
             {/* Mobile Hamburger Icon */}
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden z-50 text-2xl focus:outline-none"
             >
@@ -134,15 +134,15 @@ const Navbar = () => {
       </nav>
 
       {/* --- MOBILE FULLSCREEN MENU --- */}
-      <div 
+      <div
         ref={mobileMenuRef}
         className="fixed inset-0 bg-black z-40 flex flex-col justify-center px-8 translate-x-full md:hidden"
       >
         <div className="flex flex-col gap-6">
           {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              to={link.path} 
+            <Link
+              key={link.name}
+              to={link.path}
               onClick={closeMenu}
               ref={addToMobileLinks}
               className="text-5xl font-black text-white uppercase tracking-tighter hover:text-gray-400 transition-colors"
@@ -150,8 +150,8 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <Link 
-          
+          <Link
+
             to="/contact"
             onClick={closeMenu}
             ref={addToMobileLinks}
@@ -161,7 +161,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="absolute bottom-10 left-8 text-gray-500 text-xs uppercase tracking-widest">
+        <div className="absolute bottom-10 left-8 text-gray-400 text-xs uppercase tracking-widest">
           Growvia Digital Agency &copy; 2024
         </div>
       </div>

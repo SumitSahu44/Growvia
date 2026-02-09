@@ -48,9 +48,9 @@ const Blogs = () => {
       <div className="max-w-7xl mx-auto mb-20 border-b border-gray-100 pb-10">
         <p className="text-blue-600 font-bold uppercase tracking-widest text-xs mb-4">The Journal</p>
         <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6">
-          Insights & <br /><span className="text-gray-400">Updates.</span>
+          Insights & <br /><span className="text-gray-500">Updates.</span>
         </h1>
-        <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
+        <p className="text-xl text-gray-700 max-w-2xl leading-relaxed">
           Explore our latest thoughts on design, technology, and business growth.
         </p>
       </div>
@@ -77,7 +77,7 @@ const Blogs = () => {
 
             {/* Content */}
             <div className="pr-4">
-              <div className="flex items-center gap-4 text-xs text-gray-400 font-medium uppercase tracking-wider mb-3">
+              <div className="flex items-center gap-4 text-xs text-gray-600 font-medium uppercase tracking-wider mb-3">
                 <span className="flex items-center gap-1"><FiCalendar /> {new Date(blog.createdAt).toLocaleDateString()}</span>
                 <span className="flex items-center gap-1"><FiUser /> {blog.author || "Team"}</span>
               </div>
@@ -88,7 +88,7 @@ const Blogs = () => {
 
               {/* HTML Content ka Plain Text Preview nikalne ka hack */}
               <div
-                className="text-gray-500 leading-relaxed mb-4 line-clamp-3 text-sm"
+                className="text-gray-700 leading-relaxed mb-4 line-clamp-3 text-sm"
                 dangerouslySetInnerHTML={{ __html: blog.content.substring(0, 100) + "..." }}
               ></div>
 

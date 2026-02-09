@@ -47,9 +47,9 @@ const Capabilities = () => {
   useLayoutEffect(() => {
     // Jab activeIndex badlega, image animate hogi
     const tl = gsap.timeline();
-    
-    tl.fromTo(imgRef.current, 
-      { opacity: 0, scale: 1.1, filter: "blur(10px)" }, 
+
+    tl.fromTo(imgRef.current,
+      { opacity: 0, scale: 1.1, filter: "blur(10px)" },
       { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }
     );
 
@@ -58,19 +58,19 @@ const Capabilities = () => {
   // --- 2. SCROLL DETECTION (The Auto Logic) ---
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      
+
       serviceRefs.current.forEach((el, index) => {
         ScrollTrigger.create({
           trigger: el,
           start: "top center", // Jab element ka top screen ke center me aaye
           end: "bottom center", // Jab element ka bottom center cross kare
-          
+
           // Jab user niche scroll karke enter kare
           onEnter: () => setActiveIndex(index),
-          
+
           // Jab user wapas upar scroll karke enter kare
           onEnterBack: () => setActiveIndex(index),
-          
+
           // markers: true // Debugging ke liye (baad me hata dena)
         });
       });
@@ -88,44 +88,44 @@ const Capabilities = () => {
   };
 
   return (
-    <section 
+    <section
       ref={containerRef}
       className="relative w-full bg-black text-white py-20 md:py-32 px-6 md:px-20 flex flex-col md:flex-row gap-10 md:gap-20"
     >
-      
+
       {/* --- LEFT COLUMN: Sticky Image (Auto Changes) --- */}
       <div className="w-full md:w-[40%] relative hidden md:block">
         {/* h-[50vh] rakha hai taaki center me dikhe */}
         <div className="sticky top-[25vh] h-[50vh] w-full overflow-hidden rounded-lg border border-white/10 shadow-2xl">
-          
+
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10"></div>
-          
+
           {/* Image Source directly activeIndex se le rahe hain */}
-          <img 
+          <img
             ref={imgRef}
-            src={services[activeIndex].img} 
-            alt="Service Preview" 
+            src={services[activeIndex].img}
+            alt="Service Preview"
             className="w-full h-full object-cover"
           />
 
           <div className="absolute bottom-6 left-6 z-20">
-             <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/60 mb-2">Capabilities</p>
-             {/* Dynamic Title on Image */}
-             <h3 className="text-2xl font-bold text-white transition-all duration-300">
-                {services[activeIndex].title}
-             </h3>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-white/80 mb-2">Capabilities</p>
+            {/* Dynamic Title on Image */}
+            <h3 className="text-2xl font-bold text-white transition-all duration-300">
+              {services[activeIndex].title}
+            </h3>
           </div>
         </div>
       </div>
 
       {/* --- RIGHT COLUMN: Scrollable List --- */}
       <div className="w-full md:w-[60%] flex flex-col justify-center pb-20">
-        
+
         <div className="mb-20 border-b border-white/20 pb-8">
-            <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">What We Do</h2>
-            <p className="text-3xl md:text-5xl font-light leading-tight text-white/90">
-                We combine design, technology, and strategy to build brands that defy expectations.
-            </p>
+          <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">What We Do</h2>
+          <p className="text-3xl md:text-5xl font-light leading-tight text-white/90">
+            We combine design, technology, and strategy to build brands that defy expectations.
+          </p>
         </div>
 
         {/* List Items */}
@@ -135,7 +135,7 @@ const Capabilities = () => {
             const isActive = index === activeIndex;
 
             return (
-              <div 
+              <div
                 key={index}
                 ref={addToRefs}
                 // Agar Active hai to Bright White, nahi to Dim Grey (Auto Focus Effect)
@@ -145,27 +145,27 @@ const Capabilities = () => {
                 onMouseEnter={() => setActiveIndex(index)}
               >
                 <div className="flex flex-col gap-4">
-                   <span className="text-sm font-mono text-gray-500">/{service.id}</span>
-                   
-                   <h3 className={`text-4xl md:text-6xl font-bold transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`}>
-                     {service.title}
-                   </h3>
-                   
-                   <p className="text-gray-400 max-w-md text-base md:text-lg leading-relaxed">
-                     {service.desc}
-                   </p>
-                   
-                   {/* Tags */}
-                   <div className="flex flex-wrap gap-2 mt-2">
-                      {service.tags.map((tag, i) => (
-                          <span key={i} className={`text-xs border px-3 py-1 rounded-full transition-colors ${isActive ? 'border-white/30 text-gray-300' : 'border-white/5 text-gray-600'}`}>
-                              {tag}
-                          </span>
-                      ))}
-                   </div>
+                  <span className="text-sm font-mono text-gray-400">/{service.id}</span>
 
-                   {/* Active Indicator Arrow */}
-                   <FiArrowUpRight className={`text-3xl mt-4 transition-all duration-500 ${isActive ? 'text-blue-500 rotate-45 opacity-100' : 'text-gray-700 rotate-0 opacity-0'}`} />
+                  <h3 className={`text-4xl md:text-6xl font-bold transition-colors ${isActive ? 'text-white' : 'text-gray-500'}`}>
+                    {service.title}
+                  </h3>
+
+                  <p className="text-gray-300 max-w-md text-base md:text-lg leading-relaxed">
+                    {service.desc}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {service.tags.map((tag, i) => (
+                      <span key={i} className={`text-xs border px-3 py-1 rounded-full transition-colors ${isActive ? 'border-white/30 text-gray-300' : 'border-white/5 text-gray-500'}`}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Active Indicator Arrow */}
+                  <FiArrowUpRight className={`text-3xl mt-4 transition-all duration-500 ${isActive ? 'text-blue-500 rotate-45 opacity-100' : 'text-gray-700 rotate-0 opacity-0'}`} />
                 </div>
               </div>
             );

@@ -19,16 +19,16 @@ const ReviewCard = ({ review }) => (
       </div>
       <FaQuoteLeft className="text-2xl text-white/20 group-hover:text-blue-500 transition-colors" />
     </div>
-    
+
     <p className="text-lg text-gray-300 leading-relaxed mb-8 group-hover:text-white transition-colors">
       "{review.text}"
     </p>
-    
+
     <div className="flex items-center gap-4">
       <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full border-2 border-white/10 object-cover" />
       <div>
         <h4 className="text-white font-bold">{review.name}</h4>
-        <p className="text-xs text-gray-500 uppercase tracking-wider">{review.role}</p>
+        <p className="text-xs text-gray-400 uppercase tracking-wider">{review.role}</p>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@ const ReviewCard = ({ review }) => (
 const Testimonials = () => {
   return (
     <section className="relative w-full py-24 md:py-40 bg-black text-white overflow-hidden">
-      
+
       {/* CSS for infinite animation */}
       <style>{`
         @keyframes marquee {
@@ -64,44 +64,44 @@ const Testimonials = () => {
       {/* --- HEADER --- */}
       <div className="px-6 md:px-20 mb-20 flex flex-col md:flex-row items-end justify-between gap-10">
         <div>
-           <span className="text-blue-500 font-bold tracking-[0.2em] uppercase text-sm">Testimonials</span>
-           <h2 className="text-5xl md:text-7xl font-black mt-4 leading-none">
-              Client<br />Stories.
-           </h2>
+          <span className="text-blue-500 font-bold tracking-[0.2em] uppercase text-sm">Testimonials</span>
+          <h2 className="text-5xl md:text-7xl font-black mt-4 leading-none">
+            Client<br />Stories.
+          </h2>
         </div>
-        <p className="text-gray-400 max-w-sm text-lg text-right md:text-left">
-           Don't just take our word for it. Here is what the industry leaders have to say about our craft.
+        <p className="text-gray-300 max-w-sm text-lg text-right md:text-left">
+          Don't just take our word for it. Here is what the industry leaders have to say about our craft.
         </p>
       </div>
 
       {/* --- MARQUEE CONTAINER --- */}
       <div className="marquee-container flex flex-col gap-8">
-        
+
         {/* ROW 1: Moves LEFT */}
         <div className="relative w-full overflow-hidden">
-           {/* Side Gradients for Fade Effect */}
-           <div className="absolute top-0 left-0 w-20 md:w-40 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
-           <div className="absolute top-0 right-0 w-20 md:w-40 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
-           
-           <div className="flex w-max animate-marquee">
-             {/* Duplicate data to create seamless loop */}
-             {[...reviews, ...reviews, ...reviews].map((review, i) => (
-                <ReviewCard key={`r1-${i}`} review={review} />
-             ))}
-           </div>
+          {/* Side Gradients for Fade Effect */}
+          <div className="absolute top-0 left-0 w-20 md:w-40 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
+          <div className="absolute top-0 right-0 w-20 md:w-40 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
+
+          <div className="flex w-max animate-marquee">
+            {/* Duplicate data to create seamless loop */}
+            {[...reviews, ...reviews, ...reviews].map((review, i) => (
+              <ReviewCard key={`r1-${i}`} review={review} />
+            ))}
+          </div>
         </div>
 
         {/* ROW 2: Moves RIGHT (Reverse) */}
         <div className="relative w-full overflow-hidden">
-           {/* Side Gradients */}
-           <div className="absolute top-0 left-0 w-20 md:w-40 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
-           <div className="absolute top-0 right-0 w-20 md:w-40 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
+          {/* Side Gradients */}
+          <div className="absolute top-0 left-0 w-20 md:w-40 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
+          <div className="absolute top-0 right-0 w-20 md:w-40 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
 
-           <div className="flex w-max animate-marquee-reverse">
-             {[...reviews, ...reviews, ...reviews].map((review, i) => (
-                <ReviewCard key={`r2-${i}`} review={review} />
-             ))}
-           </div>
+          <div className="flex w-max animate-marquee-reverse">
+            {[...reviews, ...reviews, ...reviews].map((review, i) => (
+              <ReviewCard key={`r2-${i}`} review={review} />
+            ))}
+          </div>
         </div>
 
       </div>

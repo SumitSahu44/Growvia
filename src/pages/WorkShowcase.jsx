@@ -51,11 +51,11 @@ const projects = [
 
 const WorkShowcase = () => {
   const containerRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0); 
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      
+
       // Header Reveal
       gsap.from(".work-header-item", {
         y: 80, opacity: 0, duration: 1.2, stagger: 0.1, ease: "power4.out",
@@ -74,117 +74,117 @@ const WorkShowcase = () => {
 
   // Mobile Click Handler
   const handleToggle = (index) => {
-    if (activeIndex === index) return; 
+    if (activeIndex === index) return;
     setActiveIndex(index);
   };
 
   return (
     <section ref={containerRef} className="relative w-full py-20 md:py-32 px-4 md:px-20 bg-white text-black z-10 overflow-hidden">
-      
+
       {/* --- HEADER --- */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 border-b border-gray-200 pb-8 md:pb-10">
         <div>
-            <div className="overflow-hidden mb-2">
-                <p className="work-header-item text-blue-600 font-bold uppercase tracking-[0.2em] text-xs">Selected Works</p>
-            </div>
-            <div className="overflow-hidden">
-                <h2 className="work-header-item text-4xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter">
-                    Made by<br/>Growvia.
-                </h2>
-            </div>
+          <div className="overflow-hidden mb-2">
+            <p className="work-header-item text-blue-600 font-bold uppercase tracking-[0.2em] text-xs">Selected Works</p>
+          </div>
+          <div className="overflow-hidden">
+            <h2 className="work-header-item text-4xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter">
+              Made by<br />Growvia.
+            </h2>
+          </div>
         </div>
         <div className="overflow-hidden mt-6 md:mt-0">
-            <p className="work-header-item text-gray-500 max-w-xs text-left md:text-right text-sm md:text-base font-medium">
-                We build digital products that define categories and drive massive growth.
-            </p>
+          <p className="work-header-item text-gray-700 max-w-xs text-left md:text-right text-sm md:text-base font-medium">
+            We build digital products that define categories and drive massive growth.
+          </p>
         </div>
       </div>
 
       {/* --- PROJECTS ACCORDION LIST --- */}
       <div className="projects-list flex flex-col">
         {projects.map((project, index) => {
-            const isActive = activeIndex === index;
+          const isActive = activeIndex === index;
 
-            return (
-                <div 
-                    key={index}
-                    // Desktop: Hover triggers
-                    onMouseEnter={() => window.innerWidth > 768 && setActiveIndex(index)}
-                    // Mobile: Click triggers
-                    onClick={() => handleToggle(index)}
-                    className={`project-row group border-b border-gray-200 cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]
+          return (
+            <div
+              key={index}
+              // Desktop: Hover triggers
+              onMouseEnter={() => window.innerWidth > 768 && setActiveIndex(index)}
+              // Mobile: Click triggers
+              onClick={() => handleToggle(index)}
+              className={`project-row group border-b border-gray-200 cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]
                         ${isActive ? 'pb-8 pt-8 md:pb-10 md:pt-10' : 'py-6 md:py-8 hover:bg-gray-50'}`}
-                >
-                    {/* TOP ROW: Title & Meta */}
-                    <div className="flex items-center justify-between px-2">
-                        <div className="flex items-center gap-4 md:gap-10">
-                            <span className={`font-mono text-xs md:text-sm transition-colors duration-300 ${isActive ? 'text-blue-600' : 'text-gray-400'}`}>
-                                0{index + 1}
-                            </span>
-                            <h3 className={`text-2xl md:text-6xl font-black uppercase tracking-tight transition-all duration-500
-                                ${isActive ? 'text-black translate-x-2 md:translate-x-4' : 'text-gray-300 group-hover:text-gray-500'}`}>
-                                {project.client}
-                            </h3>
-                        </div>
-                        
-                        <div className="flex items-center gap-3 md:gap-12">
-                            <span className="hidden md:block text-xs font-bold uppercase tracking-widest text-gray-400">
-                                {project.category}
-                            </span>
-                            <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all duration-500
-                                ${isActive ? 'bg-black text-white rotate-45 border-black' : 'text-gray-400 group-hover:border-black group-hover:text-black'}`}>
-                                <FiArrowUpRight className="text-sm md:text-lg"/>
-                            </div>
-                        </div>
-                    </div>
+            >
+              {/* TOP ROW: Title & Meta */}
+              <div className="flex items-center justify-between px-2">
+                <div className="flex items-center gap-4 md:gap-10">
+                  <span className={`font-mono text-xs md:text-sm transition-colors duration-300 ${isActive ? 'text-blue-600' : 'text-gray-500'}`}>
+                    0{index + 1}
+                  </span>
+                  <h3 className={`text-2xl md:text-6xl font-black uppercase tracking-tight transition-all duration-500
+                                ${isActive ? 'text-black translate-x-2 md:translate-x-4' : 'text-gray-400 group-hover:text-gray-600'}`}>
+                    {project.client}
+                  </h3>
+                </div>
 
-                    {/* HIDDEN CONTENT (Reveals on Hover/Click) */}
-                    <div 
-                        className={`overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]
+                <div className="flex items-center gap-3 md:gap-12">
+                  <span className="hidden md:block text-xs font-bold uppercase tracking-widest text-gray-600">
+                    {project.category}
+                  </span>
+                  <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all duration-500
+                                ${isActive ? 'bg-black text-white rotate-45 border-black' : 'text-gray-500 group-hover:border-black group-hover:text-black'}`}>
+                    <FiArrowUpRight className="text-sm md:text-lg" />
+                  </div>
+                </div>
+              </div>
+
+              {/* HIDDEN CONTENT (Reveals on Hover/Click) */}
+              <div
+                className={`overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]
                         ${isActive ? 'max-h-[800px] opacity-100 mt-6 md:mt-8' : 'max-h-0 opacity-0'}`}
-                    >
-                        {/* FIX: Changed Mobile Order. Text first (order-1), Image second (order-2) */}
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10">
-                            
-                            {/* Left: Description & Button (NOW FIRST ON MOBILE) */}
-                            <div className="order-1 lg:col-span-4 flex flex-col justify-end p-2 lg:pl-16">
-                                <span className="md:hidden text-xs font-bold uppercase tracking-widest text-blue-600 mb-2 block">
-                                    {project.category}
-                                </span>
-                                <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8">
-                                    {project.description}
-                                </p>
-                                <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
-                                    <span className="px-3 py-1 rounded-full bg-gray-100 text-[10px] font-bold uppercase tracking-wide text-gray-500">{project.year}</span>
-                                    <span className="px-3 py-1 rounded-full bg-gray-100 text-[10px] font-bold uppercase tracking-wide text-gray-500">Case Study</span>
-                                </div>
-                                <button className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest border-b border-black pb-1 w-fit hover:text-blue-600 hover:border-blue-600 transition-colors">
-                                    View Full Project <FiMaximize2/>
-                                </button>
-                            </div>
+              >
+                {/* FIX: Changed Mobile Order. Text first (order-1), Image second (order-2) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10">
 
-                            {/* Right: Big Image (NOW SECOND ON MOBILE) */}
-                            <div className="order-2 lg:col-span-8 h-[250px] md:h-[450px] rounded-xl md:rounded-2xl overflow-hidden relative group/image">
-                                <img 
-                                    src={project.img} 
-                                    alt={project.client} 
-                                    className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out scale-105 group-hover/image:scale-100"
-                                />
-                                <div className="absolute inset-0 bg-black/10 group-hover/image:bg-transparent transition-colors duration-500"></div>
-                            </div>
-
-                        </div>
+                  {/* Left: Description & Button (NOW FIRST ON MOBILE) */}
+                  <div className="order-1 lg:col-span-4 flex flex-col justify-end p-2 lg:pl-16">
+                    <span className="md:hidden text-xs font-bold uppercase tracking-widest text-blue-600 mb-2 block">
+                      {project.category}
+                    </span>
+                    <p className="text-base md:text-lg text-gray-800 leading-relaxed mb-6 md:mb-8">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
+                      <span className="px-3 py-1 rounded-full bg-gray-100 text-[10px] font-bold uppercase tracking-wide text-gray-700">{project.year}</span>
+                      <span className="px-3 py-1 rounded-full bg-gray-100 text-[10px] font-bold uppercase tracking-wide text-gray-700">Case Study</span>
                     </div>
+                    <button className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest border-b border-black pb-1 w-fit hover:text-blue-600 hover:border-blue-600 transition-colors">
+                      View Full Project <FiMaximize2 />
+                    </button>
+                  </div>
+
+                  {/* Right: Big Image (NOW SECOND ON MOBILE) */}
+                  <div className="order-2 lg:col-span-8 h-[250px] md:h-[450px] rounded-xl md:rounded-2xl overflow-hidden relative group/image">
+                    <img
+                      src={project.img}
+                      alt={project.client}
+                      className="w-full h-full object-cover transform transition-transform duration-[1.5s] ease-out scale-105 group-hover/image:scale-100"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover/image:bg-transparent transition-colors duration-500"></div>
+                  </div>
 
                 </div>
-            );
+              </div>
+
+            </div>
+          );
         })}
       </div>
 
       <div className="mt-16 md:mt-20 text-center">
-          <button className="w-full md:w-auto bg-black text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 hover:scale-105 transition-all shadow-xl">
-              View All Projects
-          </button>
+        <button className="w-full md:w-auto bg-black text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 hover:scale-105 transition-all shadow-xl">
+          View All Projects
+        </button>
       </div>
 
     </section>

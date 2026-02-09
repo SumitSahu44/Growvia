@@ -82,10 +82,10 @@ const Showcase = () => {
       elementsRef.current.forEach((el, i) => {
         if (!el) return;
         const speed = projects[i].scrollSpeed;
-        
+
         // Add will-change for performance
         el.style.willChange = 'transform';
-        
+
         gsap.to(el, {
           y: isMobile ? -speed * 0.5 : -speed * 1.2,
           ease: "none",
@@ -108,13 +108,13 @@ const Showcase = () => {
         const handleMouseMove = (e) => {
           mouseX = (e.clientX / window.innerWidth) - 0.5;
           mouseY = (e.clientY / window.innerHeight) - 0.5;
-          
+
           if (!rafId) {
             rafId = requestAnimationFrame(() => {
               elementsRef.current.forEach((el, i) => {
                 if (!el) return;
                 const speed = projects[i].speed * 40;
-                
+
                 gsap.to(el, {
                   x: mouseX * speed,
                   y: mouseY * speed,
@@ -144,7 +144,7 @@ const Showcase = () => {
 
   const handleMouseEnter = (index) => {
     if (isMobile) return; // Disable hover on mobile
-    
+
     elementsRef.current.forEach((el, i) => {
       if (i !== index && el) {
         gsap.to(el, {
@@ -172,14 +172,14 @@ const Showcase = () => {
 
   const handleMouseLeave = () => {
     if (isMobile) return;
-    
+
     projects.forEach((item, i) => {
       const el = elementsRef.current[i];
       if (!el) return;
 
       const originalOpacity = item.className.includes('opacity-20') ? 0.2 :
-                              item.className.includes('opacity-10') ? 0.1 : 1;
-      
+        item.className.includes('opacity-10') ? 0.1 : 1;
+
       const finalOpacity = item.className.includes('mix-blend-difference') ? 1 : originalOpacity;
 
       gsap.to(el, {
@@ -200,15 +200,15 @@ const Showcase = () => {
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="relative min-h-[300vh] bg-black overflow-hidden"
-      style={{ 
+      style={{
         background: 'radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%)'
       }}
     >
       {/* Modern Noise Overlay */}
-      <div 
+      <div
         className="fixed inset-0 opacity-[0.03] pointer-events-none z-50 mix-blend-overlay"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
@@ -226,7 +226,7 @@ const Showcase = () => {
         <h1 className="text-white text-sm sm:text-base md:text-lg font-light tracking-[0.3em] pointer-events-auto">
           PORTFOLIO 2026
         </h1>
-        <p className="text-white/40 text-xs sm:text-sm md:text-base font-light tracking-wider pointer-events-auto">
+        <p className="text-white/60 text-xs sm:text-sm md:text-base font-light tracking-wider pointer-events-auto">
           SCROLL TO EXPLORE
         </p>
       </div>
@@ -245,18 +245,18 @@ const Showcase = () => {
             {isImage ? (
               <div className="relative w-full h-full group">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
-                
+
                 <img
                   src={item.src}
                   alt={`Project ${item.id}`}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 rounded-lg shadow-2xl"
                   loading="lazy"
                 />
-                
+
                 <div className="absolute inset-0 border border-white/10 rounded-lg group-hover:border-white/30 transition-colors duration-500" />
-                
+
                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-lg">
-                  <p className="text-white/60 text-[10px] sm:text-xs tracking-widest mb-1">CASE STUDY</p>
+                  <p className="text-white/80 text-[10px] sm:text-xs tracking-widest mb-1">CASE STUDY</p>
                   <h3 className="text-white text-sm sm:text-base md:text-xl font-light tracking-wider">PROJECT 0{item.id}</h3>
                 </div>
               </div>
@@ -281,7 +281,7 @@ const Showcase = () => {
 
       {/* Scroll Progress Bar */}
       <div className="fixed bottom-0 left-0 right-0 h-0.5 bg-white/5 z-50">
-        <div 
+        <div
           className="h-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300"
           style={{
             width: '0%',

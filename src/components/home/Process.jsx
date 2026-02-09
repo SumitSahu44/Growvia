@@ -34,7 +34,7 @@ const Process = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      
+
       // --- 1. THE CONNECTING LINE ANIMATION ---
       // Jaise section scroll hoga, line upar se neeche grow karegi
       gsap.fromTo(lineRef.current,
@@ -45,7 +45,7 @@ const Process = () => {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top center", // Jab section screen ke beech me aaye
-            end: "bottom center", 
+            end: "bottom center",
             scrub: 1, // Smooth connection with scroll
           }
         }
@@ -58,7 +58,7 @@ const Process = () => {
         const xStart = isEven ? -100 : 100;
 
         // Content slide-in animation
-        gsap.fromTo(step.querySelector('.step-content'), 
+        gsap.fromTo(step.querySelector('.step-content'),
           { opacity: 0, x: xStart },
           {
             opacity: 1,
@@ -101,15 +101,15 @@ const Process = () => {
   return (
     <section ref={sectionRef} className="relative py-24 md:py-40 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 relative">
-        
+
         {/* Section Header */}
         <div className="text-center mb-20">
-             <span className="text-sm font-bold uppercase tracking-[0.3em] text-blue-600">
-                How We Work
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black mt-4 text-black">
-                THE PATH TO DOMINANCE.
-            </h2>
+          <span className="text-sm font-bold uppercase tracking-[0.3em] text-blue-600">
+            How We Work
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black mt-4 text-black">
+            THE PATH TO DOMINANCE.
+          </h2>
         </div>
 
 
@@ -118,9 +118,9 @@ const Process = () => {
         <div className="absolute left-8 md:left-1/2 top-0 h-full w-[2px] bg-gray-200 -translate-x-1/2 md:translate-x-0"></div>
 
         {/* --- THE ANIMATED LINE (Growing Blue Line) --- */}
-        <div 
-            ref={lineRef}
-            className="absolute left-8 md:left-1/2 top-0 h-full w-[2px] bg-blue-600 origin-top -translate-x-1/2 md:translate-x-0 scale-y-0"
+        <div
+          ref={lineRef}
+          className="absolute left-8 md:left-1/2 top-0 h-full w-[2px] bg-blue-600 origin-top -translate-x-1/2 md:translate-x-0 scale-y-0"
         ></div>
 
 
@@ -129,19 +129,19 @@ const Process = () => {
           {steps.map((step, index) => {
             const isEven = index % 2 === 0;
             return (
-              <div 
-                key={step.id} 
+              <div
+                key={step.id}
                 ref={addToRefs}
                 // Responsive Layout: Mobile=Flex Start, Desktop=Alternating
                 className={`flex items-center ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} justify-start md:justify-center w-full relative`}
               >
-                
+
                 {/* The Content Box */}
                 {/* Mobile: Left margin for line | Desktop: Width 50% and padding */}
                 <div className={`step-content ml-12 md:ml-0 w-full md:w-1/2 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'}`}>
-                  <span className="block text-6xl font-black text-gray-200 mb-2 leading-none">{step.id}</span>
+                  <span className="block text-6xl font-black text-gray-300 mb-2 leading-none">{step.id}</span>
                   <h3 className="text-2xl font-bold text-black mb-4">{step.title}</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">{step.description}</p>
+                  <p className="text-gray-700 text-lg leading-relaxed">{step.description}</p>
                 </div>
 
                 {/* The Connecting Dot (Marker) */}
@@ -149,7 +149,7 @@ const Process = () => {
                 <div className="absolute left-8 md:left-1/2 -translate-x-1/2 md:translate-x-0 flex items-center justify-center">
                   {/* Outer Glow Ring */}
                   <div className="w-8 h-8 rounded-full bg-white border-4 border-gray-100 shadow-sm flex items-center justify-center z-20">
-                     {/* Inner Animated Dot */}
+                    {/* Inner Animated Dot */}
                     <div className="step-dot w-3 h-3 rounded-full bg-gray-200"></div>
                   </div>
                 </div>

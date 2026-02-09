@@ -43,7 +43,7 @@ const ServicesAlternate = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      
+
       // 1. HERO FADE IN
       gsap.from(".srv-hero", {
         y: 100, opacity: 0, duration: 1.2, stagger: 0.1, ease: "power4.out"
@@ -52,9 +52,9 @@ const ServicesAlternate = () => {
       // 2. IMAGE PARALLAX & TEXT REVEAL
       services.forEach((_, i) => {
         // Image Parallax (Image moves inside container)
-        gsap.fromTo(imageRefs.current[i], 
+        gsap.fromTo(imageRefs.current[i],
           { scale: 1.2, yPercent: -20 }, // Start position
-          { 
+          {
             yPercent: 20, // Move down
             ease: "none",
             scrollTrigger: {
@@ -88,12 +88,12 @@ const ServicesAlternate = () => {
 
   return (
     <div ref={containerRef} className="bg-white min-h-screen text-black overflow-hidden w-full">
-      
+
       {/* --- HERO SECTION --- */}
       <section className="pt-32 pb-20 px-6 md:px-20 max-w-[1400px] mx-auto">
         <p className="srv-hero text-blue-600 font-bold uppercase tracking-[0.2em] text-sm mb-4">What We Do</p>
         <h1 className="srv-hero text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-8">
-            Solving Problems<br/>With Design.
+          Solving Problems<br />With Design.
         </h1>
         <div className="w-full h-[1px] bg-gray-200 mt-10 srv-hero"></div>
       </section>
@@ -101,72 +101,72 @@ const ServicesAlternate = () => {
       {/* --- SERVICES LOOP --- */}
       <div className="flex flex-col gap-0 md:gap-32 pb-32">
         {services.map((service, index) => {
-            // Check if index is even (0, 2, 4...)
-            const isEven = index % 2 === 0;
+          // Check if index is even (0, 2, 4...)
+          const isEven = index % 2 === 0;
 
-            return (
-                <section key={index} className="w-full px-6 md:px-20 max-w-[1400px] mx-auto">
-                    <div className={`flex flex-col lg:flex-row items-center gap-10 md:gap-24 
+          return (
+            <section key={index} className="w-full px-6 md:px-20 max-w-[1400px] mx-auto">
+              <div className={`flex flex-col lg:flex-row items-center gap-10 md:gap-24 
                         ${isEven ? '' : 'lg:flex-row-reverse'} 
                     `}>
-                        
-                        {/* --- IMAGE SIDE --- */}
-                        <div className="w-full lg:w-1/2 aspect-[4/3] lg:aspect-[16/10] overflow-hidden rounded-2xl relative group">
-                            {/* Inner Image with Parallax Ref */}
-                            <div className="w-full h-full overflow-hidden">
-                                <img 
-                                    ref={addToImages}
-                                    src={service.img} 
-                                    alt={service.title} 
-                                    className="w-full h-[140%] object-cover object-center will-change-transform" // h-140% for parallax space
-                                />
-                            </div>
-                            
-                            {/* Hover Overlay */}
-                            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
-                            
-                            {/* Floating Number (Corner) */}
-                            <div className="absolute top-0 left-0 bg-white px-6 py-4 rounded-br-2xl border-b border-r border-gray-100 z-10">
-                                <span className="text-2xl font-black">{service.id}</span>
-                            </div>
-                        </div>
 
-                        {/* --- TEXT SIDE --- */}
-                        <div ref={addToText} className="w-full lg:w-1/2 flex flex-col gap-6">
-                            
-                            {/* Title & Desc */}
-                            <div>
-                                <h2 className="text-4xl md:text-6xl font-black uppercase leading-none mb-6">
-                                    {service.title}
-                                </h2>
-                                <p className="text-lg md:text-xl text-gray-500 leading-relaxed">
-                                    {service.desc}
-                                </p>
-                            </div>
+                {/* --- IMAGE SIDE --- */}
+                <div className="w-full lg:w-1/2 aspect-[4/3] lg:aspect-[16/10] overflow-hidden rounded-2xl relative group">
+                  {/* Inner Image with Parallax Ref */}
+                  <div className="w-full h-full overflow-hidden">
+                    <img
+                      ref={addToImages}
+                      src={service.img}
+                      alt={service.title}
+                      className="w-full h-[140%] object-cover object-center will-change-transform" // h-140% for parallax space
+                    />
+                  </div>
 
-                            {/* Features List */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-4 mt-4 border-t border-gray-100 pt-8">
-                                {service.features.map((feature, fIndex) => (
-                                    <div key={fIndex} className="flex items-center gap-3 text-sm font-bold uppercase tracking-wide text-gray-800">
-                                        <FiCheckCircle className="text-blue-600 text-lg flex-shrink-0"/>
-                                        {feature}
-                                    </div>
-                                ))}
-                            </div>
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
 
-                            {/* CTA Button */}
-                            <div className="pt-6">
-                                <button className="group flex items-center gap-2 text-sm font-bold uppercase tracking-widest border-b border-black pb-1 hover:text-blue-600 hover:border-blue-600 transition-all w-fit">
-                                    View Projects 
-                                    <FiArrowUpRight className="text-lg transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/>
-                                </button>
-                            </div>
+                  {/* Floating Number (Corner) */}
+                  <div className="absolute top-0 left-0 bg-white px-6 py-4 rounded-br-2xl border-b border-r border-gray-100 z-10">
+                    <span className="text-2xl font-black">{service.id}</span>
+                  </div>
+                </div>
 
-                        </div>
+                {/* --- TEXT SIDE --- */}
+                <div ref={addToText} className="w-full lg:w-1/2 flex flex-col gap-6">
 
-                    </div>
-                </section>
-            );
+                  {/* Title & Desc */}
+                  <div>
+                    <h2 className="text-4xl md:text-6xl font-black uppercase leading-none mb-6">
+                      {service.title}
+                    </h2>
+                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                      {service.desc}
+                    </p>
+                  </div>
+
+                  {/* Features List */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-4 mt-4 border-t border-gray-100 pt-8">
+                    {service.features.map((feature, fIndex) => (
+                      <div key={fIndex} className="flex items-center gap-3 text-sm font-bold uppercase tracking-wide text-gray-800">
+                        <FiCheckCircle className="text-blue-600 text-lg flex-shrink-0" />
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <div className="pt-6">
+                    <button className="group flex items-center gap-2 text-sm font-bold uppercase tracking-widest border-b border-black pb-1 hover:text-blue-600 hover:border-blue-600 transition-all w-fit">
+                      View Projects
+                      <FiArrowUpRight className="text-lg transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </button>
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+          );
         })}
       </div>
 
@@ -174,7 +174,7 @@ const ServicesAlternate = () => {
       <section className="px-6 md:px-20 py-24 bg-gray-50 text-center">
         <h2 className="text-3xl md:text-5xl font-black uppercase mb-8">Not sure what you need?</h2>
         <button className="bg-black text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 hover:scale-105 transition-all">
-            Book a Free Consultation
+          Book a Free Consultation
         </button>
       </section>
 
