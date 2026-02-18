@@ -4,23 +4,23 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Manifesto = ({ 
-    title = "Our Philosophy", 
-    text = "We believe that digital products should be more than just functional. They should be intuitive, beautiful, and deeply human. In a world of noise, we bring clarity. We don't just build websites; we build the future." 
+const Manifesto = ({
+  title = "The Future We’re Building",
+  text = "We’re building a future where brands don’t compete for attention, they command it. Through strategy, design, and performance marketing, we help businesses evolve into industry leaders that set trends instead of following them. Every project we take on is crafted to be scalable, impactful, and built for long-term dominance."
 }) => {
   const containerRef = useRef(null);
   const textRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      
+
       const words = textRef.current.querySelectorAll('.word');
 
       // --- TEXT REVEAL ANIMATION ---
-      gsap.fromTo(words, 
-        { 
-          opacity: 0.1, 
-          filter: "blur(8px)", 
+      gsap.fromTo(words,
+        {
+          opacity: 0.1,
+          filter: "blur(8px)",
           y: 10 // Thoda neeche se aayega
         },
         {
@@ -54,29 +54,29 @@ const Manifesto = ({
   };
 
   return (
-    <section 
-        ref={containerRef} 
-        className="relative w-full py-32 md:py-48 px-3 md:px-20 bg-white text-black overflow-hidden flex flex-col justify-center items-center"
+    <section
+      ref={containerRef}
+      className="relative w-full py-32 md:py-48 px-3 md:px-20 bg-white text-black overflow-hidden flex flex-col justify-center items-center"
     >
-        <div className="max-w-6xl mx-auto text-center md:text-left w-full">
-            
-            {/* Small Label */}
-            <div className="mb-8 md:mb-12 flex items-center justify-center md:justify-start gap-4">
-                <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
-                <span className="text-sm font-bold font-mono uppercase tracking-[0.3em] text-gray-400">
-                    {title}
-                </span>
-            </div>
+      <div className="max-w-6xl mx-auto text-center md:text-left w-full">
 
-            {/* Main Manifesto Text */}
-            <p 
-                ref={textRef} 
-                className="text-4xl md:text-5xl lg:text-[4rem] font-black leading-[1.1] tracking-tight text-black"
-            >
-                {splitText(text)}
-            </p>
-
+        {/* Small Label */}
+        <div className="mb-8 md:mb-12 flex items-center justify-center md:justify-start gap-4">
+          <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
+          <span className="text-sm font-bold font-mono uppercase tracking-[0.3em] text-gray-400">
+            {title}
+          </span>
         </div>
+
+        {/* Main Manifesto Text */}
+        <p
+          ref={textRef}
+          className="text-4xl md:text-5xl lg:text-[4rem] font-black leading-[1.1] tracking-tight text-black"
+        >
+          {splitText(text)}
+        </p>
+
+      </div>
     </section>
   );
 };

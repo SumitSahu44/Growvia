@@ -8,22 +8,22 @@ const steps = [
   {
     id: "01",
     title: "Discovery & Audit",
-    description: "We dive deep into your brand ecosystem, analyzing competitors, audience behavior, and current performance gaps.",
+    description: "We analyze your brand from every angle, competitors, audiences, and data, to identify exactly where scale is waiting.",
   },
   {
     id: "02",
     title: "Strategy Blueprint",
-    description: "We craft a tailored roadmap blending creative campaigns with data-driven acquisition channels tailored for ROI.",
+    description: "We map out a focused strategy combining creative, targeting, and channel planning designed for performance from day one.",
   },
   {
     id: "03",
     title: "Execution & Scale",
-    description: "Our specialists deploy campaigns, optimize creatives in real-time, and scale what's winning aggressively.",
+    description: "We execute campaigns with a clear structure, closely monitor performance, and continuously refine targeting, creatives, and strategy to improve results and scale what works best.",
   },
   {
     id: "04",
-    title: "Analytics & Refine",
-    description: "Transparent reporting and continuous iteration. We don't just launch; we learn and improve exponentially.",
+    title: "Data & Growth Insights",
+    description: "We don’t guess, we measure. From conversion data to audience signals, we analyse everything to refine campaigns, improve ROI, and unlock consistent growth.",
   },
 ];
 
@@ -108,7 +108,8 @@ const Process = () => {
             How We Work
           </span>
           <h2 className="text-4xl md:text-5xl font-black mt-4 text-black">
-            THE PATH TO DOMINANCE.
+            THE FRAMEWORK FOR SCALE.
+
           </h2>
         </div>
 

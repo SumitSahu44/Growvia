@@ -83,7 +83,7 @@ const Hero = () => {
 
         {/* 3. Subtext */}
         <p className="hero-anim-item max-w-xl text-lg md:text-xl text-gray-700 font-medium leading-relaxed mb-10">
-          We are Growvia. We build brands that define culture through strategic design and performance marketing.
+          Growvia is a performance-led digital growth partner helping brands attract attention, convert audiences, and scale revenue through strategy, design, and paid media.
         </p>
 
         {/* 4. Action Buttons */}
