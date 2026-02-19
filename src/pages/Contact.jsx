@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiArrowUpRight, FiPlus, FiMinus, FiMapPin, FiMail, FiPhone, FiSend } from 'react-icons/fi';
+import { FiArrowUpRight, FiPlus, FiMinus, FiMapPin, FiMail, FiPhone, FiSend, FiLoader, FiCheckCircle } from 'react-icons/fi';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,23 +19,42 @@ const Contact = () => {
     const [activeService, setActiveService] = useState([]);
     const [openFaq, setOpenFaq] = useState(null);
 
+    // --- NEW STATES FOR PROCESSING & POPUP ---
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showThanks, setShowThanks] = useState(false);
+
     const toggleService = (service) => {
         activeService.includes(service)
             ? setActiveService(activeService.filter(s => s !== service))
             : setActiveService([...activeService, service]);
     };
 
+    // --- SUBMIT HANDLER ---
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        // 1 second processing delay
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setShowThanks(true);
+            
+            // GSAP animation for popup entry
+            gsap.fromTo(".thanks-card", 
+                { y: 50, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
+            );
+        }, 1000);
+    };
+
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-
-            // 1. Hero Text Reveal
             gsap.from(".hero-char", {
                 y: 100, opacity: 0, duration: 1, stagger: 0.05, ease: "power4.out"
             });
 
-            // 2. Parallax Image Effect
             gsap.to(".contact-img", {
-                yPercent: 20, // Image moves inside container
+                yPercent: 20,
                 ease: "none",
                 scrollTrigger: {
                     trigger: ".contact-grid",
@@ -45,17 +64,38 @@ const Contact = () => {
                 }
             });
 
-            // 3. Form Reveal
             gsap.from(formRef.current, {
                 y: 50, opacity: 0, duration: 1, delay: 0.5, ease: "power3.out"
             });
-
         }, containerRef);
         return () => ctx.revert();
     }, []);
 
     return (
-        <div ref={containerRef} className="bg-white min-h-screen text-black overflow-x-hidden selection:bg-black selection:text-white">
+        <div ref={containerRef} className="relative bg-white min-h-screen text-black overflow-x-hidden selection:bg-black selection:text-white">
+
+            {/* --- THANK YOU POPUP --- */}
+            {showThanks && (
+                <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-6">
+                    <div className="thanks-card bg-white text-black p-10 md:p-16 rounded-[2rem] max-w-2xl shadow-2xl text-center border border-gray-100">
+                        <div className="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-8 text-4xl">
+                            <FiCheckCircle />
+                        </div>
+                        <h2 className="text-4xl font-black uppercase tracking-tighter mb-6">Thank you page</h2>
+                        <p className="text-xl text-gray-700 leading-relaxed mb-10">
+                            Thanks for reaching out! That click might be the smartest move you made today.
+                            <br /><br />
+                            We’ve received your submission and our team is already mapping out possibilities. Expect to hear from us soon.
+                        </p>
+                        <button 
+                            onClick={() => setShowThanks(false)}
+                            className="bg-black text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 transition-colors"
+                        >
+                            Back to site
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* --- HERO HEADER --- */}
             <section className="pt-32 pb-16 px-6 md:px-20 border-b border-gray-100">
@@ -69,15 +109,12 @@ const Contact = () => {
                 </div>
             </section>
 
-            {/* --- MAIN GRID (Image Left, Form Right) --- */}
+            {/* --- MAIN GRID --- */}
             <section className="contact-grid px-6 md:px-20 py-20 max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
 
                 {/* LEFT: VISUAL STICKY CARD */}
                 <div className="w-full lg:w-5/12 relative">
-                    {/* Sticky Container */}
                     <div className="sticky top-10 h-[85vh] w-full rounded-3xl overflow-hidden relative group">
-
-                        {/* Parallax Image */}
                         <div className="absolute inset-0 w-full h-[120%] -top-[10%] overflow-hidden">
                             <img
                                 ref={imageRef}
@@ -86,11 +123,7 @@ const Contact = () => {
                                 className="contact-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                         </div>
-
-                        {/* Overlay Gradient */}
                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-500"></div>
-
-                        {/* Content Overlay (Glassmorphism) */}
                         <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl text-white">
                             <div className="flex flex-col gap-8">
                                 <div>
@@ -113,19 +146,16 @@ const Contact = () => {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 {/* RIGHT: THE FORM */}
                 <div ref={formRef} className="w-full lg:w-7/12 flex flex-col justify-center">
-
                     <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-xl">
                         Got an idea? We’d love to hear about it. Fill out the form below and we’ll get back to you within 24 hours.
                     </p>
 
-                    <form className="flex flex-col gap-12">
-
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-12">
                         {/* Inputs Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                             <div className="relative group">
@@ -178,14 +208,27 @@ const Contact = () => {
                         </div>
 
                         {/* Submit */}
-                        <button className="group w-full md:w-fit bg-black text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 transition-all duration-300 flex items-center justify-center gap-3 shadow-xl">
-                            <span>Send Message</span>
-                            <FiSend className="text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        <button 
+                            disabled={isSubmitting}
+                            className={`group w-full md:w-fit px-10 py-5 rounded-full font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-3 shadow-xl 
+                            ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-black text-white hover:bg-blue-600'}`}
+                        >
+                            {isSubmitting ? (
+                                <>
+                                    <span>Processing...</span>
+                                    <FiLoader className="animate-spin" />
+                                </>
+                            ) : (
+                                <>
+                                    <span>Send Message</span>
+                                    <FiSend className="text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                </>
+                            )}
                         </button>
 
                     </form>
 
-                    {/* --- FAQ MINI SECTION --- */}
+                    {/* FAQ SECTION */}
                     <div className="mt-24 pt-10 border-t border-gray-100">
                         <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-8">FAQ</h3>
                         <div className="flex flex-col gap-6">
@@ -202,11 +245,8 @@ const Contact = () => {
                             ))}
                         </div>
                     </div>
-
                 </div>
-
             </section>
-
         </div>
     );
 };
