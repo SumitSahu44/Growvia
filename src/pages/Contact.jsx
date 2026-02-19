@@ -124,28 +124,48 @@ const Contact = () => {
                             />
                         </div>
                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-500"></div>
-                        <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl text-white">
-                            <div className="flex flex-col gap-8">
-                                <div>
-                                    <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Email</h3>
-                                    <a href="mailto:hello@agency.com" className="text-2xl font-bold hover:text-blue-400 transition-colors">hello@agency.com</a>
-                                </div>
-                                <div>
-                                    <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Visit Us</h3>
-                                    <p className="text-lg leading-snug">
-                                        123, Innovation Tower, Suite 404<br />
-                                        Indore, India - 452001
-                                    </p>
-                                </div>
-                                <div className="flex gap-4 pt-4 border-t border-white/20">
-                                    {['Insta', 'LinkedIn', 'Twitter'].map(social => (
-                                        <a key={social} href="#" className="text-sm font-bold uppercase tracking-widest hover:text-blue-400 transition-colors">
-                                            {social}
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                     <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl text-white">
+    <div className="flex flex-col gap-8">
+        {/* Email Section */}
+        <div>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Email</h3>
+            <a 
+                href="mailto:growviadigitalmarketing26@gmail.com" 
+                className="text-xl md:text-2xl font-bold hover:text-blue-400 transition-colors break-all"
+            >
+                growviadigitalmarketing26@gmail.com
+            </a>
+        </div>
+
+        {/* Location Section */}
+        <div>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Visit Us</h3>
+            <p className="text-lg leading-snug">
+                Indore, Madhya Pradesh, <br />
+                India
+            </p>
+        </div>
+
+        {/* Social Links Section */}
+        <div className="flex flex-wrap gap-6 pt-4 border-t border-white/20">
+            {[
+                { name: 'Instagram', url: 'https://www.instagram.com/growviadigitalmarketing/' },
+                { name: 'LinkedIn', url: 'https://www.linkedin.com/company/growvia-digital-marketing/' },
+                { name: 'WhatsApp', url: 'https://wa.me/918962799979' }
+            ].map((social) => (
+                <a 
+                    key={social.name} 
+                    href={social.url} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="text-xs md:text-sm font-bold uppercase tracking-widest hover:text-blue-400 transition-colors"
+                >
+                    {social.name}
+                </a>
+            ))}
+        </div>
+    </div>
+</div>
                     </div>
                 </div>
 
