@@ -6,9 +6,9 @@ import { FiArrowUpRight, FiPlus, FiMinus, FiMapPin, FiMail, FiPhone, FiSend } fr
 gsap.registerPlugin(ScrollTrigger);
 
 const faqs = [
-    { question: "Typical project timeline?", answer: "4-8 weeks for most branding and web projects. We move fast without breaking things." },
-    { question: "Do you offer retainers?", answer: "Yes. We become your long-term design partner, handling everything from social assets to landing pages." },
-    { question: "What is the starting budget?", answer: "Our projects typically start from $5k. We focus on high-impact results." }
+    { question: "Typical project timeline?", answer: "Most projects take 2–6 weeks, depending on scope, features, and feedback cycles." },
+    { question: "Do you offer retainers?", answer: "Yes, we offer flexible monthly retainers for ongoing marketing, design, and optimisation support, so your brand keeps growing consistently." },
+    { question: "Will I have a dedicated point of contact?", answer: "Yes, you’ll work directly with a strategist who understands your brand inside out." }
 ];
 
 const Contact = () => {
