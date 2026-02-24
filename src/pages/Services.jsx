@@ -127,15 +127,17 @@ const ServicesAlternate = () => {
   const addToText = (el) => { if (el && !textRefs.current.includes(el)) textRefs.current.push(el); };
 
   return (
-    <div ref={containerRef} className="bg-white min-h-screen text-black w-full selection:bg-blue-600 selection:text-white">
+    // Black Background Applied Here
+    <div ref={containerRef} className="bg-[#050505] min-h-screen text-white w-full selection:bg-blue-600 selection:text-white">
       
       {/* --- HERO SECTION --- */}
       <section className="pt-32 pb-20 px-6 md:px-20 max-w-[1400px] mx-auto">
-        <p className="srv-hero text-blue-600 font-bold uppercase tracking-[0.2em] text-sm mb-4">GrowVia Expertise</p>
-        <h1 className="srv-hero text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-8">
-          Systems That Scale,<br />Not Just Trends.
+        <p className="srv-hero text-blue-500 font-bold uppercase tracking-[0.2em] text-sm mb-4">GrowVia Expertise</p>
+        <h1 className="srv-hero text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-8 text-white">
+          Systems That Scale,<br />
+          <span className="text-gray-500">Not Just Trends.</span>
         </h1>
-        <div className="w-full h-[1px] bg-gray-100 mt-10 srv-hero"></div>
+        <div className="w-full h-[1px] bg-white/10 mt-10 srv-hero"></div>
       </section>
 
       {/* --- SERVICES LOOP --- */}
@@ -146,38 +148,41 @@ const ServicesAlternate = () => {
             <section key={index} className="w-full px-6 md:px-20 max-w-[1400px] mx-auto">
               <div className={`flex flex-col lg:flex-row items-center gap-12 md:gap-24 ${isEven ? '' : 'lg:flex-row-reverse'}`}>
                 
-                {/* IMAGE SIDE */}
-                <div ref={addToItems} className="w-full lg:w-1/2 aspect-[4/3] lg:aspect-[16/11] overflow-hidden rounded-3xl relative group bg-gray-50">
+                {/* IMAGE SIDE (Restored to Exact Original Layout) */}
+                <div ref={addToItems} className="w-full lg:w-1/2 aspect-[4/3] lg:aspect-[16/11] overflow-hidden rounded-3xl relative group bg-gray-900 border border-white/5">
                   <div className="w-full h-full overflow-hidden">
                     <img ref={addToImages} src={service.img} alt={service.title} className="w-full h-[130%] object-cover object-center" />
                   </div>
-                  <div className="absolute top-0 left-0 bg-white/90 backdrop-blur-sm px-6 py-4 rounded-br-3xl border-b border-r border-gray-100 z-10">
-                    <span className="text-xl font-black text-blue-600 italic">{service.id}</span>
+                  {/* Badge adjusted for dark theme but kept original position/shape */}
+                  <div className="absolute top-0 left-0 bg-[#050505] px-6 py-4 rounded-br-3xl border-b border-r border-white/10 z-10">
+                    <span className="text-xl font-black text-blue-500 italic">{service.id}</span>
                   </div>
                 </div>
 
-                {/* TEXT SIDE */}
+                {/* TEXT SIDE (Removed Overlapping Watermarks) */}
                 <div ref={addToText} className="w-full lg:w-1/2 flex flex-col gap-8">
                   <div>
-                    <h2 className="text-4xl md:text-6xl font-black uppercase leading-none mb-6 tracking-tighter">{service.title}</h2>
-                    <p className="text-xl text-gray-600 leading-relaxed font-medium">{service.desc}</p>
+                    <h2 className="text-4xl md:text-6xl font-black uppercase leading-none mb-6 tracking-tighter text-white">{service.title}</h2>
+                    <p className="text-xl text-gray-400 leading-relaxed font-medium">{service.desc}</p>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 py-8 border-y border-gray-100">
+                  {/* Features List */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 py-8 border-y border-white/10">
                     {service.features.map((feature, fIndex) => (
-                      <div key={fIndex} className="flex items-start gap-3 text-sm font-bold uppercase tracking-wide text-gray-800">
-                        <FiCheckCircle className="text-blue-600 text-lg flex-shrink-0 mt-0.5" />
+                      <div key={fIndex} className="flex items-start gap-3 text-sm font-bold uppercase tracking-wide text-gray-300">
+                        <FiCheckCircle className="text-blue-500 text-lg flex-shrink-0 mt-0.5" />
                         {feature}
                       </div>
                     ))}
                   </div>
 
                   <Link to="/contact">
-                    <button className="group flex items-center gap-3 text-sm font-black uppercase tracking-widest border-b-2 border-black pb-2 hover:text-blue-600 hover:border-blue-600 transition-all">
+                    <button className="group flex items-center gap-3 text-sm font-black uppercase tracking-widest text-white border-b-2 border-white/20 pb-2 hover:text-blue-500 hover:border-blue-500 transition-all">
                       Scale Your Brand <FiArrowUpRight className="text-xl transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </button>
                   </Link>
                 </div>
+
               </div>
             </section>
           );
