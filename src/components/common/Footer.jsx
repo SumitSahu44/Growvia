@@ -165,7 +165,7 @@ const Footer = () => {
           </div>
 
           {/* Col 4: Time & Location */}
-          <div ref={addToLinksRef} className="flex flex-col justify-between">
+          {/* <div ref={addToLinksRef} className="flex flex-col justify-between">
             <div>
               <h4 className="text-gray-400 font-mono text-xs uppercase tracking-widest mb-2">Local Time</h4>
               <p className="text-2xl font-mono">{time}</p>
@@ -178,7 +178,7 @@ const Footer = () => {
             >
               Back to Top <span className="text-lg">↑</span>
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* SECTION 3: GIANT BRAND NAME */}
