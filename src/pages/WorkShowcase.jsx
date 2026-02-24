@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiArrowUpRight, FiMaximize2 } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -182,11 +183,13 @@ const WorkShowcase = () => {
       </div>
 
       <div className="mt-16 md:mt-20 text-center">
-        <button className="w-full md:w-auto bg-black text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 hover:scale-105 transition-all shadow-xl">
-          View All Projects
-        </button>
+        <Link to="/contact">
+          <button className="inline-flex items-center gap-2 bg-black text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 hover:scale-105 transition-all shadow-xl">
+            Book Our Service <FiArrowUpRight className="inline-block text-xl" />
+          </button>
+        </Link>
       </div>
-
+  
     </section>
   );
 };

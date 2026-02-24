@@ -124,27 +124,20 @@ const Contact = () => {
                             />
                         </div>
                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-500"></div>
-                     <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl text-white">
+                     <div className="absolute bottom-6 left-3 right-3 md:left-6 md:right-6 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl text-white">
     <div className="flex flex-col gap-8">
         {/* Email Section */}
         <div>
             <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Email</h3>
             <a 
                 href="mailto:growviadigitalmarketing26@gmail.com" 
-                className="text-xl md:text-2xl font-bold hover:text-blue-400 transition-colors break-all"
+                className="text-[14px] md:text-xl whitespace-nowrap font-bold hover:text-blue-400 transition-colors break-all"
             >
                 growviadigitalmarketing26@gmail.com
             </a>
         </div>
 
         {/* Location Section */}
-        <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Visit Us</h3>
-            <p className="text-lg leading-snug">
-                Indore, Madhya Pradesh, <br />
-                India
-            </p>
-        </div>
 
         {/* Social Links Section */}
         <div className="flex flex-wrap gap-6 pt-4 border-t border-white/20">
