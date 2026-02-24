@@ -57,7 +57,7 @@ const MissionVision = () => {
                         </p>
                         <div className="fade-up mt-8 h-[1px] bg-gray-100 w-full"></div>
                         <p className="fade-up mt-8 text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
-                            We drive meaningful business outcomes through strategic thinking, creative execution, and performance precision — while fostering a culture where our team is empowered to experiment, learn, and excel.
+                            We drive meaningful business outcomes through strategic thinking, creative execution, and performance precision, while fostering a culture where our team is empowered to experiment, learn, and excel.
                         </p>
                     </div>
                 </div>
