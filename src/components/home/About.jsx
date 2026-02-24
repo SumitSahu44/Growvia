@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiArrowUpRight, FiGlobe, FiUsers } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,9 +118,11 @@ const About = () => {
           </div>
 
           <div className="reveal-text">
+            <Link to="/about" >
             <button className="bg-black text-white px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-blue-600 hover:scale-105 transition-all duration-300 shadow-xl flex items-center gap-2">
               Discover More <FiArrowUpRight className="text-lg" />
             </button>
+            </Link>
           </div>
 
         </div>
