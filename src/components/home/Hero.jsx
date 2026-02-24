@@ -93,9 +93,9 @@ const Hero = () => {
               Start a Project <FiArrowRight />
             </button>
           </Link>
-          <button className="px-8 py-4 bg-white text-black border border-gray-200 rounded-full font-bold text-sm tracking-wide hover:bg-gray-50 hover:border-black transition-all duration-300 flex items-center justify-center gap-2">
+          {/* <button className="px-8 py-4 bg-white text-black border border-gray-200 rounded-full font-bold text-sm tracking-wide hover:bg-gray-50 hover:border-black transition-all duration-300 flex items-center justify-center gap-2">
             View Showreel <FiPlay className="fill-current" />
-          </button>
+          </button> */}
         </div>
 
       </div>
