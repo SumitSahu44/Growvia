@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { FaStar, FaQuoteLeft } from 'react-icons/fa';
 
 const reviews = [
@@ -12,7 +12,7 @@ const reviews = [
 
 // Helper Component for a Single Card
 const ReviewCard = ({ review }) => (
-  <div className="w-[350px] md:w-[450px] flex-shrink-0 bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer group mx-4">
+  <div className="w-[300px] md:w-[400px] flex-shrink-0 bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl backdrop-blur-sm hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-grab active:cursor-grabbing group mx-3">
     <div className="flex justify-between items-start mb-6">
       <div className="flex gap-1 text-yellow-500 text-sm">
         {[...Array(5)].map((_, i) => <FaStar key={i} />)}
@@ -20,12 +20,12 @@ const ReviewCard = ({ review }) => (
       <FaQuoteLeft className="text-2xl text-white/20 group-hover:text-blue-500 transition-colors" />
     </div>
 
-    <p className="text-lg text-gray-300 leading-relaxed mb-8 group-hover:text-white transition-colors">
+    <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-8 group-hover:text-white transition-colors">
       "{review.text}"
     </p>
 
     <div className="flex items-center gap-4">
-      <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full border-2 border-white/10 object-cover" />
+      <img src={review.img} alt={review.name} className="w-12 h-12 rounded-full border-2 border-white/10 object-cover pointer-events-none" />
       <div>
         <h4 className="text-white font-bold">{review.name}</h4>
         <p className="text-xs text-gray-400 uppercase tracking-wider">{review.role}</p>
@@ -34,80 +34,128 @@ const ReviewCard = ({ review }) => (
   </div>
 );
 
+// Marquee Row Component to handle logic per row
+const MarqueeRow = ({ items, speed = 1, reverse = false }) => {
+  const scrollContainerRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    let animationFrameId;
+
+    const autoScroll = () => {
+      if (container && !isHovered && !isDragging) {
+        if (reverse) {
+           container.scrollLeft -= speed;
+           if (container.scrollLeft <= 0) {
+             container.scrollLeft = container.scrollWidth / 2;
+           }
+        } else {
+           container.scrollLeft += speed;
+           if (container.scrollLeft >= container.scrollWidth / 2) {
+             container.scrollLeft = 0;
+           }
+        }
+      }
+      animationFrameId = requestAnimationFrame(autoScroll);
+    };
+
+    animationFrameId = requestAnimationFrame(autoScroll);
+    
+    // Initial setup for reverse to start in the middle so it can scroll left immediately
+    if (reverse && container) {
+       container.scrollLeft = container.scrollWidth / 2;
+    }
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isHovered, isDragging, speed, reverse]);
+
+  // Mouse Drag Logic
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+    setScrollLeft(scrollContainerRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+    setIsHovered(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Scroll speed multiplier
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  return (
+    <div className="relative w-full">
+      {/* Side Gradients for Fade Effect */}
+      <div className="absolute top-0 left-0 w-12 md:w-32 h-full bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-12 md:w-32 h-full bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+
+      <div 
+        ref={scrollContainerRef}
+        className="flex w-full overflow-x-auto no-scrollbar scroll-smooth"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        onTouchStart={() => setIsHovered(true)}
+        onTouchEnd={() => setIsHovered(false)}
+      >
+        {/* Duplicate data enough times to allow infinite scroll illusion */}
+        {[...items, ...items, ...items, ...items].map((review, i) => (
+          <ReviewCard key={i} review={review} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+
 const Testimonials = () => {
   return (
-    <section className="relative w-full py-24 md:py-40 bg-black text-white overflow-hidden">
-
-      {/* CSS for infinite animation */}
+    <section className="relative w-full py-24 md:py-32 bg-black text-white overflow-hidden">
+      
+      {/* Hide scrollbar globally for webkit browsers as inline style might not cover it all */}
       <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes marquee-reverse {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-        .animate-marquee {
-          animation: marquee 40s linear infinite;
-        }
-        .animate-marquee-reverse {
-          animation: marquee-reverse 40s linear infinite;
-        }
-        /* Pause on Hover */
-        .marquee-container:hover .animate-marquee,
-        .marquee-container:hover .animate-marquee-reverse {
-          animation-play-state: paused;
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
 
       {/* --- HEADER --- */}
-      <div className="px-6 md:px-20 mb-20 flex flex-col md:flex-row items-end justify-between gap-10">
-        <div>
-          <span className="text-blue-500 font-bold tracking-[0.2em] uppercase text-sm">Testimonials</span>
-          <h2 className="text-5xl md:text-7xl font-black mt-4 leading-none">
-            Client<br />Stories.
-          </h2>
-        </div>
-        <p className="text-gray-300 max-w-sm text-lg text-right md:text-left">
-          Don't just take our word for it. Here is what the industry leaders have to say about our craft.
+      {/* Changed to flex-col and text-left on all sizes */}
+      <div className="px-6 md:px-20 mb-20 flex flex-col items-start text-left">
+        <span className="text-blue-500 font-bold tracking-[0.2em] uppercase text-sm mb-2">Testimonials</span>
+        <h2 className="text-5xl md:text-7xl font-black mb-6 leading-none text-white">
+          Client Stories.
+        </h2>
+        <p className="text-gray-400 max-w-xl text-lg md:text-xl">
+          Don't just take our word for it. Here is what the industry leaders have to say about our craft and commitment to excellence.
         </p>
       </div>
 
       {/* --- MARQUEE CONTAINER --- */}
-      <div className="marquee-container flex flex-col gap-8">
-
-        {/* ROW 1: Moves LEFT */}
-        <div className="relative w-full overflow-hidden">
-          {/* Side Gradients for Fade Effect */}
-          <div className="absolute top-0 left-0 w-20 md:w-40 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
-          <div className="absolute top-0 right-0 w-20 md:w-40 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
-
-          <div className="flex w-max animate-marquee">
-            {/* Duplicate data to create seamless loop */}
-            {[...reviews, ...reviews, ...reviews].map((review, i) => (
-              <ReviewCard key={`r1-${i}`} review={review} />
-            ))}
-          </div>
-        </div>
-
+      <div className="flex flex-col gap-6 md:gap-8">
+        {/* ROW 1: Moves LEFT normally */}
+        <MarqueeRow items={reviews} speed={1.5} reverse={false} />
+        
         {/* ROW 2: Moves RIGHT (Reverse) */}
-        <div className="relative w-full overflow-hidden">
-          {/* Side Gradients */}
-          <div className="absolute top-0 left-0 w-20 md:w-40 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
-          <div className="absolute top-0 right-0 w-20 md:w-40 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
-
-          <div className="flex w-max animate-marquee-reverse">
-            {[...reviews, ...reviews, ...reviews].map((review, i) => (
-              <ReviewCard key={`r2-${i}`} review={review} />
-            ))}
-          </div>
-        </div>
-
+        <MarqueeRow items={reviews} speed={1.5} reverse={true} />
       </div>
-
-      {/* Background Glow Decoration */}
-      {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none z-0"></div> */}
 
     </section>
   );
