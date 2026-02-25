@@ -87,7 +87,7 @@ const Hero = () => {
         </p>
 
         {/* 4. Action Buttons */}
-        <div className="hero-anim-item flex flex-col sm:flex-row gap-4 w-full justify-center">
+        <div className="hero-anim-item flex  flex-row sm:flex-row gap-4 w-full justify-center">
           <Link to="/contact">
             <button className="px-8 py-4 bg-black text-white rounded-full font-bold text-sm tracking-wide hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2">
               Start a Project <FiArrowRight />
