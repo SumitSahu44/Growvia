@@ -56,7 +56,7 @@ const Manifesto = ({
   return (
     <section
       ref={containerRef}
-      className="relative w-full py-10 md:py-10 px-3 md:px-20 bg-white text-black overflow-hidden flex flex-col justify-center items-center"
+      className="relative w-full py-10 md:py-20 px-3 md:px-20 bg-white text-black overflow-hidden flex flex-col justify-center items-center"
     >
       <div className="max-w-6xl mx-auto text-center md:text-left w-full">
 

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Hero from '../components/home/Hero';
 import About from '../components/home/About'; // Import kiya
 import Philosophy from '../components/home/Philosophy';
-import Services from '../components/home/Services';
 import Process from '../components/home/Process';
 import Testimonials from '../components/home/Testimonials';
 import { gsap } from 'gsap';
@@ -51,12 +50,6 @@ const Home = () => {
         <ToolstationCaseStudy />
       </div> */}
       
-      <div className="home-section">
-        <Services />
-      </div>
-
-
-
 
         {/* <div className="home-section">
         <MagicSection />

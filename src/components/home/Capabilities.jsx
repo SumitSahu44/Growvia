@@ -128,54 +128,60 @@ const Capabilities = () => {
           </p>
         </div>
 
-        {/* List Items */}
-        <div className="flex flex-col gap-20"> {/* Gap badha diya taaki scroll trigger clear ho */}
-          {services.map((service, index) => {
-            // Check if this item is currently active
-            const isActive = index === activeIndex;
-
-            return (
-              <div
-                key={index}
-                ref={addToRefs}
-                // Agar Active hai to Bright White, nahi to Dim Grey (Auto Focus Effect)
-                className={`group relative border-l-2 pl-8 md:pl-12 transition-all duration-500 cursor-pointer 
-                  ${isActive ? 'border-white opacity-100' : 'border-white/10 opacity-30 blur-[1px]'}`}
-                // Manual click/hover support bhi rakha hai
-                onMouseEnter={() => setActiveIndex(index)}
-              >
-                <div className="flex flex-col gap-4">
-                  <span className="text-sm font-mono text-gray-400">/{service.id}</span>
-
-                  <h3 className={`text-4xl md:text-6xl font-bold transition-colors ${isActive ? 'text-white' : 'text-gray-500'}`}>
-                    {service.title}
-                  </h3>
-
-                  <p className="text-gray-300 max-w-md text-base md:text-lg leading-relaxed">
-                    {service.desc}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {service.tags.map((tag, i) => (
-                      <span key={i} className={`text-xs border px-3 py-1 rounded-full transition-colors ${isActive ? 'border-white/30 text-gray-300' : 'border-white/5 text-gray-500'}`}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Active Indicator Arrow */}
-                  <FiArrowUpRight className={`text-3xl mt-4 transition-all duration-500 ${isActive ? 'text-blue-500 rotate-45 opacity-100' : 'text-gray-700 rotate-0 opacity-0'}`} />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
+       
       </div>
 
     </section>
   );
 };
+
+
+
+
+// line number 131 ka code 
+ {/* List Items */}
+        // <div className="flex flex-col gap-20"> {/* Gap badha diya taaki scroll trigger clear ho */}
+        //   {services.map((service, index) => {
+        //     // Check if this item is currently active
+        //     const isActive = index === activeIndex;
+
+        //     return (
+        //       <div
+        //         key={index}
+        //         ref={addToRefs}
+        //         // Agar Active hai to Bright White, nahi to Dim Grey (Auto Focus Effect)
+        //         className={`group relative border-l-2 pl-8 md:pl-12 transition-all duration-500 cursor-pointer 
+        //           ${isActive ? 'border-white opacity-100' : 'border-white/10 opacity-30 blur-[1px]'}`}
+        //         // Manual click/hover support bhi rakha hai
+        //         onMouseEnter={() => setActiveIndex(index)}
+        //       >
+        //         <div className="flex flex-col gap-4">
+        //           <span className="text-sm font-mono text-gray-400">/{service.id}</span>
+
+        //           <h3 className={`text-4xl md:text-6xl font-bold transition-colors ${isActive ? 'text-white' : 'text-gray-500'}`}>
+        //             {service.title}
+        //           </h3>
+
+        //           <p className="text-gray-300 max-w-md text-base md:text-lg leading-relaxed">
+        //             {service.desc}
+        //           </p>
+
+        //           {/* Tags */}
+        //           <div className="flex flex-wrap gap-2 mt-2">
+        //             {service.tags.map((tag, i) => (
+        //               <span key={i} className={`text-xs border px-3 py-1 rounded-full transition-colors ${isActive ? 'border-white/30 text-gray-300' : 'border-white/5 text-gray-500'}`}>
+        //                 {tag}
+        //               </span>
+        //             ))}
+        //           </div>
+
+        //           {/* Active Indicator Arrow */}
+        //           <FiArrowUpRight className={`text-3xl mt-4 transition-all duration-500 ${isActive ? 'text-blue-500 rotate-45 opacity-100' : 'text-gray-700 rotate-0 opacity-0'}`} />
+        //         </div>
+        //       </div>
+        //     );
+        //   })}
+        // </div>
+
 
 export default Capabilities;
