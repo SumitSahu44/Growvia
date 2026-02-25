@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom'; // Added for SPA navigation
+import React, { useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiArrowUpRight } from 'react-icons/fi';
@@ -12,27 +12,11 @@ const Footer = () => {
   const buttonRef = useRef(null);
   const textRef = useRef(null);
   const linksRef = useRef([]);
-
-  // --- LIVE TIME LOGIC ---
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const date = new Date();
-      setTime(date.toLocaleTimeString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        hour12: true 
-      }));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const location = useLocation();
 
   // --- ANIMATIONS ---
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx = gsap.context(() => {
       // 1. Magnetic Button Effect
       const button = buttonRef.current;
       const text = textRef.current;
@@ -50,12 +34,14 @@ const Footer = () => {
         gsap.to(text, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
       };
 
-      button.addEventListener('mousemove', moveButton);
-      button.addEventListener('mouseleave', leaveButton);
+      if (button) {
+        button.addEventListener('mousemove', moveButton);
+        button.addEventListener('mouseleave', leaveButton);
+      }
 
       // 2. Reveal Animation
       gsap.fromTo(linksRef.current,
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
@@ -64,19 +50,19 @@ const Footer = () => {
           ease: "power3.out",
           scrollTrigger: {
             trigger: footerRef.current,
-            start: "top 85%",
+            start: "top bottom", 
+            toggleActions: "play none none none"
           }
         }
       );
-
-      return () => {
-        button.removeEventListener('mousemove', moveButton);
-        button.removeEventListener('mouseleave', leaveButton);
-      };
     }, footerRef);
 
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
+
     return () => ctx.revert();
-  }, []);
+  }, [location.pathname]);
 
   const addToLinksRef = (el) => {
     if (el && !linksRef.current.includes(el)) linksRef.current.push(el);
@@ -85,10 +71,10 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className="relative w-full bg-[#050505] text-white pt-20 md:pt-32 overflow-hidden"
+      className="relative w-full bg-[#050505] text-slate-200 pt-20 md:pt-32 overflow-hidden"
     >
       {/* NOISE OVERLAY */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.03] mix-blend-overlay">
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.02] mix-blend-overlay">
         <svg className="w-full h-full">
           <filter id="noiseFilter">
             <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
@@ -98,15 +84,16 @@ const Footer = () => {
       </div>
 
       <div className="relative z-10">
+        
         {/* SECTION 1: TOP CONTENT */}
         <div className="px-6 md:px-20 flex flex-col md:flex-row justify-between items-start mb-20 md:mb-32">
           <div className="w-full md:w-1/2 mb-10 md:mb-0">
-            <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9]">
+            <h2 className="text-5xl md:text-[5.5rem] font-black uppercase tracking-tighter leading-[0.95] text-white">
               Let's grow<br /> Your Brand
             </h2>
             <div className="mt-8 flex items-center gap-4">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div>
-              <p className="text-gray-400 font-mono text-sm uppercase">Available for Digital Excellence</p>
+              <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_12px_#22c55e]"></div>
+              <p className="text-slate-400 font-mono text-xs md:text-sm uppercase tracking-wide">Available for Digital Excellence</p>
             </div>
           </div>
 
@@ -114,22 +101,22 @@ const Footer = () => {
             <a 
               href="mailto:growviadigitalmarketing26@gmail.com"
               ref={buttonRef}
-              className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-blue-600 hover:bg-white hover:text-black transition-colors duration-500 flex items-center justify-center cursor-pointer group shadow-2xl shadow-blue-900/20"
+              className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-blue-600 hover:bg-white hover:text-black transition-colors duration-500 flex items-center justify-center cursor-pointer group shadow-[0_0_40px_rgba(37,99,235,0.2)] text-white"
             >
               <div ref={textRef} className="flex flex-col items-center">
-                <span className="text-sm md:text-lg font-bold uppercase tracking-widest text-center">Get in<br/>Touch</span>
+                <span className="text-sm md:text-base font-bold uppercase tracking-widest text-center mt-1">Get in<br/>Touch</span>
                 <FiArrowUpRight className="text-2xl mt-1 group-hover:rotate-45 transition-transform duration-300" />
               </div>
             </a>
           </div>
         </div>
 
-        {/* SECTION 2: LINKS GRID */}
-        <div className="px-6 md:px-20 grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-10 md:gap-0 border-t border-white/10 pt-16 pb-16">
+        {/* SECTION 2: LINKS GRID - Changed to grid-cols-2 for mobile */}
+        <div className="px-6 md:px-20 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12 md:gap-8 border-t border-white/10 pt-16 pb-16">
           
           {/* Col 1: Navigation */}
           <div ref={addToLinksRef} className="flex flex-col gap-4">
-            <h4 className="text-gray-400 font-mono text-xs uppercase tracking-widest mb-2">Explore</h4>
+            <h4 className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-2">Explore</h4>
             {[
               { name: 'Home', path: '/' },
               { name: 'About', path: '/about' },
@@ -137,61 +124,75 @@ const Footer = () => {
               { name: 'Blogs', path: '/blogs' },
               { name: 'Contact', path: '/contact' }
             ].map((link) => (
-              <Link key={link.name} to={link.path} className="text-lg hover:text-gray-300 transition-colors w-fit group">
+              <Link key={link.name} to={link.path} className="text-base md:text-lg text-slate-300 hover:text-white transition-colors w-fit group flex items-center gap-2">
+                <span className="w-0 h-[1px] bg-blue-500 group-hover:w-4 transition-all duration-300"></span>
                 {link.name}
-                <span className="block h-[1px] w-0 bg-white group-hover:w-full transition-all duration-300"></span>
               </Link>
             ))}
           </div>
 
           {/* Col 2: Socials */}
           <div ref={addToLinksRef} className="flex flex-col gap-4">
-            <h4 className="text-gray-400 font-mono text-xs uppercase tracking-widest mb-2">Socials</h4>
-            <div className="flex flex-col gap-3">
-              <a href="https://www.instagram.com/growviadigitalmarketing/" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-pink-500 transition-colors"><FaInstagram /> Instagram</a>
-              <a href="https://www.linkedin.com/company/growvia-digital-marketing/" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-blue-600 transition-colors"><FaLinkedinIn /> LinkedIn</a>
-              <a href="https://wa.me/918962799979" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-green-500 transition-colors"><FaWhatsapp /> WhatsApp</a>
+            <h4 className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-2">Socials</h4>
+            <div className="flex flex-col gap-4">
+              <a href="https://www.instagram.com/growviadigitalmarketing/" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base md:text-lg text-slate-300 hover:text-white transition-colors group">
+                <FaInstagram className="group-hover:text-pink-500 transition-colors" /> Instagram
+              </a>
+              <a href="https://www.linkedin.com/company/growvia-digital-marketing/" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base md:text-lg text-slate-300 hover:text-white transition-colors group">
+                <FaLinkedinIn className="group-hover:text-blue-500 transition-colors" /> LinkedIn
+              </a>
+              <a href="https://wa.me/918962799979" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base md:text-lg text-slate-300 hover:text-white transition-colors group">
+                <FaWhatsapp className="group-hover:text-green-500 transition-colors" /> WhatsApp
+              </a>
             </div>
           </div>
 
           {/* Col 3: Contact Info */}
           <div ref={addToLinksRef} className="flex flex-col gap-4">
-            <h4 className="text-gray-400 font-mono text-xs uppercase tracking-widest mb-2">Contact</h4>
-            <a href="mailto:growviadigitalmarketing26@gmail.com" className="text-base md:text-lg break-all hover:text-blue-400 transition-colors">growviadigitalmarketing26@gmail.com</a>
-            <a href="tel:+918962799979" className="text-lg hover:text-blue-400 transition-colors">+91 89627 99979</a>
-            <p className="text-gray-400 text-sm mt-2 max-w-[200px]">
+            <h4 className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-2">Contact</h4>
+            {/* break-words instead of break-all so it wraps nicely in mobile 2-col layout */}
+            <a href="mailto:growviadigitalmarketing26@gmail.com" className="text-sm md:text-base break-words text-slate-300 hover:text-blue-400 transition-colors pr-4">
+              growviadigitalmarketing26@gmail.com
+            </a>
+            <a href="tel:+918962799979" className="text-base md:text-lg text-slate-300 hover:text-blue-400 transition-colors">
+              +91 89627 99979
+            </a>
+            <p className="text-slate-400 text-sm mt-2 leading-relaxed">
               Indore, Madhya Pradesh,<br />India
             </p>
           </div>
 
-          {/* Col 4: Time & Location */}
-          {/* <div ref={addToLinksRef} className="flex flex-col justify-between">
-            <div>
-              <h4 className="text-gray-400 font-mono text-xs uppercase tracking-widest mb-2">Local Time</h4>
-              <p className="text-2xl font-mono">{time}</p>
-              <p className="text-gray-400 text-sm">Indore, M.P.</p>
-            </div>
+          {/* Col 4: Core Expertise (Replaced Newsletter) */}
+          <div ref={addToLinksRef} className="flex flex-col gap-4">
+            <h4 className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-2">Expertise</h4>
+            <ul className="flex flex-col gap-3">
+              {[
+                "Performance Marketing",
+                "Brand Strategy",
+                "Web Development",
+                "SEO & Content"
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-sm md:text-base text-slate-300">
+                  <span className="w-1.5 h-1.5 bg-blue-600 rounded-full opacity-70"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="hidden md:flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors mt-8 uppercase tracking-widest"
-            >
-              Back to Top <span className="text-lg">↑</span>
-            </button>
-          </div> */}
         </div>
 
         {/* SECTION 3: GIANT BRAND NAME */}
         <div className="w-full overflow-hidden border-t border-white/10">
-          <h1 className="text-[14vw] font-black text-center leading-none tracking-tighter text-white opacity-10 hover:opacity-100 transition-opacity duration-1000 cursor-default select-none -mb-4 md:-mb-10 mix-blend-overlay uppercase">
+          <h1 className="text-[14vw] font-black text-center leading-none tracking-tighter text-white opacity-[0.05] hover:opacity-100 transition-opacity duration-700 cursor-default select-none -mb-2 md:-mb-8 uppercase">
             Growvia
           </h1>
         </div>
 
         {/* BOTTOM BAR */}
-        <div className="w-full px-6 md:px-20 py-6 flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 font-mono border-t border-white/5 bg-black">
-          <p>© 2026 Growvia Digital Marketing. Crafted for Growth.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
+        <div className="w-full px-6 md:px-20 py-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-mono border-t border-white/5 bg-[#030303]">
+          <p className="text-center md:text-left mb-4 md:mb-0">© 2026 Growvia Digital Marketing. Crafted for Growth.</p>
+          <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
           </div>
