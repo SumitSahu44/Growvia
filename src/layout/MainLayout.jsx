@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import SmoothScroll from '../utils/SmoothScroll';
+import WhatsAppButton from '../components/common/WhatsAppButton';
 
 const MainLayout = ({ children }) => {
   const location = useLocation();
@@ -16,7 +17,7 @@ const MainLayout = ({ children }) => {
 
         {/* Navbar only for non-admin pages */}
         {!isAdminRoute && <Navbar />}
-
+          <WhatsAppButton /> {/* WhatsApp Button Always Visible */}
         {/* Main Content */}
         <main className="flex-grow">
           {children}
