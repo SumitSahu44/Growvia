@@ -10,8 +10,7 @@ import Showcase from '../components/home/Showcase';
 import HorizontalScroll from '../components/home/HorizontalScroll';
 import Capabilities from '../components/home/Capabilities';
 import MagicSection from '../components/home/MagicSection';
-import ToolstationCaseStudy from '../components/home/ToolstationCaseStudy';
-
+import GrowviaMarquee from '../components/home/GrowviaMarquee';
 const Home = () => {
   
   // Page specific animations yahan trigger kar sakte ho
@@ -34,6 +33,14 @@ const Home = () => {
        <div className="home-section">
         <About />
       </div>
+
+
+        <div className="home-section">
+        <GrowviaMarquee />  
+      </div>
+
+
+
 
        <div className="home-section">
         <Philosophy />
