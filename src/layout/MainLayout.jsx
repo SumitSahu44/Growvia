@@ -4,7 +4,7 @@ import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import SmoothScroll from '../utils/SmoothScroll';
 import WhatsAppButton from '../components/common/WhatsAppButton';
-
+import ScrollToTop from '../components/common/ScrollToTop';
 const MainLayout = ({ children }) => {
   const location = useLocation();
 
@@ -15,9 +15,17 @@ const MainLayout = ({ children }) => {
     <SmoothScroll>
       <div className="flex flex-col min-h-screen bg-white text-black">
 
+      <WhatsAppButton /> {/* WhatsApp Button Always Visible */}
+      <ScrollToTop /> {/* Scroll to top on route change */} 
+
+
+
+
+
+
         {/* Navbar only for non-admin pages */}
         {!isAdminRoute && <Navbar />}
-          <WhatsAppButton /> {/* WhatsApp Button Always Visible */}
+       
         {/* Main Content */}
         <main className="flex-grow">
           {children}

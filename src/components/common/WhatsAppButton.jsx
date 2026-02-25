@@ -1,7 +1,7 @@
 import React from "react";
 
 const WhatsAppButton = () => {
-  const phoneNumber = "919876543210"; // 👉 apna number dal (without + sign)
+  const phoneNumber = "918962799979"; // 👉 apna number dal (without + sign)
   const message = "Hi, I want your services.";
 
   const handleClick = () => {
