@@ -14,7 +14,7 @@ const About = () => {
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
 
-            // --- 1. HERO PARALLAX (Keeping only the background movement) ---
+            // --- 1. HERO PARALLAX ---
             gsap.to(".hero-img", {
                 yPercent: 15,
                 ease: "none",
@@ -50,7 +50,7 @@ const About = () => {
             <section className="hero-section relative w-full h-[90vh] flex flex-col justify-end pb-20 px-6 md:px-20 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&auto=format&fit=crop&q=60"
+                        src="/images/about1.jpeg"
                         alt="Office"
                         className="hero-img w-full h-[120%] object-cover origin-top"
                     />
@@ -65,54 +65,60 @@ const About = () => {
                 </div>
             </section>
 
-            {/* --- 2. MANIFESTO (Normal Fixed Text) --- */}
-            <section ref={sectionRef} className="manifesto-section py-32 px-6 md:px-20 w-full bg-white">
-                <div className="flex flex-col lg:flex-row gap-16 items-start">
-
-                    {/* Left: Content Area */}
-                    <div className="w-full lg:w-1/2">
-                        <div className="mb-8">
-                            <span className="text-sm font-bold uppercase tracking-[0.3em] text-gray-400 block mb-2">GrowVia Origins</span>
-                            <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter text-black">
-                                Our Story.
-                            </h2>
+            {/* --- 2. MANIFESTO (Editorial Layout) --- */}
+            <section ref={sectionRef} className="manifesto-section py-32 w-full bg-white flex flex-col items-center">
+                
+                {/* LAYER 1: Centered Stats & Our Story Intro */}
+                <div className="max-w-6xl w-full px-6 md:px-20 mb-24">
+                    {/* Centered Gap Stats */}
+                    <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32 mb-24">
+                        <div className="text-center">
+                            <span className="block text-6xl md:text-8xl font-black italic text-black leading-none">03</span>
+                            <span className="text-sm md:text-base uppercase tracking-widest text-gray-500 font-bold mt-2 block">Founders</span>
                         </div>
-
-                        {/* Normal Text - No Reveal Animation */}
-                        <div className="text-3xl md:text-4xl font-bold leading-[1.1] text-black mb-10">
-                            GrowVia Digital Marketing was built by three founders who have spent years inside real ad accounts, real businesses, and real pressure situations, where performance matters and excuses don’t.
-                        </div>
-
-                        {/* Secondary Detail Text */}
-                        <div className="space-y-6 text-lg text-gray-700 max-w-xl border-l-2 border-black pl-6 italic">
-                            <p>
-                                We are not a <span className="font-bold text-black">"full-service agency"</span> that dabbles in everything. We are specialists who focus on what actually moves revenue: <span className="text-black font-semibold">paid media, scalable funnels, and conversion-driven websites.</span>
-                            </p>
-                            <p className="font-medium">
-                                If you’re tired of agencies that speak in impressions, vanity metrics, and buzzwords, you’re in the right place.
-                            </p>
-                        </div>
-
-                        <div className="mt-12 flex gap-12">
-                            <div>
-                                <span className="block text-4xl font-black italic">03</span>
-                                <span className="text-xs uppercase tracking-widest text-gray-500 font-bold">Founders</span>
-                            </div>
-                            <div>
-                                <span className="block text-4xl font-black italic">ROI</span>
-                                <span className="text-xs uppercase tracking-widest text-gray-500 font-bold">Focused</span>
-                            </div>
+                        {/* Divider Dot (Optional, looks premium) */}
+                        <div className="hidden md:block w-3 h-3 bg-black rounded-full"></div>
+                        <div className="text-center">
+                            <span className="block text-6xl md:text-8xl font-black italic text-black leading-none">ROI</span>
+                            <span className="text-sm md:text-base uppercase tracking-widest text-gray-500 font-bold mt-2 block">Focused</span>
                         </div>
                     </div>
 
-                    {/* Right: Parallax Image */}
-                    <div className="w-full lg:w-1/2 h-[60vh] lg:h-[85vh] overflow-hidden rounded-3xl relative shadow-2xl">
+                    {/* Our Story Header & Main Content */}
+                    <div className="max-w-4xl mx-auto text-center">
+                        <span className="text-sm font-bold uppercase tracking-[0.3em] text-gray-400 block mb-6">GrowVia Origins</span>
+                        <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-black mb-10">
+                            Our Story.
+                        </h2>
+                        <p className="text-3xl md:text-5xl font-bold leading-[1.15] text-black tracking-tight">
+                            GrowVia Digital Marketing was built by three founders who have spent years inside real ad accounts, real businesses, and real pressure situations, where performance matters and excuses don’t.
+                        </p>
+                    </div>
+                </div>
+
+                {/* LAYER 2: Large Parallax Image */}
+                <div className="w-full px-4 md:px-10 mb-24">
+                    <div className="w-full h-[60vh] md:h-[80vh] overflow-hidden rounded-[2rem] relative shadow-2xl">
                         <img
-                            src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop"
+                            src="/images/about2.jpeg"
                             alt="High Performance Work Environment"
                             className="manifesto-img w-full h-[130%] object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent"></div>
+                    </div>
+                </div>
+
+                {/* LAYER 3: Offset Secondary Text */}
+                <div className="max-w-6xl w-full px-6 md:px-20 flex justify-end">
+                    <div className="w-full lg:w-1/2">
+                        <div className="space-y-8 text-xl md:text-2xl text-gray-600 border-l-4 border-black pl-6 md:pl-10 italic">
+                            <p>
+                                We are not a <span className="font-bold text-black not-italic">"full-service agency"</span> that dabbles in everything. We are specialists who focus on what actually moves revenue: <span className="text-black font-semibold not-italic">paid media, scalable funnels, and conversion-driven websites.</span>
+                            </p>
+                            <p className="font-medium text-black not-italic text-2xl md:text-3xl">
+                                If you’re tired of agencies that speak in impressions, vanity metrics, and buzzwords, you’re in the right place.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>

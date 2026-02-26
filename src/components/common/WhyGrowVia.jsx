@@ -1,6 +1,6 @@
 import React from 'react';
-import { FiTarget, FiZap, FiEye, FiTrendingUp, FiSettings, FiAward, FiShield, FiBarChart2 } from 'react-icons/fi';
-import { Link, useLocation } from 'react-router-dom';
+import { FiTarget, FiZap, FiEye, FiTrendingUp, FiSettings, FiAward } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const whyData = [
     {
@@ -46,9 +46,9 @@ const WhyGrowVia = () => {
                     <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
                         Why GrowVia <br /> Digital Marketing
                     </h2>
-                    <p className="max-w-2xl text-xl text-gray-600 leading-relaxed">
+                    {/* <p className="max-w-2xl text-xl text-gray-600 leading-relaxed">
                         Let’s turn traffic into revenue, and growth into something predictable. GrowVia is built for owners who value ownership and performance.
-                    </p>
+                    </p> */}
                 </div>
 
                 {/* --- CARDS GRID --- */}
@@ -56,7 +56,8 @@ const WhyGrowVia = () => {
                     {whyData.map((item, index) => (
                         <div 
                             key={index} 
-                            className="group p-10 bg-gray-50 rounded-[2rem] border border-transparent hover:border-blue-600/20 hover:bg-white hover:shadow-2xl transition-all duration-500"
+                            // CHANGED: bg-gray-50 to bg-gray-100 for better visibility
+                            className="group p-10 bg-gray-100 rounded-[2rem] border border-transparent hover:border-blue-600/20 hover:bg-white hover:shadow-2xl transition-all duration-500"
                         >
                             <div className="mb-6 inline-block p-4 bg-white rounded-2xl shadow-sm group-hover:scale-110 transition-transform duration-500">
                                 {item.icon}

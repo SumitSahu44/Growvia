@@ -114,7 +114,7 @@ const Hero = () => {
         {/* Image/Video */}
         <img
           ref={imageRef}
-          src="https://plus.unsplash.com/premium_photo-1681505206409-cb05afabd573?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8QWdlbmN5JTIwV29yayUyMFNob3djYXNlfGVufDB8fDB8fHwwhttps://plus.unsplash.com/premium_photo-1661726850402-18398d011b03?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fEFnZW5jeSUyMFdvcmslMjBTaG93Y2FzZXxlbnwwfHwwfHx8MA%3D%3D"
+          src="/images/hero1.jpeg"
           alt="Agency Work Showcase"
           className="w-full h-full object-cover"
         />

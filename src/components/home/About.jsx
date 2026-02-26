@@ -135,7 +135,7 @@ const About = () => {
           <div className="w-full h-full relative z-10">
             <img
               ref={imageRef}
-              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2000&auto=format&fit=crop"
+              src="/images/hero2.jpeg"
               alt="Creative Team"
               className="w-full h-full object-cover shadow-2xl"
             />

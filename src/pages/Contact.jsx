@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // <-- 1. IMPORT NAVIGATE
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiArrowUpRight, FiPlus, FiMinus, FiMapPin, FiMail, FiPhone, FiSend, FiLoader, FiCheckCircle } from 'react-icons/fi';
@@ -12,16 +13,14 @@ const faqs = [
 ];
 
 const Contact = () => {
+    const navigate = useNavigate(); // <-- 2. INITIALIZE NAVIGATE
     const containerRef = useRef(null);
     const formRef = useRef(null);
     const imageRef = useRef(null);
 
     const [activeService, setActiveService] = useState([]);
     const [openFaq, setOpenFaq] = useState(null);
-
-    // --- NEW STATES FOR PROCESSING & POPUP ---
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [showThanks, setShowThanks] = useState(false);
 
     const toggleService = (service) => {
         activeService.includes(service)
@@ -29,22 +28,23 @@ const Contact = () => {
             : setActiveService([...activeService, service]);
     };
 
-    // --- SUBMIT HANDLER ---
-    const handleSubmit = (e) => {
+    // --- UPDATED SUBMIT HANDLER ---
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // 1 second processing delay
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setShowThanks(true);
+        try {
+            // Yahan tumhara API call aayega. 
+            // Abhi ke liye 1 second ka delay (fake api response) lagaya hai.
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             
-            // GSAP animation for popup entry
-            gsap.fromTo(".thanks-card", 
-                { y: 50, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
-            );
-        }, 1000);
+            // 3. API Success hote hi Thank You page par bhej do
+            navigate('/thank-you');
+            
+        } catch (error) {
+            console.error("Submission Error", error);
+            setIsSubmitting(false); // Agar error aayi to wapas normal state
+        }
     };
 
     useLayoutEffect(() => {
@@ -74,29 +74,6 @@ const Contact = () => {
     return (
         <div ref={containerRef} className="relative bg-white min-h-screen text-black overflow-x-hidden selection:bg-black selection:text-white">
 
-            {/* --- THANK YOU POPUP --- */}
-            {showThanks && (
-                <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-6">
-                    <div className="thanks-card bg-white text-black p-10 md:p-16 rounded-[2rem] max-w-2xl shadow-2xl text-center border border-gray-100">
-                        <div className="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-8 text-4xl">
-                            <FiCheckCircle />
-                        </div>
-                        <h2 className="text-4xl font-black uppercase tracking-tighter mb-6">Thank you page</h2>
-                        <p className="text-xl text-gray-700 leading-relaxed mb-10">
-                            Thanks for reaching out! That click might be the smartest move you made today.
-                            <br /><br />
-                            We’ve received your submission and our team is already mapping out possibilities. Expect to hear from us soon.
-                        </p>
-                        <button 
-                            onClick={() => setShowThanks(false)}
-                            className="bg-black text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-blue-600 transition-colors"
-                        >
-                            Back to site
-                        </button>
-                    </div>
-                </div>
-            )}
-
             {/* --- HERO HEADER --- */}
             <section className="pt-32 pb-16 px-6 md:px-20 border-b border-gray-100">
                 <div className="max-w-screen-xl mx-auto">
@@ -124,41 +101,39 @@ const Contact = () => {
                             />
                         </div>
                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-500"></div>
-                     <div className="absolute bottom-6 left-3 right-3 md:left-6 md:right-6 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl text-white">
-    <div className="flex flex-col gap-8">
-        {/* Email Section */}
-        <div>
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Email</h3>
-            <a 
-                href="mailto:growviadigitalmarketing26@gmail.com" 
-                className="text-[14px] md:text-xl whitespace-nowrap font-bold hover:text-blue-400 transition-colors break-all"
-            >
-                growviadigitalmarketing26@gmail.com
-            </a>
-        </div>
+                        <div className="absolute bottom-6 left-3 right-3 md:left-6 md:right-6 bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl text-white">
+                            <div className="flex flex-col gap-8">
+                                {/* Email Section */}
+                                <div>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Email</h3>
+                                    <a 
+                                        href="mailto:growviadigitalmarketing26@gmail.com" 
+                                        className="text-[14px] md:text-xl whitespace-nowrap font-bold hover:text-blue-400 transition-colors break-all"
+                                    >
+                                        growviadigitalmarketing26@gmail.com
+                                    </a>
+                                </div>
 
-        {/* Location Section */}
-
-        {/* Social Links Section */}
-        <div className="flex flex-wrap gap-6 pt-4 border-t border-white/20">
-            {[
-                { name: 'Instagram', url: 'https://www.instagram.com/growviadigitalmarketing/' },
-                { name: 'LinkedIn', url: 'https://www.linkedin.com/company/growvia-digital-marketing/' },
-                { name: 'WhatsApp', url: 'https://wa.me/918962799979' }
-            ].map((social) => (
-                <a 
-                    key={social.name} 
-                    href={social.url} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="text-xs md:text-sm font-bold uppercase tracking-widest hover:text-blue-400 transition-colors"
-                >
-                    {social.name}
-                </a>
-            ))}
-        </div>
-    </div>
-</div>
+                                {/* Social Links Section */}
+                                <div className="flex flex-wrap gap-6 pt-4 border-t border-white/20">
+                                    {[
+                                        { name: 'Instagram', url: 'https://www.instagram.com/growviadigitalmarketing/' },
+                                        { name: 'LinkedIn', url: 'https://www.linkedin.com/company/growvia-digital-marketing/' },
+                                        { name: 'WhatsApp', url: 'https://wa.me/918962799979' }
+                                    ].map((social) => (
+                                        <a 
+                                            key={social.name} 
+                                            href={social.url} 
+                                            target="_blank" 
+                                            rel="noreferrer"
+                                            className="text-xs md:text-sm font-bold uppercase tracking-widest hover:text-blue-400 transition-colors"
+                                        >
+                                            {social.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -203,8 +178,8 @@ const Contact = () => {
                                         onClick={() => toggleService(service)}
                                         className={`px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wider border transition-all duration-300 hover:scale-105
                                     ${activeService.includes(service)
-                                                ? "bg-black text-white border-black"
-                                                : "bg-white text-gray-600 border-gray-300 hover:border-black hover:text-black"}`}
+                                            ? "bg-black text-white border-black"
+                                            : "bg-white text-gray-600 border-gray-300 hover:border-black hover:text-black"}`}
                                     >
                                         {service}
                                     </button>

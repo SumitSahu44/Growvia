@@ -96,7 +96,7 @@ const Manifesto = () => {
                 {/* Right: Parallax Image */}
                 <div className="w-full lg:w-1/2 h-[60vh] lg:h-[85vh] overflow-hidden rounded-3xl relative shadow-2xl">
                     <img
-                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop"
+                        src="/images/about2.jpeg"
                         alt="High Performance Work Environment"
                         className="manifesto-img w-full h-[130%] object-cover"
                     />

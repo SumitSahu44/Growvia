@@ -39,9 +39,9 @@ const GrowViaValues = () => {
     const values = [
         { title: "Curiosity First", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600" },
         { title: "Meaningful Connections", img: "https://plus.unsplash.com/premium_photo-1726826626814-a9098b1a68a7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVhbmluZ2Z1bCUyMGNvbm5lY3Rpb25zfGVufDB8fDB8fHww" },
-        { title: "Respect Always", img: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=600" },
-        { title: "Excellence Standard", img: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=600" },
-        { title: "Celebrate Wins", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600" }
+        { title: "Respect Always", img: "/images/respect.jpeg" },
+        { title: "Excellence Standard", img: "/images/excellence.jpeg" },
+        { title: "Celebrate Wins", img: "/images/celebrate.jpeg" }
     ];
 
     return (

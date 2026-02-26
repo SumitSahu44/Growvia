@@ -13,6 +13,7 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import WorkShowcase from './pages/WorkShowcase';
 import AdminPanel from './pages/AdminPanel';
+import ThankYou from './components/common/ThankYour';
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -58,8 +59,9 @@ function App() {
           <Route path="/works" element={<WorkShowcase />} />
           <Route path="/Services" element={<Services />} />
           <Route path="/Contact" element={<Contact />} />
+           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/AdminPanel" element={<AdminPanel />} />
-        </Routes>
+          </Routes>
       </MainLayout>
 
     </Router>

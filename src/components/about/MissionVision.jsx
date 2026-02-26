@@ -9,7 +9,7 @@ const MissionVision = () => {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // Line animations for titles
+            // 1. Line animations for titles
             gsap.from(".reveal-line", {
                 width: 0,
                 duration: 1.5,
@@ -21,7 +21,7 @@ const MissionVision = () => {
                 }
             });
 
-            // Content fade-up
+            // 2. Content fade-up
             gsap.from(".fade-up", {
                 y: 60,
                 opacity: 0,
@@ -33,13 +33,15 @@ const MissionVision = () => {
                     start: "top 80%",
                 }
             });
+
         }, componentRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={componentRef} className="bg-white py-24 md:py-40 px-6 md:px-20 overflow-hidden">
+        // Changed bg-white to bg-black
+        <section ref={componentRef} className="bg-black py-24 md:py-40 px-6 md:px-20 overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 
                 {/* Mission Section */}
@@ -47,16 +49,21 @@ const MissionVision = () => {
                     <div className="w-full md:w-1/3">
                         <div className="flex items-center gap-4 mb-4">
                             <span className="text-sm font-bold tracking-[0.3em] uppercase text-gray-400">01</span>
-                            <div className="reveal-line h-[2px] bg-black w-24"></div>
+                            {/* Changed bg-black to bg-white for the line */}
+                            <div className="reveal-line h-[2px] bg-white w-24"></div>
                         </div>
-                        <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter">Mission</h2>
+                        {/* Changed text-black to text-white */}
+                        <h2 className="text-white text-5xl md:text-6xl font-black uppercase tracking-tighter">Mission</h2>
                     </div>
                     <div className="w-full md:w-2/3">
-                        <p className="fade-up text-3xl md:text-5xl font-medium leading-[1.1] text-black tracking-tight">
+                        {/* Changed text-black to text-white */}
+                        <p className="fade-up text-white text-3xl md:text-5xl font-medium leading-[1.1] tracking-tight">
                             To unlock <span className="text-gray-400 italic">bold growth</span> for brands that refuse to stand still.
                         </p>
-                        <div className="fade-up mt-8 h-[1px] bg-gray-100 w-full"></div>
-                        <p className="fade-up mt-8 text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
+                        {/* Changed divider to a subtle dark theme border */}
+                        <div className="fade-up mt-8 h-[1px] bg-white/10 w-full"></div>
+                        {/* Adjusted text color for readability on black */}
+                        <p className="fade-up mt-8 text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl">
                             We drive meaningful business outcomes through strategic thinking, creative execution, and performance precision, while fostering a culture where our team is empowered to experiment, learn, and excel.
                         </p>
                     </div>
@@ -66,24 +73,28 @@ const MissionVision = () => {
                 <div className="flex flex-col md:flex-row-reverse gap-12 md:gap-24">
                     <div className="w-full md:w-1/3 md:text-right">
                         <div className="flex items-center md:justify-end gap-4 mb-4">
-                            <div className="reveal-line h-[2px] bg-black w-24"></div>
+                            {/* Changed bg-black to bg-white for the line */}
+                            <div className="reveal-line h-[2px] bg-white w-24"></div>
                             <span className="text-sm font-bold tracking-[0.3em] uppercase text-gray-400">02</span>
                         </div>
-                        <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter">Vision</h2>
+                        {/* Changed text-black to text-white */}
+                        <h2 className="text-white text-5xl md:text-6xl font-black uppercase tracking-tighter">Vision</h2>
                     </div>
                     <div className="w-full md:w-2/3">
-                        <p className="fade-up text-3xl md:text-5xl font-medium leading-[1.1] text-black tracking-tight">
+                        {/* Changed text-black to text-white */}
+                        <p className="fade-up text-white text-3xl md:text-5xl font-medium leading-[1.1] tracking-tight">
                             Shaping a future where brands grow <span className="text-gray-400 italic">faster and smarter</span>.
                         </p>
-                        <div className="fade-up mt-8 h-[1px] bg-gray-100 w-full"></div>
-                        <p className="fade-up mt-8 text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
+                        {/* Changed divider to a subtle dark theme border */}
+                        <div className="fade-up mt-8 h-[1px] bg-white/10 w-full"></div>
+                        {/* Adjusted text color for readability on black */}
+                        <p className="fade-up mt-8 text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl">
                             By uniting creativity, media, and data into one seamless growth engine, we transform how ambitious companies scale in the digital age.
                         </p>
                     </div>
                 </div>
 
             </div>
-         
         </section>
     );
 };
