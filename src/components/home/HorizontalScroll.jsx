@@ -22,47 +22,49 @@ const HorizontalScroll = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      
       const slider = sliderRef.current;
       const heading = headingRef.current;
       const stickySection = stickyRef.current;
+      const isDesktop = window.innerWidth > 768;
       
-      const totalMovement = -(slider.scrollWidth - window.innerWidth + 150);
+      const totalMovement = -(slider.scrollWidth - window.innerWidth + (isDesktop ? 150 : 50));
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: targetRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 1, // Smooth control
+          scrub: 1,
         }
       });
 
-      // --- 1. HEADING EXIT (SUPER FAST) ---
-      // Duration sirf 0.15 rakhi hai (Total scroll ka sirf 15% hissa)
-      // Jaise hi user thoda sa scroll karega, heading gayab ho jayegi.
-      tl.to(heading, {
-        y: -300, // Bohot upar bhej diya
-        opacity: 0, // Gayab bhi kar diya
-        scale: 0.9,
-        ease: "power2.in",
-        duration: 0.15 
-      }, 0); // Start at 0
+      // --- 1. HEADING ANIMATION (ONLY FOR DESKTOP) ---
+      if (isDesktop) {
+        tl.to(heading, {
+          y: -300, 
+          opacity: 0,
+          scale: 0.9,
+          ease: "power2.in",
+          duration: 0.15 
+        }, 0);
+      } else {
+        // Mobile par heading ko static rakhne ke liye sirf halka sa scale ya opacity change de sakte hain
+        // ya fir isko khali chorr dein taaki wo wahi rahe.
+        tl.to(heading, { opacity: 1, duration: 0.15 }, 0); 
+      }
 
-      // --- 2. SLIDER MOVEMENT (NORMAL SPEED) ---
-      // Ye poore time chalta rahega (Duration 1)
+      // --- 2. SLIDER MOVEMENT ---
       tl.to(slider, {
         x: totalMovement,
         ease: "none",
         duration: 1 
       }, 0);
 
-      // --- 3. BACKGROUND COLOR CHANGE ---
-      // Ye bhi jaldi ho jayega taaki grey na dikhe
+      // --- 3. COLOR CHANGE ---
       tl.fromTo(stickySection, 
         { backgroundColor: "#ffffff", color: "#000000" },
         { backgroundColor: "#000000", color: "#ffffff", duration: 0.2 }, 
-        0.3 // Thoda wait karke color change hoga
+        0.2 
       );
 
       // --- 4. PROGRESS BAR ---
@@ -78,43 +80,37 @@ const HorizontalScroll = () => {
   }, []);
 
   return (
-    <section 
-      ref={targetRef} 
-      className="relative h-[400vh]"
-    >
-      
+    <section ref={targetRef} className="relative h-[400vh] bg-white">
       <div 
         ref={stickyRef}
-        className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center will-change-[background-color]"
+        className="sticky top-0 h-screen w-full overflow-hidden flex flex-col md:justify-center justify-start pt-24 md:pt-0 will-change-[background-color]"
       >
         
-        {/* --- HEADING --- */}
-        {/* top-1/2 aur -translate-y-1/2 se center me rakha hai shuru me */}
+        {/* --- HEADING (Mobile: Static at Top | Desktop: Absolute Center) --- */}
         <div 
           ref={headingRef} 
-          className="absolute top-1/2 left-6 md:left-20 -translate-y-1/2 z-30 pointer-events-none mix-blend-difference text-white will-change-transform"
+          className="relative md:absolute md:top-1/2 left-6 md:left-20 md:-translate-y-1/2 z-30 pointer-events-none mix-blend-difference text-white will-change-transform mb-16 md:mb-0"
         >
-           <div className="flex items-center gap-4 mb-2">
-             <span className="w-12 h-[2px] bg-white"></span>
-             <span className="text-sm font-bold uppercase tracking-[0.3em]">Recent Cases</span>
-           </div>
-           <h2 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none">
-              Work
-           </h2>
+          <div className="flex items-center gap-4 mb-2">
+            <span className="w-8 md:w-12 h-[2px] bg-white"></span>
+            <span className="text-[10px] md:text-sm font-bold uppercase tracking-[0.3em]">Recent Cases</span>
+          </div>
+          <h2 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none">
+            Work
+          </h2>
         </div>
 
         {/* --- SLIDER CONTENT --- */}
-        {/* items-center kar diya taaki cards beech me rahein jab heading chali jaye */}
         <div 
           ref={sliderRef}
-          className="flex items-center gap-12 pl-[100vw] md:pl-[40vw] pr-20 w-fit h-full will-change-transform"
+          className="flex items-center gap-8 md:gap-12 pl-6 md:pl-[40vw] pr-20 w-fit h-fit md:h-full will-change-transform"
         >
           {works.map((work, index) => (
             <div 
               key={index} 
-              className="relative w-[85vw] md:w-[45vw] aspect-[4/3] md:aspect-[16/9] flex-shrink-0 group cursor-pointer"
+              className="relative w-[82vw] md:w-[45vw] aspect-[4/3] md:aspect-[16/9] flex-shrink-0 group cursor-pointer"
             >
-              <div className="w-full h-full overflow-hidden rounded-lg shadow-2xl transition-all duration-700 ease-out">
+              <div className="w-full h-full overflow-hidden rounded-lg shadow-xl">
                 <img 
                   src={work.img} 
                   alt={work.title} 
@@ -122,12 +118,12 @@ const HorizontalScroll = () => {
                 />
               </div>
               
-              <div className="absolute -bottom-14 left-0 w-full flex justify-between items-end text-current transition-colors">
+              <div className="absolute -bottom-10 md:-bottom-14 left-0 w-full flex justify-between items-end text-current transition-colors">
                  <div>
-                    <p className="text-xs font-bold uppercase tracking-widest opacity-60 mb-1">{work.category}</p>
-                    <h3 className="text-3xl md:text-5xl font-black uppercase leading-none">{work.title}</h3>
+                    <p className="text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-60 mb-1">{work.category}</p>
+                    <h3 className="text-2xl md:text-5xl font-black uppercase leading-none">{work.title}</h3>
                  </div>
-                 <span className="text-6xl md:text-8xl font-black opacity-10 group-hover:opacity-100 transition-opacity duration-300">
+                 <span className="text-4xl md:text-8xl font-black opacity-10">
                     {work.id}
                  </span>
               </div>
@@ -135,26 +131,20 @@ const HorizontalScroll = () => {
           ))}
 
           {/* VIEW ALL BUTTON */}
-          <div className="w-[40vw] md:w-[25vw] aspect-square flex-shrink-0 flex items-center justify-center">
-             <div className="w-40 h-40 md:w-60 md:h-60 rounded-full border border-current hover:bg-white hover:text-black transition-all duration-500 flex flex-col items-center justify-center cursor-pointer group">
-                <p className="text-sm font-bold uppercase tracking-widest mb-2">See All Work</p>
-                <FiArrowRight className="text-4xl group-hover:translate-x-2 transition-transform"/>
+          <div className="w-[60vw] md:w-[25vw] aspect-square flex-shrink-0 flex items-center justify-center">
+             <div className="w-36 h-36 md:w-60 md:h-60 rounded-full border border-current hover:bg-white hover:text-black transition-all duration-500 flex flex-col items-center justify-center cursor-pointer group">
+                <p className="text-[10px] md:text-sm font-bold uppercase tracking-widest mb-1">See All</p>
+                <FiArrowRight className="text-2xl md:text-4xl group-hover:translate-x-2 transition-transform"/>
              </div>
           </div>
-
         </div>
 
         {/* PROGRESS BAR */}
-        <div className="absolute bottom-10 left-6 md:left-20 w-[200px] h-[2px] bg-gray-200/20 overflow-hidden">
+        <div className="absolute bottom-10 left-6 md:left-20 w-[120px] md:w-[200px] h-[2px] bg-gray-200/20 overflow-hidden">
            <div ref={progressRef} className="h-full w-0 bg-current"></div>
         </div>
         
-        <div className="absolute bottom-10 right-10 text-xs font-bold uppercase tracking-widest animate-pulse mix-blend-difference text-white">
-            Scroll &rarr;
-        </div>
-        
       </div>
-
     </section>
   );
 };
