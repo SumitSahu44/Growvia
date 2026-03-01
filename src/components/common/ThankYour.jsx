@@ -26,10 +26,10 @@ const ThankYou = () => {
                     <FiCheckCircle />
                 </div>
                 
-                <h2 className="text-4xl font-black uppercase tracking-tighter mb-6">Thank you page</h2>
+                <h2 className="text-4xl font-black uppercase tracking-tighter mb-6">Thank you for reaching out!</h2>
                 
                 <p className="text-xl text-gray-700 leading-relaxed mb-10">
-                    Thanks for reaching out! That click might be the smartest move you made today.
+                    That click might be the smartest move you made today.
                     <br /><br />
                     We’ve received your submission and our team is already mapping out possibilities. Expect to hear from us soon.
                 </p>

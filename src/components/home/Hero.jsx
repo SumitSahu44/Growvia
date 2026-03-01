@@ -62,9 +62,9 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen pt-32 pb-20 px-4 md:px-8 bg-white text-black flex flex-col items-center"
+      className="relative w-full min-h-screen pt-32 pb-10 px-4 md:px-8 bg-white text-black flex flex-col items-center"
     >
-
+ 
       {/* --- CENTERED TEXT CONTENT --- */}
       <div ref={textContainerRef} className="max-w-4xl w-full text-center flex flex-col items-center z-10 mb-16">
 
@@ -120,10 +120,10 @@ const Hero = () => {
         />
 
         {/* Optional: Floating Badge on Image */}
-        <div className="absolute bottom-8 left-8 z-20 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-2xl hidden md:block">
+        {/* <div className="absolute bottom-8 left-8 z-20 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-2xl hidden md:block">
           <p className="text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Featured Work</p>
           <p className="text-sm font-black text-black">Nike Campaign 2024 &rarr;</p>
-        </div>
+        </div> */}
       </div>
 
     </section>

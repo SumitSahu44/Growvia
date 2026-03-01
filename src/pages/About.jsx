@@ -69,23 +69,12 @@ const About = () => {
             <section ref={sectionRef} className="manifesto-section py-32 w-full bg-white flex flex-col items-center">
                 
                 {/* LAYER 1: Centered Stats & Our Story Intro */}
-                <div className="max-w-6xl w-full px-6 md:px-20 mb-24">
+                <div className=" w-full px-6 md:px-20 mb-24">
                     {/* Centered Gap Stats */}
-                    <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32 mb-24">
-                        <div className="text-center">
-                            <span className="block text-6xl md:text-8xl font-black italic text-black leading-none">03</span>
-                            <span className="text-sm md:text-base uppercase tracking-widest text-gray-500 font-bold mt-2 block">Founders</span>
-                        </div>
-                        {/* Divider Dot (Optional, looks premium) */}
-                        <div className="hidden md:block w-3 h-3 bg-black rounded-full"></div>
-                        <div className="text-center">
-                            <span className="block text-6xl md:text-8xl font-black italic text-black leading-none">ROI</span>
-                            <span className="text-sm md:text-base uppercase tracking-widest text-gray-500 font-bold mt-2 block">Focused</span>
-                        </div>
-                    </div>
+
 
                     {/* Our Story Header & Main Content */}
-                    <div className="max-w-4xl mx-auto text-center">
+                    <div className="w-[100vw] text-left">
                         <span className="text-sm font-bold uppercase tracking-[0.3em] text-gray-400 block mb-6">GrowVia Origins</span>
                         <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-black mb-10">
                             Our Story.

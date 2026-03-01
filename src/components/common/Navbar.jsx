@@ -35,7 +35,7 @@ const Navbar = () => {
   // --- 2. Mobile Menu Animation (GSAP) ---
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'; // Scroll disable karein jab menu open ho
+      document.body.style.overflow = 'hidden'; 
       gsap.to(mobileMenuRef.current, {
         x: '0%',
         duration: 0.8,
@@ -57,6 +57,7 @@ const Navbar = () => {
 
   const closeMenu = () => setIsMobileMenuOpen(false);
 
+  mobileLinksRef.current = [];
   const addToMobileLinks = (el) => {
     if (el && !mobileLinksRef.current.includes(el)) {
       mobileLinksRef.current.push(el);
@@ -77,19 +78,25 @@ const Navbar = () => {
         ref={navRef}
         className={`fixed top-0 left-0 w-full z-[60] transition-all duration-500 transform 
         ${isVisible ? 'translate-y-0' : '-translate-y-full'}
-        ${isScrolled ? 'py-4 bg-white/90 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent'}
+        ${/* Transparent Black Background with Blur */
+          isScrolled 
+          ? 'py-3 bg-black/80 backdrop-blur-lg shadow-lg' 
+          : 'py-5 bg-black/30 backdrop-blur-sm'}
         `}
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
           
-          {/* Logo - Rang badlega mobile menu open hone par */}
+          {/* Logo - Only Image (Bigger Size) */}
           <Link 
             to="/" 
             onClick={closeMenu}
-            className={`z-[70] text-2xl font-black tracking-tighter uppercase transition-colors duration-300 
-            ${isMobileMenuOpen ? 'text-white' : 'text-black'}`}
+            className="z-[70] flex items-center"
           >
-            Growvia<span className="text-blue-600">.</span>
+            <img 
+              src="/images/growvia.png" 
+              alt="Growvia Logo" 
+              className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Links */}
@@ -98,10 +105,10 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="relative group overflow-hidden text-sm font-bold uppercase tracking-widest text-black"
+                className="relative group overflow-hidden text-sm font-bold uppercase tracking-widest text-white"
               >
                 <span className="block transition-transform duration-300 group-hover:-translate-y-full">{link.name}</span>
-                <span className="absolute top-0 left-0 block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-blue-600">{link.name}</span>
+                <span className="absolute top-0 left-0 block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-blue-400">{link.name}</span>
               </Link>
             ))}
           </div>
@@ -110,16 +117,15 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <Link
               to="/contact"
-              className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-blue-600 transition-all rounded-full"
+              className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all rounded-full"
             >
               Let's Talk <FiArrowUpRight className="text-lg" />
             </Link>
 
-            {/* Hamburger Button - Crucial Change Here */}
+            {/* Hamburger Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden z-[70] text-3xl focus:outline-none transition-colors duration-300
-              ${isMobileMenuOpen ? 'text-white' : 'text-black'}`}
+              className="md:hidden z-[70] text-3xl focus:outline-none text-white transition-colors duration-300"
             >
               {isMobileMenuOpen ? <FiX /> : <FiMenu />}
             </button>
@@ -160,9 +166,6 @@ const Navbar = () => {
           <div className="text-gray-500 text-[10px] uppercase tracking-widest leading-loose">
             Growvia Digital Agency <br />
             &copy; 2026 Indore, India
-          </div>
-          <div className="flex gap-4 text-white text-sm">
-            <span className="opacity-50 italic">Follow us</span>
           </div>
         </div>
       </div>

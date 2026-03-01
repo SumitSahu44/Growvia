@@ -76,7 +76,7 @@ const About = () => {
     // WHITE BG, BLACK TEXT
     <section
       ref={sectionRef}
-      className="w-full py-24 md:py-32 px-6 md:px-20 bg-white text-black relative overflow-hidden"
+      className="w-full py-5 md:py-10 px-6 md:px-20 bg-white text-black relative overflow-hidden"
     >
 
       {/* Decorative Background Text (Subtle) */}
