@@ -9,27 +9,25 @@ const MissionVision = () => {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // 1. Line animations for titles
             gsap.from(".reveal-line", {
                 width: 0,
-                duration: 1.5,
+                duration: 1.2,
                 ease: "power4.out",
-                stagger: 0.3,
+                stagger: 0.2,
                 scrollTrigger: {
-                    trigger: ".reveal-line",
+                    trigger: componentRef.current,
                     start: "top 85%",
                 }
             });
 
-            // 2. Content fade-up
             gsap.from(".fade-up", {
-                y: 60,
+                y: 30, // Pehle 60 tha, ab kam kiya taaki jump chota lage
                 opacity: 0,
-                duration: 1,
-                stagger: 0.2,
+                duration: 0.8,
+                stagger: 0.1,
                 ease: "power3.out",
                 scrollTrigger: {
-                    trigger: ".fade-up",
+                    trigger: componentRef.current,
                     start: "top 80%",
                 }
             });
@@ -40,55 +38,46 @@ const MissionVision = () => {
     }, []);
 
     return (
-        // Changed bg-white to bg-black
-        <section ref={componentRef} className="bg-black py-24 md:py-40 px-6 md:px-20 overflow-hidden">
+        // Py-24/40 ko kam karke py-16/24 kiya hai
+        <section ref={componentRef} className="bg-black py-16 md:py-24 px-6 md:px-20 overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 
-                {/* Mission Section */}
-                <div className="flex flex-col md:flex-row gap-12 md:gap-24 mb-32 md:mb-48">
+                {/* Mission Section - Mb-32/48 ko kam karke mb-16/24 kiya hai */}
+                <div className="flex flex-col md:flex-row gap-6 md:gap-24 mb-16 md:mb-24">
                     <div className="w-full md:w-1/3">
-                        <div className="flex items-center gap-4 mb-4">
-                            <span className="text-sm font-bold tracking-[0.3em] uppercase text-gray-400">01</span>
-                            {/* Changed bg-black to bg-white for the line */}
-                            <div className="reveal-line h-[2px] bg-white w-24"></div>
+                        <div className="flex items-center gap-3 mb-2">
+                            <span className="text-xs font-bold tracking-[0.2em] uppercase text-gray-500">01</span>
+                            <div className="reveal-line h-[1px] bg-white w-16 md:w-20"></div>
                         </div>
-                        {/* Changed text-black to text-white */}
-                        <h2 className="text-white text-5xl md:text-6xl font-black uppercase tracking-tighter">Mission</h2>
+                        <h2 className="text-white text-4xl md:text-6xl font-black uppercase tracking-tighter">Mission</h2>
                     </div>
                     <div className="w-full md:w-2/3">
-                        {/* Changed text-black to text-white */}
-                        <p className="fade-up text-white text-3xl md:text-5xl font-medium leading-[1.1] tracking-tight">
+                        <p className="fade-up text-white text-2xl md:text-5xl font-medium leading-[1.15] tracking-tight">
                             To unlock <span className="text-gray-400 italic">bold growth</span> for brands that refuse to stand still.
                         </p>
-                        {/* Changed divider to a subtle dark theme border */}
-                        <div className="fade-up mt-8 h-[1px] bg-white/10 w-full"></div>
-                        {/* Adjusted text color for readability on black */}
-                        <p className="fade-up mt-8 text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl">
-                            We drive meaningful business outcomes through strategic thinking, creative execution, and performance precision, while fostering a culture where our team is empowered to experiment, learn, and excel.
+                        {/* Divider space kam kiya (mt-6) */}
+                        <div className="fade-up mt-6 h-[1px] bg-white/10 w-full"></div>
+                        <p className="fade-up mt-6 text-base md:text-xl text-gray-400 leading-relaxed max-w-2xl">
+                            We drive meaningful business outcomes through strategic thinking, creative execution, and performance precision, while fostering a culture where our team is empowered.
                         </p>
                     </div>
                 </div>
 
                 {/* Vision Section */}
-                <div className="flex flex-col md:flex-row-reverse gap-12 md:gap-24">
+                <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-24">
                     <div className="w-full md:w-1/3 md:text-right">
-                        <div className="flex items-center md:justify-end gap-4 mb-4">
-                            {/* Changed bg-black to bg-white for the line */}
-                            <div className="reveal-line h-[2px] bg-white w-24"></div>
-                            <span className="text-sm font-bold tracking-[0.3em] uppercase text-gray-400">02</span>
+                        <div className="flex items-center md:justify-end gap-3 mb-2">
+                            <div className="reveal-line h-[1px] bg-white w-16 md:w-20"></div>
+                            <span className="text-xs font-bold tracking-[0.2em] uppercase text-gray-500">02</span>
                         </div>
-                        {/* Changed text-black to text-white */}
-                        <h2 className="text-white text-5xl md:text-6xl font-black uppercase tracking-tighter">Vision</h2>
+                        <h2 className="text-white text-4xl md:text-6xl font-black uppercase tracking-tighter">Vision</h2>
                     </div>
                     <div className="w-full md:w-2/3">
-                        {/* Changed text-black to text-white */}
-                        <p className="fade-up text-white text-3xl md:text-5xl font-medium leading-[1.1] tracking-tight">
+                        <p className="fade-up text-white text-2xl md:text-5xl font-medium leading-[1.15] tracking-tight">
                             Shaping a future where brands grow <span className="text-gray-400 italic">faster and smarter</span>.
                         </p>
-                        {/* Changed divider to a subtle dark theme border */}
-                        <div className="fade-up mt-8 h-[1px] bg-white/10 w-full"></div>
-                        {/* Adjusted text color for readability on black */}
-                        <p className="fade-up mt-8 text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl">
+                        <div className="fade-up mt-6 h-[1px] bg-white/10 w-full"></div>
+                        <p className="fade-up mt-6 text-base md:text-xl text-gray-400 leading-relaxed max-w-2xl">
                             By uniting creativity, media, and data into one seamless growth engine, we transform how ambitious companies scale in the digital age.
                         </p>
                     </div>

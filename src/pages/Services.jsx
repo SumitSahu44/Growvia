@@ -12,14 +12,14 @@ const services = [
     title: "Google Ads",
     desc: "We build Google Ads accounts that are structured for scalability and profitability, not just initial performance.",
     features: ["High‑intent keyword strategy", "Clean account structure", "Conversion‑focused bidding", "Proper GA4 & GTM tracking", "Continuous data analysis"],
-    img: "https://images.unsplash.com/photo-1556155092-490a1ba16284?w=600&auto=format&fit=crop&q=60"
+    img: "/images/Google Ads.webp"
   },
   {
     id: "02",
     title: "Meta Ads",
     desc: "Meta Ads are not about boosting posts or chasing cheap leads. They’re about creative + audience + funnel alignment.",
     features: ["Clear offer positioning", "Funnel‑based structure", "Creative testing with intent", "Retargeting that converts", "Scaling without breaking "],
-    img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=2074&auto=format&fit=crop"
+    img: "/images/meta.jpeg"
   },
   {
     id: "03",
@@ -33,28 +33,28 @@ const services = [
     title: "Microsoft / Bing Ads",
     desc: "Bing Ads are often ignored, which is exactly why they work. Capture untapped demand with higher efficiency.",
     features: ["Capture untapped demand", "Lower overall blended CPA", "Paid media efficiency", "Targeted search intent"],
-    img: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop"
+    img: "/images/microsoft-ads.webp"
   },
   {
     id: "05",
     title: "Organic Social Media",
     desc: "Organic social should support growth, not exist for aesthetics. We focus on content that builds genuine trust.",
     features: ["Trust-building content", "Messaging alignment", "Platform‑specific strategy", "Growth-led engagement"],
-    img: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=2074&auto=format&fit=crop"
+    img: "/images/social-media.jpeg"
   },
   {
     id: "06",
     title: "Website Development",
     desc: "A beautiful website that doesn’t convert is a liability. We build conversion-first sites that guide users clearly.",
     features: ["Fast loading speeds", "Clear user guidance", "Support paid traffic", "Lead & sales optimization"],
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
+    img: "/images/website.jpeg"
   },
   {
     id: "07",
     title: "SEO Strategy",
     desc: "SEO isn’t about ranking for random keywords. It’s about attracting high‑intent traffic that actually converts.",
     features: ["Business intent research", "On‑page optimization", "Technical fundamentals", "Content for paid campaigns"],
-    img: "https://images.unsplash.com/photo-1709281847981-73a69aa6f770?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8U0VPJTIwU3RyYXRlZ3l8ZW58MHx8MHx8fDA%3D"
+    img: "https://images.unsplash.com/photo-1637606346315-d23ed32a6cfc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNlb3xlbnwwfHwwfHx8MA%3D%3D"
   },
   {
     id: "08",
