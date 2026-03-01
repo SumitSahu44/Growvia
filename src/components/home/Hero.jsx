@@ -1,131 +1,163 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiArrowRight, FiPlay } from 'react-icons/fi'; // Icons
+import { FiArrowRight } from 'react-icons/fi';
 import { Link } from "react-router-dom";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const containerRef = useRef(null);
-  const textContainerRef = useRef(null);
   const heroMediaRef = useRef(null);
   const imageRef = useRef(null);
+  
+  // --- ADVANCED TYPING/SWAPPER LOGIC ---
+  const words = ["BOUNDARIES", "LIMITS", "EXPECTATIONS", "CONVENTIONS"];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 3000); // Har 3 second mein word badlega
+    return () => clearInterval(interval);
+  }, []);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+      const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
 
-      // 1. Text Elements Reveal (Staggered Up)
-      // Hum text-container ke andar ke sabhi children ko target karenge
-      tl.from(".hero-anim-item", {
-        y: 50,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.15,
-        delay: 0.2
+      // 1. Text Reveal Animation
+      tl.from(".hero-line span", {
+        y: "110%",
+        duration: 1.5,
+        stagger: 0.2,
       })
-        // 2. The Big Media Reveal (Scale Up effect)
-        .from(heroMediaRef.current, {
-          y: 100,
-          scale: 0.9,
-          opacity: 0,
-          duration: 1.5,
-          ease: "expo.out"
-        }, "-=1.0"); // Text ke saath saath start hoga
+      .from(".hero-subtext", {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+      }, "-=0.8")
+      .from(".hero-btn", {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.8,
+      }, "-=1");
 
-      // 3. Scroll Parallax for the Media Container
-      gsap.to(heroMediaRef.current, {
-        y: -50, // Scroll karne par ye thoda upar jayega (floating feel)
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1, // Smooth interaction
-        },
-      });
+      // 2. Media Reveal (Box scaling up)
+      tl.fromTo(heroMediaRef.current, 
+        { clipPath: "inset(30% 20% 30% 20% rounded 60px)" },
+        { clipPath: "inset(0% 0% 0% 0% rounded 20px)", duration: 2, ease: "expo.inOut" },
+        "-=1.5"
+      );
 
-      // 4. Image Scale inside container (Zoom effect)
+      // 3. Parallax on Scroll
       gsap.to(imageRef.current, {
+        y: "15%",
         scale: 1.1,
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: 1,
-        },
+          scrub: true,
+        }
       });
-
     }, containerRef);
+
     return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen pt-32 pb-10 px-4 md:px-8 bg-white text-black flex flex-col items-center"
+      className="relative w-full min-h-screen pt-40 pb-20 bg-white text-black overflow-hidden flex flex-col items-center"
     >
- 
-      {/* --- CENTERED TEXT CONTENT --- */}
-      <div ref={textContainerRef} className="max-w-4xl w-full text-center flex flex-col items-center z-10 mb-16">
-
-        {/* 1. Pill Badge */}
-        <div className="hero-anim-item mb-6">
-          <span className="px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-xs font-bold uppercase tracking-widest text-gray-600">
-            Reimagining Digital
-          </span>
-        </div>
-
-        {/* 2. Main Headline (Clean, Solid, Centered) */}
-        <h1 className="hero-anim-item text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.1] mb-8">
-          GROWTH BEYOND <br />
-          <span className="text-gray-500">BOUNDARIES.</span>
-        </h1>
-
-        {/* 3. Subtext */}
-        <p className="hero-anim-item max-w-xl text-lg md:text-xl text-gray-700 font-medium leading-relaxed mb-10">
-          Growvia is a performance-led digital growth partner helping brands attract attention, convert audiences, and scale revenue through strategy, design, and paid media.
-        </p>
-
-        {/* 4. Action Buttons */}
-        <div className="hero-anim-item flex  flex-row sm:flex-row gap-4 w-full justify-center">
-          <Link to="/contact">
-            <button className="px-8 py-4 bg-black text-white rounded-full font-bold text-sm tracking-wide hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2">
-              Start a Project <FiArrowRight />
-            </button>
-          </Link>
-          {/* <button className="px-8 py-4 bg-white text-black border border-gray-200 rounded-full font-bold text-sm tracking-wide hover:bg-gray-50 hover:border-black transition-all duration-300 flex items-center justify-center gap-2">
-            View Showreel <FiPlay className="fill-current" />
-          </button> */}
-        </div>
-
+      {/* Background Decorative Text (Watermark style) */}
+      <div className="absolute top-40 left-1/2 -translate-x-1/2 text-[20vw] font-black text-gray-50 opacity-[0.03] select-none pointer-events-none uppercase">
+        Growvia
       </div>
 
+      <div className="container mx-auto px-6 md:px-12 z-10">
+        
+        {/* --- CREATIVE TYPOGRAPHY --- */}
+        <div className="text-center mb-16">
+          <h1 className="text-[11vw] md:text-[8.5vw] font-black leading-[0.85] tracking-tighter uppercase">
+            <div className="hero-line overflow-hidden py-2">
+              <span className="inline-block">Growth</span>
+            </div>
+            <div className="hero-line overflow-hidden py-2 text-blue-600 italic">
+              <span className="inline-block">Beyond</span>
+            </div>
+            
+            {/* Typing / Swapping Word Area */}
+            <div className="hero-line overflow-hidden h-[1.1em] relative py-2">
+              <span 
+                key={words[index]} // Key change se animation trigger hogi
+                className="inline-block animate-typing-reveal"
+              >
+                {words[index]}
+                <span className="inline-block w-[4px] h-[0.8em] bg-blue-600 ml-2 animate-pulse" />
+              </span>
+            </div>
+          </h1>
+        </div>
 
-      {/* --- THE FLOATING MEDIA CONTAINER --- */}
-      {/* Ye wo element hai jo "Tagda" look dega. Ek dum clean window. */}
-      <div
-        ref={heroMediaRef}
-        className="w-full max-w-6xl h-[50vh] md:h-[70vh] rounded-3xl overflow-hidden shadow-2xl relative z-0"
-        style={{ boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }} // Soft premium shadow
-      >
-        {/* Overlay for depth */}
-        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none"></div>
+        {/* --- SUBTEXT & BUTTON --- */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-10 max-w-6xl mx-auto mb-24">
+          <p className="hero-subtext text-lg md:text-xl text-gray-500 max-w-lg text-center md:text-left font-medium">
+            We are a hybrid creative studio building digital experiences that 
+            <span className="text-black"> defy gravity</span> and scale brands at the speed of light.
+          </p>
 
-        {/* Image/Video */}
-        <img
-          ref={imageRef}
-          src="/images/hero1.jpeg"
-          alt="Agency Work Showcase"
-          className="w-full h-full object-cover"
-        />
+          <div className="hero-btn">
+            <Link to="/contact">
+              <button className="group relative px-12 py-6 bg-black text-white rounded-full font-bold overflow-hidden transition-all flex items-center gap-3">
+                <span className="relative z-10">START A PROJECT</span>
+                <FiArrowRight className="relative z-10 text-xl group-hover:translate-x-2 transition-transform" />
+                <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+              </button>
+            </Link>
+          </div>
+        </div>
 
-        {/* Optional: Floating Badge on Image */}
-        {/* <div className="absolute bottom-8 left-8 z-20 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-2xl hidden md:block">
-          <p className="text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">Featured Work</p>
-          <p className="text-sm font-black text-black">Nike Campaign 2024 &rarr;</p>
-        </div> */}
+        {/* --- THE MEDIA WINDOW --- */}
+        <div
+          ref={heroMediaRef}
+          className="relative w-full max-w-7xl aspect-video md:aspect-[21/9] mx-auto overflow-hidden shadow-2xl z-20"
+          style={{ willChange: 'clip-path' }}
+        >
+          <img
+            ref={imageRef}
+            src="/images/hero1.jpeg"
+            alt="Showcase"
+            className="w-full h-full object-cover scale-125"
+          />
+          
+          {/* Subtle Overlay */}
+          <div className="absolute inset-0 bg-black/20" />
+          
+          {/* Floating Info */}
+          <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 text-white">
+            <div className="flex items-center gap-4 mb-2">
+              <span className="w-12 h-[1px] bg-white/50" />
+              <span className="text-xs tracking-[0.4em] font-light">EST. 2026</span>
+            </div>
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight">CRAFTING DIGITAL SUCCESS</h2>
+          </div>
+        </div>
       </div>
 
+      {/* Required CSS for the Typing Reveal effect */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes typing-reveal {
+          0% { transform: translateY(100%); opacity: 0; filter: blur(10px); }
+          20% { transform: translateY(0); opacity: 1; filter: blur(0px); }
+          80% { transform: translateY(0); opacity: 1; filter: blur(0px); }
+          100% { transform: translateY(-100%); opacity: 0; filter: blur(10px); }
+        }
+        .animate-typing-reveal {
+          animation: typing-reveal 3s infinite ease-in-out;
+        }
+      `}} />
     </section>
   );
 };

@@ -97,7 +97,7 @@ const Process = () => {
   };
 
   return (
-    <section className="relative py-24 md:py-30 bg-[#f8fafc] overflow-hidden text-slate-900">
+    <section className="relative py-24 md:py-20 bg-[#f8fafc] overflow-hidden text-slate-900">
       <div className="container mx-auto px-6 md:px-12 relative max-w-6xl">
 
         {/* --- Section Header (Line iske upar nahi aayegi ab) --- */}
