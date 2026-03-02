@@ -90,7 +90,7 @@ const Capabilities = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full bg-black text-white py-20 md:py-32 px-6 md:px-20 flex flex-col md:flex-row gap-10 md:gap-20"
+      className="relative w-full bg-black text-white py-5 md:py-32 px-6 md:px-20 flex flex-col md:flex-row gap-10 md:gap-20"
     >
 
       {/* --- LEFT COLUMN: Sticky Image (Auto Changes) --- */}
@@ -119,7 +119,7 @@ const Capabilities = () => {
       </div>
 
       {/* --- RIGHT COLUMN: Scrollable List --- */}
-      <div className="w-full md:w-[60%] flex flex-col justify-center pb-20">
+      <div className="w-full md:w-[60%] flex flex-col justify-center pb-0">
 
         <div className="mb-20 border-b border-white/20 pb-8">
           <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">What We Do</h2>

@@ -139,7 +139,7 @@ const Hero = () => {
           <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 text-white">
             <div className="flex items-center gap-4 mb-2">
               <span className="w-12 h-[1px] bg-white/50" />
-              <span className="text-xs tracking-[0.4em] font-light">EST. 2026</span>
+              <span className="text-xs tracking-[0.4em] font-light">EST. 2025</span>
             </div>
             <h2 className="text-2xl md:text-4xl font-bold tracking-tight">CRAFTING DIGITAL SUCCESS</h2>
           </div>

@@ -80,8 +80,8 @@ const Navbar = () => {
         ${isVisible ? 'translate-y-0' : '-translate-y-full'}
         ${/* Transparent Black Background with Blur */
           isScrolled 
-          ? 'py-3 bg-black/80 backdrop-blur-lg shadow-lg' 
-          : 'py-5 bg-black/30 backdrop-blur-sm'}
+          ? 'py-2 bg-black/100 backdrop-blur-lg shadow-lg' 
+          : 'py-2 bg-black/100 backdrop-blur-sm'}
         `}
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">

@@ -45,7 +45,7 @@ const ReviewCard = ({ review }) => (
 
 const Testimonials = () => {
   return (
-    <section className="w-full py-24 md:py-32 bg-black text-white overflow-hidden relative">
+    <section className="w-full py-10 md:py-24 bg-black text-white overflow-hidden relative">
       
       {/* HEADER SECTION */}
       <div className="container mx-auto px-6 md:px-12 mb-16 md:mb-24 flex flex-col items-start text-left max-w-7xl relative z-10">
