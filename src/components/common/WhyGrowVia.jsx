@@ -37,7 +37,7 @@ const whyData = [
 
 const WhyGrowVia = () => {
     return (
-        <section className="bg-white py-24 px-6 md:px-20">
+        <section className="bg-white py-20 px-6 md:px-20">
             <div className="max-w-screen-xl mx-auto">
                 
                 {/* --- HEADER --- */}

@@ -75,7 +75,7 @@ const Contact = () => {
         <div ref={containerRef} className="relative bg-white min-h-screen text-black overflow-x-hidden selection:bg-black selection:text-white">
 
             {/* --- HERO HEADER --- */}
-            <section className="pt-32 pb-16 px-6 md:px-20 border-b border-gray-100">
+            <section className="pt-30 pb-10 px-6 md:px-20 border-b border-gray-100">
                 <div className="max-w-screen-xl mx-auto">
                     <p className="text-blue-600 font-mono text-xs uppercase tracking-[0.3em] mb-6 font-bold">Get in Touch</p>
                     <h1 className="text-[12vw] md:text-[8rem] font-black leading-[0.85] tracking-tighter uppercase overflow-hidden">
@@ -87,7 +87,7 @@ const Contact = () => {
             </section>
 
             {/* --- MAIN GRID --- */}
-            <section className="contact-grid px-6 md:px-20 py-20 max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
+            <section className="contact-grid px-6 md:px-20 py-10 max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
 
                 {/* LEFT: VISUAL STICKY CARD */}
                 <div className="w-full lg:w-5/12 relative">

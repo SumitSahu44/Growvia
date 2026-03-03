@@ -69,7 +69,7 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen pt-40 pb-20 bg-white text-black overflow-hidden flex flex-col items-center"
+      className="relative w-full min-h-screen pt-10 pb-10 bg-white text-black overflow-hidden flex flex-col items-center"
     >
       {/* Background Decorative Text (Watermark style) */}
       <div className="absolute top-40 left-1/2 -translate-x-1/2 text-[20vw] font-black text-gray-50 opacity-[0.03] select-none pointer-events-none uppercase">
@@ -102,16 +102,16 @@ const Hero = () => {
         </div>
 
         {/* --- SUBTEXT & BUTTON --- */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-10 max-w-6xl mx-auto mb-24">
-          <p className="hero-subtext text-lg md:text-xl text-gray-500 max-w-lg text-center md:text-left font-medium">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-10 max-w-6xl mx-auto mb-24">
+          {/* <p className="hero-subtext text-lg md:text-xl text-gray-500 max-w-lg text-center md:text-left font-medium">
             We are a hybrid creative studio building digital experiences that 
             <span className="text-black"> defy gravity</span> and scale brands at the speed of light.
-          </p>
+          </p> */}
 
           <div className="hero-btn">
             <Link to="/contact">
               <button className="group relative px-12 py-6 bg-black text-white rounded-full font-bold overflow-hidden transition-all flex items-center gap-3">
-                <span className="relative z-10">START A PROJECT</span>
+                <span className="relative z-10">Free Consultancy</span>
                 <FiArrowRight className="relative z-10 text-xl group-hover:translate-x-2 transition-transform" />
                 <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
               </button>

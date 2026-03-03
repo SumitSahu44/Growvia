@@ -121,7 +121,7 @@ const Capabilities = () => {
       {/* --- RIGHT COLUMN: Scrollable List --- */}
       <div className="w-full md:w-[60%] flex flex-col justify-center pb-0">
 
-        <div className="mb-20 border-b border-white/20 pb-8">
+        <div className="mb-10 border-b border-white/20 pb-8">
           <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">What We Do</h2>
           <p className="text-3xl md:text-5xl font-light leading-tight text-white/90">
             We partner with brands to create smart strategies, powerful campaigns, and strong digital experiences that don’t just look good, they perform.

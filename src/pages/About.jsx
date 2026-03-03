@@ -67,7 +67,7 @@ const About = () => {
             </section>
 
           {/* --- 2. MANIFESTO (Clean Left-Aligned Layout) --- */}
-<section ref={sectionRef} className="manifesto-section py-32 w-full bg-white">
+<section ref={sectionRef} className="manifesto-section py-20 w-full bg-white">
     
     {/* LAYER 1: Header & Main Intro */}
     <div className="w-full px-6 md:px-20 mb-20">
@@ -136,7 +136,7 @@ const About = () => {
             <WhyGrowVia />
 
             {/* --- 4. THE TEAM --- */}
-            <section className="team-section py-40 bg-gray-50 px-6 md:px-20">
+            <section className="team-section py-10 bg-gray-50 px-6 md:px-20">
                 <div className="flex justify-between items-end mb-20">
                     <h2 className="text-sm font-bold uppercase tracking-[0.4em] text-gray-600">The Minds</h2>
                     <span className="hidden md:block text-xs text-gray-600 uppercase tracking-widest">(Hover to reveal)</span>
