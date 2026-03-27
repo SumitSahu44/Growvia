@@ -51,16 +51,17 @@ const Hero = () => {
       );
 
       // 3. Parallax on Scroll
-      gsap.to(imageRef.current, {
-        y: "15%",
-        scale: 1.1,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        }
-      });
+     // 3. Parallax on Scroll (Updated Logic)
+gsap.to(imageRef.current, {
+  yPercent: 20, // y ki jagah yPercent use karo better control ke liye
+  ease: "none", // Scroll ke saath sync rehne ke liye ease none rakho
+  scrollTrigger: {
+    trigger: containerRef.current,
+    start: "top top",
+    end: "bottom top",
+    scrub: true,
+  }
+});
     }, containerRef);
 
     return () => ctx.revert();
@@ -127,7 +128,7 @@ const Hero = () => {
         >
           <img
             ref={imageRef}
-            src="/images/hero1.jpeg"
+            src="/images/new/website photo .png"
             alt="Showcase"
             className="w-full h-full object-cover scale-125"
           />

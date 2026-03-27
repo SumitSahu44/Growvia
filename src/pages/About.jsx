@@ -92,7 +92,7 @@ const About = () => {
     <div className="w-full px-4 md:px-20 mb-20">
         <div className="w-full h-[60vh] md:h-[85vh] overflow-hidden rounded-[1.5rem] md:rounded-[3rem] relative shadow-2xl">
             <img
-                src="/images/about2.jpeg"
+                src="/images/new/website photo  (2).png"
                 alt="High Performance Work Environment"
                 className="manifesto-img w-full h-[130%] object-cover"
             />
