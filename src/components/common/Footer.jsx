@@ -99,7 +99,7 @@ const Footer = () => {
 
           <div className="w-full md:w-1/2 flex justify-start md:justify-end">
             <a 
-              href="mailto:growviadigitalmarketing26@gmail.com"
+              href="mailto:info@growviadigitalmarketing.com"
               ref={buttonRef}
               className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-blue-600 hover:bg-white hover:text-black transition-colors duration-500 flex items-center justify-center cursor-pointer group shadow-[0_0_40px_rgba(37,99,235,0.2)] text-white"
             >
@@ -121,7 +121,7 @@ const Footer = () => {
               { name: 'Home', path: '/' },
               { name: 'About', path: '/about' },
               { name: 'Services', path: '/services' },
-              { name: 'Blogs', path: '/blogs' },
+              // { name: 'Blogs', path: '/blogs' },
               { name: 'Contact', path: '/contact' }
             ].map((link) => (
               <Link key={link.name} to={link.path} className="text-base md:text-lg text-slate-300 hover:text-white transition-colors w-fit group flex items-center gap-2">
@@ -151,8 +151,8 @@ const Footer = () => {
           <div ref={addToLinksRef} className="flex flex-col gap-4">
             <h4 className="text-slate-500 font-mono text-xs uppercase tracking-widest mb-2">Contact</h4>
             {/* break-words instead of break-all so it wraps nicely in mobile 2-col layout */}
-            <a href="mailto:growviadigitalmarketing26@gmail.com" className="text-sm md:text-base break-words text-slate-300 hover:text-blue-400 transition-colors pr-4">
-              growviadigitalmarketing26@gmail.com
+            <a href="mailto:info@growviadigitalmarketing.com" className="text-sm md:text-base break-words text-slate-300 hover:text-blue-400 transition-colors pr-4">
+              info@growviadigitalmarketing.com
             </a>
             <a href="tel:+918962799979" className="text-base md:text-lg text-slate-300 hover:text-blue-400 transition-colors">
               +91 89627 99979

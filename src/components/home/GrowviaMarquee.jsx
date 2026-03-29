@@ -17,20 +17,22 @@ export default function GrowviaMarquee() {
     "Performance ✦",
   ];
 
-  // Infinite feel ke liye array ko multiply kiya
+  // Infinite feel ke liye array
   const repeatedServices = [...services, ...services, ...services, ...services];
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // Single Track Animation
       gsap.to(trackRef.current, {
-        xPercent: -50, // Move left
+        xPercent: -50, 
         ease: "none",
         scrollTrigger: {
           trigger: wrapperRef.current,
           start: "top bottom",
-          end: "bottom top",
-          scrub: 1, // Scroll speed ke sath sync rahega
+          // 'end' value ko badhane se animation slow ho jayegi
+          // +=3000 ka matlab hai ki animation 3000px scroll tak stretch hogi
+          end: "+=3000", 
+          // scrub ko number dene se (e.g., 2) ek smooth "lag" aata hai jo bhot premium lagta hai
+          scrub: 2, 
         }
       });
     });
@@ -43,7 +45,6 @@ export default function GrowviaMarquee() {
       ref={wrapperRef}
       className="w-full relative bg-white border-y border-gray-100 py-12 md:py-20 overflow-hidden z-10"
     >
-      {/* Track Container */}
       <div 
         ref={trackRef} 
         className="flex whitespace-nowrap w-max items-center will-change-transform"
@@ -58,7 +59,6 @@ export default function GrowviaMarquee() {
         ))}
       </div>
 
-      {/* Optional: Subtle Overlay for smooth edges */}
       <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none"></div>
       <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none"></div>
     </div>

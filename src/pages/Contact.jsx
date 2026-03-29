@@ -107,10 +107,10 @@ const Contact = () => {
                                 <div>
                                     <h3 className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Email</h3>
                                     <a 
-                                        href="mailto:growviadigitalmarketing26@gmail.com" 
+                                        href="mailto:info@growviadigitalmarketing.com" 
                                         className="text-[14px] md:text-xl whitespace-nowrap font-bold hover:text-blue-400 transition-colors break-all"
                                     >
-                                        growviadigitalmarketing26@gmail.com
+                                        info@growviadigitalmarketing.com
                                     </a>
                                 </div>
 

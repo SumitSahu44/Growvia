@@ -18,7 +18,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
-    }, 3000); // Har 3 second mein word badlega
+    }, 3000); 
     return () => clearInterval(interval);
   }, []);
 
@@ -43,7 +43,7 @@ const Hero = () => {
         duration: 0.8,
       }, "-=1");
 
-      // 2. Media Reveal (Box scaling up)
+      // 2. Media Reveal
       tl.fromTo(heroMediaRef.current, 
         { clipPath: "inset(30% 20% 30% 20% rounded 60px)" },
         { clipPath: "inset(0% 0% 0% 0% rounded 20px)", duration: 2, ease: "expo.inOut" },
@@ -51,17 +51,16 @@ const Hero = () => {
       );
 
       // 3. Parallax on Scroll
-     // 3. Parallax on Scroll (Updated Logic)
-gsap.to(imageRef.current, {
-  yPercent: 20, // y ki jagah yPercent use karo better control ke liye
-  ease: "none", // Scroll ke saath sync rehne ke liye ease none rakho
-  scrollTrigger: {
-    trigger: containerRef.current,
-    start: "top top",
-    end: "bottom top",
-    scrub: true,
-  }
-});
+      gsap.to(imageRef.current, {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        }
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -70,10 +69,11 @@ gsap.to(imageRef.current, {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen pt-10 pb-10 bg-white text-black overflow-hidden flex flex-col items-center"
+      /* Yahan pt-32 add kiya hai navbar ke niche space ke liye */
+      className="relative w-full min-h-screen pt-32 md:pt-40 pb-20 bg-white text-black overflow-hidden flex flex-col items-center"
     >
-      {/* Background Decorative Text (Watermark style) */}
-      <div className="absolute top-40 left-1/2 -translate-x-1/2 text-[20vw] font-black text-gray-50 opacity-[0.03] select-none pointer-events-none uppercase">
+      {/* Background Decorative Text */}
+      <div className="absolute top-48 left-1/2 -translate-x-1/2 text-[18vw] font-black text-gray-50 opacity-[0.03] select-none pointer-events-none uppercase">
         Growvia
       </div>
 
@@ -81,7 +81,8 @@ gsap.to(imageRef.current, {
         
         {/* --- CREATIVE TYPOGRAPHY --- */}
         <div className="text-center mb-16">
-          <h1 className="text-[11vw] md:text-[8.5vw] font-black leading-[0.85] tracking-tighter uppercase">
+          {/* Font size slightly reduced for better fitting */}
+          <h1 className="text-[10vw] md:text-[7.5vw] font-black leading-[0.85] tracking-tighter uppercase">
             <div className="hero-line overflow-hidden py-2">
               <span className="inline-block">Growth</span>
             </div>
@@ -89,10 +90,10 @@ gsap.to(imageRef.current, {
               <span className="inline-block">Beyond</span>
             </div>
             
-            {/* Typing / Swapping Word Area */}
+            {/* Swapping Word Area */}
             <div className="hero-line overflow-hidden h-[1.1em] relative py-2">
               <span 
-                key={words[index]} // Key change se animation trigger hogi
+                key={words[index]} 
                 className="inline-block animate-typing-reveal"
               >
                 {words[index]}
@@ -102,16 +103,11 @@ gsap.to(imageRef.current, {
           </h1>
         </div>
 
-        {/* --- SUBTEXT & BUTTON --- */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-10 max-w-6xl mx-auto mb-24">
-          {/* <p className="hero-subtext text-lg md:text-xl text-gray-500 max-w-lg text-center md:text-left font-medium">
-            We are a hybrid creative studio building digital experiences that 
-            <span className="text-black"> defy gravity</span> and scale brands at the speed of light.
-          </p> */}
-
+        {/* --- BUTTON --- */}
+        <div className="flex flex-col items-center justify-center gap-10 max-w-6xl mx-auto mb-14">
           <div className="hero-btn">
             <Link to="/contact">
-              <button className="group relative px-12 py-6 bg-black text-white rounded-full font-bold overflow-hidden transition-all flex items-center gap-3">
+              <button className="group relative px-10 py-5 bg-black text-white rounded-full font-bold overflow-hidden transition-all flex items-center gap-3">
                 <span className="relative z-10">Free Consultancy</span>
                 <FiArrowRight className="relative z-10 text-xl group-hover:translate-x-2 transition-transform" />
                 <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
@@ -133,10 +129,8 @@ gsap.to(imageRef.current, {
             className="w-full h-full object-cover scale-125"
           />
           
-          {/* Subtle Overlay */}
           <div className="absolute inset-0 bg-black/20" />
           
-          {/* Floating Info */}
           <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 text-white">
             <div className="flex items-center gap-4 mb-2">
               <span className="w-12 h-[1px] bg-white/50" />
@@ -147,7 +141,6 @@ gsap.to(imageRef.current, {
         </div>
       </div>
 
-      {/* Required CSS for the Typing Reveal effect */}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes typing-reveal {
           0% { transform: translateY(100%); opacity: 0; filter: blur(10px); }

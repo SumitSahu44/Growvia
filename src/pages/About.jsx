@@ -51,7 +51,7 @@ const About = () => {
             <section className="hero-section relative w-full h-[90vh] flex flex-col justify-end pb-20 px-6 md:px-20 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="/images/about1.jpeg"
+                        src="/images/new/website photo  (2).png"
                         alt="Office"
                         className="hero-img w-full h-[120%] object-cover origin-top"
                     />
@@ -92,7 +92,7 @@ const About = () => {
     <div className="w-full px-4 md:px-20 mb-20">
         <div className="w-full h-[60vh] md:h-[85vh] overflow-hidden rounded-[1.5rem] md:rounded-[3rem] relative shadow-2xl">
             <img
-                src="/images/new/website photo  (2).png"
+                src="/images/new/about.png"
                 alt="High Performance Work Environment"
                 className="manifesto-img w-full h-[130%] object-cover"
             />
