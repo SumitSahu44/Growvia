@@ -12,10 +12,10 @@ const GrowViaValues = () => {
             const valueItems = gsap.utils.toArray('.value-item');
             valueItems.forEach((item) => {
                 gsap.fromTo(item,
-                    { 
-                        clipPath: "inset(100% 0% 0% 0%)", 
-                        opacity: 0, 
-                        y: 30 
+                    {
+                        clipPath: "inset(100% 0% 0% 0%)",
+                        opacity: 0,
+                        y: 30
                     },
                     {
                         clipPath: "inset(0% 0% 0% 0%)",
@@ -35,7 +35,7 @@ const GrowViaValues = () => {
         return () => ctx.revert();
     }, []);
 
- const values = [
+    const values = [
 
         { title: "Curiosity First", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600" },
 
@@ -53,19 +53,19 @@ const GrowViaValues = () => {
 
     return (
         <section ref={sectionRef} className="py-16 md:py-24 px-6 md:px-20 bg-black text-white w-full overflow-hidden">
-            
+
             {/* Header Area - Sab kuch Left Aligned */}
             <div className="max-w-4xl mb-12 border-b border-white/10 pb-8">
-                <div className="flex items-center gap-3 mb-4">
-                    <span className="text-blue-600 font-mono text-xs tracking-widest uppercase">03</span>
-                    <div className="h-[1px] bg-blue-600 w-16"></div>
-                    <span className="text-blue-500 font-mono text-xs tracking-widest uppercase">Core Values</span>
+                <div className="flex items-center mb-5 gap-3 ">
+                    <span className="text-white font-mono text-xs tracking-widest uppercase">03</span>
+                    <div className="h-[1px] bg-white w-16"></div>
+                    <span className="text-white font-mono text-xs tracking-widest uppercase">Core Values</span>
                 </div>
-                
+
                 <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] mb-6">
                     Our Values
                 </h2>
-                
+
                 <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed max-w-xl">
                     The core principles that drive our performance-first culture and performance precision.
                 </p>
@@ -74,20 +74,20 @@ const GrowViaValues = () => {
             {/* Grid Area - No staggered effect for tighter look */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
                 {values.map((value, idx) => (
-                    <div 
-                        key={idx} 
+                    <div
+                        key={idx}
                         className="value-item relative h-[35vh] md:h-[50vh] overflow-hidden rounded-lg group cursor-pointer"
                     >
                         {/* Background Image */}
-                        <img 
-                            src={value.img} 
-                            alt={value.title} 
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" 
+                        <img
+                            src={value.img}
+                            alt={value.title}
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                         />
-                        
+
                         {/* Overlay */}
                         <div className="absolute inset-0 bg-black/60 group-hover:bg-blue-900/20 transition-colors duration-500"></div>
-                        
+
                         {/* Content */}
                         <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-end">
                             <span className="text-blue-500 font-black text-sm mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">

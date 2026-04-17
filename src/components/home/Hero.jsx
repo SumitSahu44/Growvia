@@ -10,7 +10,7 @@ const Hero = () => {
   const containerRef = useRef(null);
   const heroMediaRef = useRef(null);
   const imageRef = useRef(null);
-  
+
   // --- ADVANCED TYPING/SWAPPER LOGIC ---
   const words = ["BOUNDARIES", "LIMITS", "EXPECTATIONS", "CONVENTIONS"];
   const [index, setIndex] = useState(0);
@@ -18,7 +18,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
-    }, 3000); 
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -32,19 +32,19 @@ const Hero = () => {
         duration: 1.5,
         stagger: 0.2,
       })
-      .from(".hero-subtext", {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-      }, "-=0.8")
-      .from(".hero-btn", {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.8,
-      }, "-=1");
+        .from(".hero-subtext", {
+          opacity: 0,
+          y: 30,
+          duration: 1,
+        }, "-=0.8")
+        .from(".hero-btn", {
+          scale: 0.9,
+          opacity: 0,
+          duration: 0.8,
+        }, "-=1");
 
       // 2. Media Reveal
-      tl.fromTo(heroMediaRef.current, 
+      tl.fromTo(heroMediaRef.current,
         { clipPath: "inset(30% 20% 30% 20% rounded 60px)" },
         { clipPath: "inset(0% 0% 0% 0% rounded 20px)", duration: 2, ease: "expo.inOut" },
         "-=1.5"
@@ -78,7 +78,7 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-6 md:px-12 z-10">
-        
+
         {/* --- CREATIVE TYPOGRAPHY --- */}
         <div className="text-center mb-16">
           {/* Font size slightly reduced for better fitting */}
@@ -89,11 +89,11 @@ const Hero = () => {
             <div className="hero-line overflow-hidden py-2 text-blue-600 italic">
               <span className="inline-block">Beyond</span>
             </div>
-            
+
             {/* Swapping Word Area */}
             <div className="hero-line overflow-hidden h-[1.1em] relative py-2">
-              <span 
-                key={words[index]} 
+              <span
+                key={words[index]}
                 className="inline-block animate-typing-reveal"
               >
                 {words[index]}
@@ -108,7 +108,7 @@ const Hero = () => {
           <div className="hero-btn">
             <Link to="/contact">
               <button className="group relative px-10 py-5 bg-black text-white rounded-full font-bold overflow-hidden transition-all flex items-center gap-3">
-                <span className="relative z-10">Free Consultancy</span>
+                <span className="relative z-10">Book Your Free Consultation</span>
                 <FiArrowRight className="relative z-10 text-xl group-hover:translate-x-2 transition-transform" />
                 <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
               </button>
@@ -128,9 +128,9 @@ const Hero = () => {
             alt="Showcase"
             className="w-full h-full object-cover scale-125"
           />
-          
+
           <div className="absolute inset-0 bg-black/20" />
-          
+
           <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 text-white">
             <div className="flex items-center gap-4 mb-2">
               <span className="w-12 h-[1px] bg-white/50" />
@@ -141,7 +141,8 @@ const Hero = () => {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes typing-reveal {
           0% { transform: translateY(100%); opacity: 0; filter: blur(10px); }
           20% { transform: translateY(0); opacity: 1; filter: blur(0px); }

@@ -59,84 +59,84 @@ const About = () => {
                 </div>
 
                 <div className="relative z-10 text-white">
-                    <p className="font-mono text-sm bg-[#155dfc] p-1 px-5 w-[175px] rounded-full font-bold uppercase tracking-[0.4em] mb-6 text-white/80">Who We Are</p>
+                    <p className="font-mono text-sm bg-[#155dfc] p-1 px-5 w-[185px] rounded-full font-bold uppercase tracking-[0.4em] mb-6 text-white/80">Who We Are</p>
                     <h1 className="text-[10vw] font-black leading-[0.8] tracking-tighter">
                         Growth without <br />guesswork.
                     </h1>
                 </div>
             </section>
 
-          {/* --- 2. MANIFESTO (Clean Left-Aligned Layout) --- */}
-<section ref={sectionRef} className="manifesto-section py-20 w-full bg-white">
-    
-    {/* LAYER 1: Header & Main Intro */}
-    <div className="w-full px-6 md:px-20 mb-20">
-        <div className="max-w-8xl">
-            {/* Pill Style Origins Badge */}
-            <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-[1px] bg-blue-600"></div>
-                <span className="text-xs font-bold uppercase tracking-[0.4em] text-blue-600">GrowVia Origins</span>
-            </div>
+            {/* --- 2. MANIFESTO (Clean Left-Aligned Layout) --- */}
+            <section ref={sectionRef} className="manifesto-section py-20 w-full bg-white">
 
-            <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-black mb-12">
-                Our Story<span className="text-blue-600">.</span>
-            </h2>
-            
-            <p className="text-3xl md:text-5xl font-bold leading-[1.1] text-black tracking-tight max-w-8xl">
-                GrowVia Digital Marketing was built by three founders who have spent years inside real ad accounts, real businesses, and real pressure situations, where performance matters and excuses don’t.
-            </p>
-        </div>
-    </div>
+                {/* LAYER 1: Header & Main Intro */}
+                <div className="w-full px-6 md:px-20 mb-20">
+                    <div className="max-w-8xl">
+                        {/* Pill Style Origins Badge */}
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="w-10 h-[1px] bg-blue-600"></div>
+                            <span className="text-xs font-bold uppercase tracking-[0.4em] text-blue-600">GrowVia Origins</span>
+                        </div>
 
-    {/* LAYER 2: Large Parallax Image */}
-    <div className="w-full px-4 md:px-20 mb-20">
-        <div className="w-full h-[60vh] md:h-[85vh] overflow-hidden rounded-[1.5rem] md:rounded-[3rem] relative shadow-2xl">
-            <img
-                src="/images/new/about.png"
-                alt="High Performance Work Environment"
-                className="manifesto-img w-full h-[130%] object-cover"
-            />
-            {/* Subtle dark overlay for depth */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-        </div>
-    </div>
+                        <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-black mb-12">
+                            Our Story<span className="text-blue-600">.</span>
+                        </h2>
 
-    {/* LAYER 3: Secondary Content (Now Left Aligned) */}
-    <div className="w-full px-6 md:px-20">
-        <div className="max-w-4xl">
-            <div className="space-y-10">
-                {/* Accent Border Line */}
-                <div className="w-20 h-2 bg-black mb-10"></div>
-                
-                <div className="space-y-8 text-2xl md:text-3xl text-gray-600 leading-snug">
-                    <p className="italic border-l-4 border-blue-600 pl-6 md:pl-10">
-                        We are not a <span className="font-bold text-black not-italic uppercase tracking-tighter">"full-service agency"</span> that dabbles in everything. We are specialists who focus on what actually moves revenue: 
-                        <span className="text-black font-semibold not-italic"> paid media, scalable funnels, and conversion-driven websites.</span>
-                    </p>
-                    
-                    <p className="font-black text-black text-3xl md:text-5xl tracking-tighter leading-none pt-4">
-                        If you’re tired of agencies that speak in impressions, vanity metrics, and buzzwords, you’re in the right place.
-                    </p>
+                        <p className="text-3xl md:text-5xl font-bold leading-[1.1] text-black tracking-tight max-w-8xl">
+                            GrowVia Digital Marketing was built by three founders who have spent years inside real ad accounts, real businesses, and real pressure situations, where performance matters and excuses don’t.
+                        </p>
+                    </div>
                 </div>
 
-                {/* Optional Call to Action Link */}
-                <div className="pt-6">
-                    <Link to="/contact">
-                    <button className="text-sm font-black uppercase tracking-widest border-b-2 border-black pb-1 hover:text-blue-600 hover:border-blue-600 transition-all">
-                        Work with us &rarr;
-                    </button>
-                    </Link>
+                {/* LAYER 2: Large Parallax Image */}
+                <div className="w-full px-4 md:px-20 mb-20">
+                    <div className="w-full h-[60vh] md:h-[85vh] overflow-hidden rounded-[1.5rem] md:rounded-[3rem] relative shadow-2xl">
+                        <img
+                            src="/images/new/about.png"
+                            alt="High Performance Work Environment"
+                            className="manifesto-img w-full h-[130%] object-cover"
+                        />
+                        {/* Subtle dark overlay for depth */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
+
+                {/* LAYER 3: Secondary Content (Now Left Aligned) */}
+                <div className="w-full px-6 md:px-20">
+                    <div className="max-w-4xl">
+                        <div className="space-y-10">
+                            {/* Accent Border Line */}
+                            <div className="w-20 h-2 bg-black mb-10"></div>
+
+                            <div className="space-y-8 text-2xl md:text-3xl text-gray-600 leading-snug">
+                                <p className="italic border-l-4 border-blue-600 pl-6 md:pl-10">
+                                    We are not a <span className="font-bold text-black not-italic uppercase tracking-tighter">"full-service agency"</span> that dabbles in everything. We are specialists who focus on what actually moves revenue:
+                                    <span className="text-black font-semibold not-italic"> paid media, scalable funnels, and conversion-driven websites.</span>
+                                </p>
+
+                                <p className="font-black text-black text-3xl md:text-5xl tracking-tighter leading-none pt-4">
+                                    If you’re tired of agencies that speak in impressions, vanity metrics, and buzzwords, you’re in the right place.
+                                </p>
+                            </div>
+
+                            {/* Optional Call to Action Link */}
+                            <div className="pt-6">
+                                <Link to="/contact">
+                                    <button className="text-sm font-black uppercase tracking-widest border-b-2 border-black pb-1 hover:text-blue-600 hover:border-blue-600 transition-all">
+                                        Work with us &rarr;
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <MissionVision />
             <Values />
             <WhyGrowVia />
 
             {/* --- 4. THE TEAM --- */}
-            <section className="team-section py-10 bg-gray-50 px-6 md:px-20">
+            <section className="team-section py-10 bg-gray-50 px-6 mb-20 md:px-20">
                 <div className="flex justify-between items-end mb-20">
                     <h2 className="text-sm font-bold uppercase tracking-[0.4em] text-gray-600">The Minds</h2>
                     <span className="hidden md:block text-xs text-gray-600 uppercase tracking-widest">(Hover to reveal)</span>
@@ -144,8 +144,8 @@ const About = () => {
 
                 <div className="flex flex-col border-t border-gray-300">
                     {[
-                        { name: "Sarah Jenkins", role: "Head of Strategy", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop" },
-                          { name: "Priya Patel", role: "UI/UX Designer", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" }
+                        { name: "Vinita Raheja", role: "Head of Strategy", img: "/images/founders/Vinita Raheja.jpeg" },
+                        { name: "Simran Dodwani", role: "UI/UX Designer", img: "/images/founders/Simran Dodwani.jpeg" }
                     ].map((member, i) => (
                         <div key={i} className="team-member group relative border-b border-gray-300 py-16 flex items-center justify-between cursor-pointer overflow-visible z-10 hover:z-20">
                             <div className="relative z-30 pointer-events-none">
