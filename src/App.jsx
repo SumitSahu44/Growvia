@@ -59,9 +59,9 @@ function App() {
           <Route path="/works" element={<WorkShowcase />} />
           <Route path="/Services" element={<Services />} />
           <Route path="/Contact" element={<Contact />} />
-           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/AdminPanel" element={<AdminPanel />} />
-          </Routes>
+        </Routes>
       </MainLayout>
 
     </Router>

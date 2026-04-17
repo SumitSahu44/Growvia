@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-export default function ScrollToTop() {
+const ScrollToTop = () => {
+  // Ye hook humein current URL (path) deta hai
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Page ko turant top (x: 0, y: 0) par scroll kar dega
+    // Jab bhi pathname badlega, ye code chalega aur scroll top pe chala jayega
     window.scrollTo(0, 0);
-  }, [pathname]); // Jab bhi pathname (URL) change hoga, ye effect chalega
+  }, [pathname]);
 
-  return null; // Ye UI mein kuch render nahi karega
-}
+  return null; // Ye component kuch dikhata nahi hai, bas background me kaam karta hai
+};
+
+export default ScrollToTop;
