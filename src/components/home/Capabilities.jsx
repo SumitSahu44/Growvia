@@ -103,7 +103,7 @@ const Capabilities = () => {
           {/* Image Source directly activeIndex se le rahe hain */}
           <img
             ref={imgRef}
-            src={services[activeIndex].img}
+            src="/images/new/brand-identity.png" // Placeholder, replace with services[activeIndex].img for dynamic images
             alt="Service Preview"
             className="w-full h-full object-cover"
           />

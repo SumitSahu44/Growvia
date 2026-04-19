@@ -144,8 +144,8 @@ const About = () => {
 
                 <div className="flex flex-col border-t border-gray-300">
                     {[
-                        { name: "Vinita Raheja", role: "Head of Strategy", img: "/images/founders/Vinita Raheja.jpeg" },
-                        { name: "Simran Dodwani", role: "UI/UX Designer", img: "/images/founders/Simran Dodwani.jpeg" }
+                        { name: "Vinita Raheja", role: "Co-Founder", img: "/images/founders/Vinita Raheja.jpeg" },
+                        { name: "Simran Dodwani", role: "Co-Founder", img: "/images/founders/Simran Dodwani.jpeg" }
                     ].map((member, i) => (
                         <div key={i} className="team-member group relative border-b border-gray-300 py-16 flex items-center justify-between cursor-pointer overflow-visible z-10 hover:z-20">
                             <div className="relative z-30 pointer-events-none">

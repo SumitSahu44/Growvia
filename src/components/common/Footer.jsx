@@ -141,7 +141,7 @@ const Footer = () => {
               <a href="https://www.linkedin.com/company/growvia-digital-marketing/" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base md:text-lg text-slate-300 hover:text-white transition-colors group">
                 <FaLinkedinIn className="group-hover:text-blue-500 transition-colors" /> LinkedIn
               </a>
-              <a href="https://wa.me/918962799979" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base md:text-lg text-slate-300 hover:text-white transition-colors group">
+              <a href="https://wa.me/918269768268" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base md:text-lg text-slate-300 hover:text-white transition-colors group">
                 <FaWhatsapp className="group-hover:text-green-500 transition-colors" /> WhatsApp
               </a>
             </div>
@@ -154,8 +154,8 @@ const Footer = () => {
             <a href="mailto:info@growviadigitalmarketing.com" className="text-sm md:text-base break-words text-slate-300 hover:text-blue-400 transition-colors pr-4">
               info@growviadigitalmarketing.com
             </a>
-            <a href="tel:+918962799979" className="text-base md:text-lg text-slate-300 hover:text-blue-400 transition-colors">
-              +91 89627 99979
+            <a href="tel:+918269768268" className="text-base md:text-lg text-slate-300 hover:text-blue-400 transition-colors">
+              +91 82697 68268
             </a>
             <p className="text-slate-400 text-sm mt-2 leading-relaxed">
               Indore, Madhya Pradesh,<br />India

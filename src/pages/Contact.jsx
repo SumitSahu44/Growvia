@@ -95,7 +95,7 @@ const Contact = () => {
                         <div className="absolute inset-0 w-full h-[120%] -top-[10%] overflow-hidden">
                             <img
                                 ref={imageRef}
-                                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+                                src="/images/new/contact.png"
                                 alt="Office Architecture"
                                 className="contact-img w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
@@ -119,7 +119,7 @@ const Contact = () => {
                                     {[
                                         { name: 'Instagram', url: 'https://www.instagram.com/growviadigitalmarketing/' },
                                         { name: 'LinkedIn', url: 'https://www.linkedin.com/company/growvia-digital-marketing/' },
-                                        { name: 'WhatsApp', url: 'https://wa.me/918962799979' }
+                                        { name: 'WhatsApp', url: 'https://wa.me/918269768268' }
                                     ].map((social) => (
                                         <a 
                                             key={social.name} 
