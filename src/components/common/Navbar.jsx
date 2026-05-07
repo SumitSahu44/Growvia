@@ -30,6 +30,7 @@ const Navbar = () => {
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden'; 
+      gsap.set(mobileMenuRef.current, { visibility: 'visible', x: '100%' });
       gsap.to(mobileMenuRef.current, {
         x: '0%',
         duration: 0.8,
@@ -44,7 +45,10 @@ const Navbar = () => {
       gsap.to(mobileMenuRef.current, {
         x: '100%',
         duration: 0.6,
-        ease: 'power4.in'
+        ease: 'power4.in',
+        onComplete: () => {
+          gsap.set(mobileMenuRef.current, { visibility: 'hidden' });
+        }
       });
     }
   }, [isMobileMenuOpen]);
@@ -70,7 +74,8 @@ const Navbar = () => {
     <>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 w-full z-[60] transition-all duration-500 transform translate-y-0
+        className={`fixed top-0 left-0 w-full transition-all duration-500 transform translate-y-0
+        ${isMobileMenuOpen ? 'z-[110]' : 'z-[60]'}
         ${/* Transparent Black Background with Blur */
           isScrolled 
           ? 'py-2 bg-black/100 backdrop-blur-lg shadow-lg' 
@@ -118,7 +123,7 @@ const Navbar = () => {
             {/* Hamburger Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden z-[70] text-3xl focus:outline-none text-white transition-colors duration-300"
+              className="md:hidden z-[100] text-3xl focus:outline-none text-white transition-colors duration-300"
             >
               {isMobileMenuOpen ? <FiX /> : <FiMenu />}
             </button>
@@ -129,7 +134,7 @@ const Navbar = () => {
       {/* --- MOBILE FULLSCREEN MENU --- */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 bg-[#0a0a0a] z-[50] flex flex-col justify-center px-8 translate-x-full md:hidden"
+        className="fixed inset-0 bg-[#0a0a0a] z-[80] flex flex-col justify-center px-8 md:hidden invisible"
       >
         <div className="flex flex-col gap-4">
           <p className="text-blue-600 font-mono text-xs uppercase tracking-[0.3em] mb-4">Navigation</p>
