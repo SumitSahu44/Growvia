@@ -48,7 +48,7 @@ const About = () => {
         <div ref={containerRef} className="bg-white min-h-screen text-black overflow-hidden selection:bg-black selection:text-white">
 
             {/* --- 1. HERO SECTION --- */}
-            <section className="hero-section relative w-full h-[90vh] flex flex-col justify-end pb-20 px-6 md:px-20 overflow-hidden">
+            <section className="hero-section relative w-full h-[80vh] flex flex-col justify-end pb-16 px-6 md:px-20 overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
                         src="/images/new/website photo  (2).png"
@@ -59,18 +59,18 @@ const About = () => {
                 </div>
 
                 <div className="relative z-10 text-white">
-                    <p className="font-mono text-sm bg-[#155dfc] p-1 px-5 w-[185px] rounded-full font-bold uppercase tracking-[0.4em] mb-6 text-white/80">Who We Are</p>
-                    <h1 className="text-[10vw] font-black leading-[0.8] tracking-tighter">
+                    <p className="font-mono text-xs bg-blue-600 p-1 px-4 w-fit rounded-full font-bold uppercase tracking-[0.3em] mb-6 text-white/90">Who We Are</p>
+                    <h1 className="text-7xl md:text-[8vw] font-black leading-[0.85] tracking-tighter">
                         Growth without <br />guesswork.
                     </h1>
                 </div>
             </section>
 
             {/* --- 2. MANIFESTO (Clean Left-Aligned Layout) --- */}
-            <section ref={sectionRef} className="manifesto-section py-20 w-full bg-white">
+            <section ref={sectionRef} className="manifesto-section py-16 w-full bg-white">
 
                 {/* LAYER 1: Header & Main Intro */}
-                <div className="w-full px-6 md:px-20 mb-20">
+                <div className="w-full px-6 md:px-20 mb-12">
                     <div className="max-w-8xl">
                         {/* Pill Style Origins Badge */}
                         <div className="flex items-center gap-3 mb-8">
@@ -78,7 +78,7 @@ const About = () => {
                             <span className="text-xs font-bold uppercase tracking-[0.4em] text-blue-600">GrowVia Origins</span>
                         </div>
 
-                        <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-black mb-12">
+                        <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-black mb-10">
                             Our Story<span className="text-blue-600">.</span>
                         </h2>
 
@@ -89,7 +89,7 @@ const About = () => {
                 </div>
 
                 {/* LAYER 2: Large Parallax Image */}
-                <div className="w-full px-4 md:px-20 mb-20">
+                <div className="w-full px-4 md:px-20 mb-16">
                     <div className="w-full h-[60vh] md:h-[85vh] overflow-hidden rounded-[1.5rem] md:rounded-[3rem] relative shadow-2xl">
                         <img
                             src="/images/new/about.png"
@@ -114,7 +114,7 @@ const About = () => {
                                     <span className="text-black font-semibold not-italic"> paid media, scalable funnels, and conversion-driven websites.</span>
                                 </p>
 
-                                <p className="font-black text-black text-3xl md:text-5xl tracking-tighter leading-none pt-4">
+                                <p className="font-black text-black text-2xl md:text-4xl tracking-tighter leading-tight pt-4">
                                     If you’re tired of agencies that speak in impressions, vanity metrics, and buzzwords, you’re in the right place.
                                 </p>
                             </div>
@@ -137,22 +137,22 @@ const About = () => {
 
             {/* --- 4. THE TEAM --- */}
             <section className="team-section py-10 bg-gray-50 px-6 mb-20 md:px-20">
-                <div className="flex justify-between items-end mb-20">
-                    <h2 className="text-sm font-bold uppercase tracking-[0.4em] text-gray-600">The Minds</h2>
-                    <span className="hidden md:block text-xs text-gray-600 uppercase tracking-widest">(Hover to reveal)</span>
+                <div className="flex justify-between items-end mb-12">
+                    <h2 className="text-xl font-bold uppercase tracking-[0.4em] text-gray-500">The Minds</h2>
+                    <span className="hidden md:block text-[10px] text-gray-400 uppercase tracking-widest">(Hover to reveal)</span>
                 </div>
 
                 <div className="flex flex-col border-t border-gray-300">
                     {[
-                        { name: "Vinita Raheja", role: "Co-Founder", img: "/images/founders/Vinita Raheja.jpeg" },
-                        { name: "Simran Dodwani", role: "Co-Founder", img: "/images/founders/Simran Dodwani.jpeg" }
+                        { name: "Simran Dodwani", role: "Co-Founder", img: "/images/founders/Simran Dodwani.jpeg" },
+                        { name: "Vinita Raheja", role: "Co-Founder", img: "/images/founders/Vinita Raheja.jpeg" }
                     ].map((member, i) => (
                         <div key={i} className="team-member group relative border-b border-gray-300 py-16 flex items-center justify-between cursor-pointer overflow-visible z-10 hover:z-20">
                             <div className="relative z-30 pointer-events-none">
-                                <h3 className="text-4xl md:text-7xl font-bold group-hover:translate-x-4 transition-transform duration-200 ease-out text-black">
+                                <h3 className="text-3xl md:text-6xl font-black group-hover:translate-x-4 transition-transform duration-300 ease-out text-black uppercase tracking-tighter">
                                     {member.name}
                                 </h3>
-                                <p className="text-gray-700 mt-3 text-lg group-hover:translate-x-4 transition-transform duration-200 ease-out delay-0">
+                                <p className="text-blue-600 mt-2 text-sm font-bold uppercase tracking-widest group-hover:translate-x-4 transition-transform duration-300 ease-out">
                                     {member.role}
                                 </p>
                             </div>

@@ -12,28 +12,28 @@ const services = [
     title: "Google Ads",
     desc: "We build Google Ads accounts that are structured for scalability and profitability, not just initial performance.",
     features: ["High‑intent keyword strategy", "Clean account structure", "Conversion‑focused bidding", "Proper GA4 & GTM tracking", "Continuous data analysis"],
-    img: "/images/Google Ads.webp"
+    img: "/images/new/IMG_0688.JPG.jpeg"
   },
   {
     id: "02",
     title: "Meta Ads",
     desc: "Meta Ads are not about boosting posts or chasing cheap leads. They’re about creative + audience + funnel alignment.",
     features: ["Clear offer positioning", "Funnel‑based structure", "Creative testing with intent", "Retargeting that converts", "Scaling without breaking "],
-    img: "/images/meta.jpeg"
+    img: "/images/new/IMG_0689.JPG.jpeg"
   },
   {
     id: "03",
     title: "LinkedIn Ads",
     desc: "LinkedIn Ads only work when they’re built for the right objective. We reach the people who make the calls.",
     features: ["B2B lead generation", "High‑value service funnels", "Decision‑maker targeting", "Cost‑controlled scaling"],
-    img: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?q=80&w=2070&auto=format&fit=crop"
+    img: "/images/new/IMG_0690.JPG.jpeg"
   },
   {
     id: "04",
     title: "Microsoft / Bing Ads",
     desc: "Bing Ads are often ignored, which is exactly why they work. Capture untapped demand with higher efficiency.",
     features: ["Capture untapped demand", "Lower overall blended CPA", "Paid media efficiency", "Targeted search intent"],
-    img: "/images/microsoft-ads.webp"
+    img: "/images/new/IMG_0691.JPG.jpeg"
   },
   {
     id: "05",

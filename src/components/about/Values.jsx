@@ -45,24 +45,24 @@ const GrowViaValues = () => {
 
         { title: "Excellence Standard", img: "/images/excellence.jpeg" },
 
-        { title: "Celebrate Wins", img: "/images/celebrate.jpeg" }
+        { title: "Celebrate Wins", img: "/images/new/celebrate-wins.jpeg" }
 
     ];
 
 
 
     return (
-        <section ref={sectionRef} className="py-16 md:py-24 px-6 md:px-20 bg-black text-white w-full overflow-hidden">
+        <section ref={sectionRef} className="py-16 md:py-20 px-6 md:px-20 bg-black text-white w-full overflow-hidden">
 
             {/* Header Area - Sab kuch Left Aligned */}
-            <div className="max-w-4xl mb-12 border-b border-white/10 pb-8">
+            <div className="max-w-4xl mb-10 border-b border-white/10 pb-6">
                 <div className="flex items-center mb-5 gap-3 ">
                     <span className="text-white font-mono text-xs tracking-widest uppercase">03</span>
                     <div className="h-[1px] bg-white w-16"></div>
                     <span className="text-white font-mono text-xs tracking-widest uppercase">Core Values</span>
                 </div>
 
-                <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] mb-6">
+                <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.95] mb-6">
                     Our Values
                 </h2>
 
@@ -76,7 +76,7 @@ const GrowViaValues = () => {
                 {values.map((value, idx) => (
                     <div
                         key={idx}
-                        className="value-item relative h-[35vh] md:h-[50vh] overflow-hidden rounded-lg group cursor-pointer"
+                        className="value-item relative h-[30vh] md:h-[40vh] overflow-hidden rounded-xl group cursor-pointer"
                     >
                         {/* Background Image */}
                         <img

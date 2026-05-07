@@ -38,8 +38,8 @@ const MissionVision = () => {
     }, []);
 
     return (
-        // Py-24/40 ko kam karke py-16/24 kiya hai
-        <section ref={componentRef} className="bg-black py-16 md:py-24 px-6 md:px-20 overflow-hidden">
+        // Reduced padding for a tighter look
+        <section ref={componentRef} className="bg-black py-16 md:py-20 px-6 md:px-20 overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 
                 {/* Mission Section - Mb-32/48 ko kam karke mb-16/24 kiya hai */}
@@ -49,7 +49,7 @@ const MissionVision = () => {
                             <span className="text-xs font-bold tracking-[0.2em] uppercase text-gray-500">01</span>
                             <div className="reveal-line h-[1px] bg-white w-16 md:w-20"></div>
                         </div>
-                        <h2 className="text-white text-4xl md:text-6xl font-black uppercase tracking-tighter">Mission</h2>
+                        <h2 className="text-white text-4xl md:text-7xl font-black uppercase tracking-tighter">Mission</h2>
                     </div>
                     <div className="w-full md:w-2/3">
                         <p className="fade-up text-white text-2xl md:text-5xl font-medium leading-[1.15] tracking-tight">
@@ -70,7 +70,7 @@ const MissionVision = () => {
                             <div className="reveal-line h-[1px] bg-white w-16 md:w-20"></div>
                             <span className="text-xs font-bold tracking-[0.2em] uppercase text-gray-500">02</span>
                         </div>
-                        <h2 className="text-white text-4xl md:text-6xl font-black uppercase tracking-tighter">Vision</h2>
+                        <h2 className="text-white text-4xl md:text-7xl font-black uppercase tracking-tighter">Vision</h2>
                     </div>
                     <div className="w-full md:w-2/3">
                         <p className="fade-up text-white text-2xl md:text-5xl font-medium leading-[1.15] tracking-tight">

@@ -98,8 +98,8 @@ const Footer = () => {
           </div>
 
           <div className="w-full md:w-1/2 flex justify-start md:justify-end">
-            <a 
-              href="mailto:info@growviadigitalmarketing.com"
+            <Link 
+              to="/contact"
               ref={buttonRef}
               className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-blue-600 hover:bg-white hover:text-black transition-colors duration-500 flex items-center justify-center cursor-pointer group shadow-[0_0_40px_rgba(37,99,235,0.2)] text-white"
             >
@@ -107,7 +107,7 @@ const Footer = () => {
                 <span className="text-sm md:text-base font-bold uppercase tracking-widest text-center mt-1">Get in<br/>Touch</span>
                 <FiArrowUpRight className="text-2xl mt-1 group-hover:rotate-45 transition-transform duration-300" />
               </div>
-            </a>
+            </Link>
           </div>
         </div>
 

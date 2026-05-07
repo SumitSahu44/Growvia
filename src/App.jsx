@@ -14,14 +14,6 @@ import Contact from './pages/Contact';
 import WorkShowcase from './pages/WorkShowcase';
 import AdminPanel from './pages/AdminPanel';
 import ThankYou from './components/common/ThankYour';
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
-};
-
 function App() {
   // Loading state
   const [loading, setLoading] = useState(true);
@@ -30,16 +22,16 @@ function App() {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
 
   useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
     const handleResize = () => setIsDesktop(window.innerWidth > 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
   return (
     <Router>
-      <ScrollToTop />
-
       {/* FIX: Preloader condition ke andar hai, lekin MainLayout condition ke BAHAR hai.
          Isse content loader ke peeche load ho jayega aur reveal effect kaam karega.
       */}

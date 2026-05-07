@@ -19,12 +19,6 @@ const Navbar = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 50);
-
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
       setLastScrollY(currentScrollY);
     };
 
@@ -67,7 +61,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Works', path: '/works' },
+    // { name: 'Works', path: '/works' },
     { name: 'Services', path: '/services' },
     // { name: 'Blogs', path: '/blogs' },
   ];
@@ -76,8 +70,7 @@ const Navbar = () => {
     <>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 w-full z-[60] transition-all duration-500 transform 
-        ${isVisible ? 'translate-y-0' : '-translate-y-full'}
+        className={`fixed top-0 left-0 w-full z-[60] transition-all duration-500 transform translate-y-0
         ${/* Transparent Black Background with Blur */
           isScrolled 
           ? 'py-2 bg-black/100 backdrop-blur-lg shadow-lg' 

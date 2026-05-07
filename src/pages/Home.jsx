@@ -11,12 +11,12 @@ import Capabilities from '../components/home/Capabilities';
 import MagicSection from '../components/home/MagicSection';
 import GrowviaMarquee from '../components/home/GrowviaMarquee';
 const Home = () => {
-  
+
   // Page specific animations yahan trigger kar sakte ho
   useEffect(() => {
     // Example: Fade in content when Home mounts
-    gsap.fromTo('.home-section', 
-      { opacity: 0, y: 50 }, 
+    gsap.fromTo('.home-section',
+      { opacity: 0, y: 50 },
       { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: 'power3.out', delay: 0.5 }
     );
   }, []);
@@ -29,54 +29,54 @@ const Home = () => {
         <Hero />
       </div>
 
-       <div className="home-section">
+      <div className="home-section">
         <About />
       </div>
 
 
-        <div className="home-section">
-        <GrowviaMarquee />  
+      <div className="home-section">
+        <GrowviaMarquee />
       </div>
 
 
 
 
-       <div className="home-section">
+      <div className="home-section">
         <Philosophy />
       </div>
 
-      
-       {/* <div className="home-section">
+
+      {/* <div className="home-section">
         <ToolstationCaseStudy />
       </div> */}
-      
 
-        {/* <div className="home-section">
+
+      {/* <div className="home-section">
         <MagicSection />
       </div> */}
-      
 
-       <div className="home-section">
+
+      <div className="home-section">
         <Process />
       </div>
-      
 
-       {/* <div className="home-section">
+
+      {/* <div className="home-section">
         <Showcase />
       </div> */}
 
-       <div className="home-section">
+      {/* <div className="home-section">
         <HorizontalScroll />
-      </div>
+      </div> */}
 
 
-        <div className="home-section">
+      <div className="home-section">
         <Capabilities />
       </div>
 
-      <div className="home-section">
+      {/* <div className="home-section">
         <Testimonials />
-      </div>
+      </div> */}
     </div>
   );
 };
